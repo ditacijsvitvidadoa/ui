@@ -1,0 +1,237 @@
+@media (min-width: 1021px) {
+    .empty-cart {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 100px;
+    }
+
+    .empty-cart__img {
+        width: 450px;
+    }
+
+    .empty-cart__h1 {
+        font-family: "Rethink Sans", sans-serif;
+        font-size: 33px;
+        font-weight: 600;
+        margin-top: 10px;
+    }
+
+    .empty-cart__p {
+        margin-top: 10px;
+        font-family: "Rethink Sans", sans-serif;
+        opacity: 0.8;
+    }
+
+    .empty-cart__btn {
+        text-decoration: none;
+        margin-top: 25px;
+        margin-bottom: 100px;
+        border: 1px solid #292929;
+        border-radius: 10px;
+        font-size: 22px;
+        padding-block: 15px;
+        padding-inline: 50px;
+        color: #292929;
+    }
+}
+
+@media (min-width: 921px) and (max-width: 1020px){
+    .empty-cart {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 50px;
+    }
+
+    .empty-cart__img {
+        width: 300px;
+    }
+
+    .empty-cart__h1 {
+        font-family: "Rethink Sans", sans-serif;
+        font-size: 28px;
+        font-weight: 600;
+        margin-top: 5px;
+    }
+
+    .empty-cart__p {
+        margin-top: 10px;
+        font-family: "Rethink Sans", sans-serif;
+        opacity: 0.8;
+        font-size: 14px;
+
+    }
+
+    .empty-cart__btn {
+        text-decoration: none;
+        margin-top: 25px;
+        margin-bottom: 75px;
+        border: 1px solid #292929;
+        border-radius: 10px;
+        font-size: 18px;
+        padding-block: 15px;
+        padding-inline: 50px;
+        color: #292929;
+    }
+}
+
+@media (min-width: 841px) and (max-width: 920px) {
+    .empty-cart {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 150px;
+    }
+
+    .empty-cart__img {
+        width: 400px;
+    }
+
+    .empty-cart__h1 {
+        font-family: "Rethink Sans", sans-serif;
+        font-size: 28px;
+        font-weight: 600;
+        margin-top: 5px;
+    }
+
+    .empty-cart__p {
+        margin-top: 10px;
+        font-family: "Rethink Sans", sans-serif;
+        opacity: 0.8;
+        font-size: 14px;
+
+    }
+
+    .empty-cart__btn {
+        text-decoration: none;
+        margin-top: 25px;
+        margin-bottom: 75px;
+        border: 1px solid #292929;
+        border-radius: 10px;
+        font-size: 18px;
+        padding-block: 15px;
+        padding-inline: 50px;
+        color: #292929;
+    }
+}
+
+@media (min-width: 451px) and (max-width: 840px) {
+    .empty-cart {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 200px;
+    }
+
+    .empty-cart__img {
+        width: 430px;
+    }
+
+    .empty-cart__h1 {
+        font-family: "Rethink Sans", sans-serif;
+        font-size: 28px;
+        font-weight: 600;
+        margin-top: 5px;
+    }
+
+    .empty-cart__p {
+        margin-top: 10px;
+        font-family: "Rethink Sans", sans-serif;
+        opacity: 0.8;
+        font-size: 14px;
+
+    }
+
+    .empty-cart__btn {
+        text-decoration: none;
+        margin-top: 25px;
+        margin-bottom: 75px;
+        border: 1px solid #292929;
+        border-radius: 10px;
+        font-size: 18px;
+        padding-block: 15px;
+        padding-inline: 50px;
+        color: #292929;
+    }
+}
+
+@media (min-width: 351px) and (max-width: 450px) {
+    .empty-cart {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 200px;
+    }
+
+    .empty-cart__img {
+        width: 320px;
+    }
+
+    .empty-cart__h1 {
+        font-family: "Rethink Sans", sans-serif;
+        font-size: 25px;
+        font-weight: 600;
+        margin-top: 5px;
+    }
+
+    .empty-cart__p {
+        margin-top: 10px;
+        font-family: "Rethink Sans", sans-serif;
+        opacity: 0.8;
+        font-size: 14px;
+
+    }
+
+    .empty-cart__btn {
+        text-decoration: none;
+        margin-top: 25px;
+        margin-bottom: 200px;
+        border: 1px solid #292929;
+        border-radius: 10px;
+        font-size: 18px;
+        padding-block: 15px;
+        padding-inline: 50px;
+        color: #292929;
+    }
+}
+
+@media (max-width: 350px) {
+    .empty-cart {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 230px;
+    }
+
+    .empty-cart__img {
+        width: 280px;
+    }
+
+    .empty-cart__h1 {
+        font-family: "Rethink Sans", sans-serif;
+        font-size: 25px;
+        font-weight: 600;
+        margin-top: 5px;
+    }
+
+    .empty-cart__p {
+        margin-top: 10px;
+        font-family: "Rethink Sans", sans-serif;
+        opacity: 0.8;
+        font-size: 14px;
+
+    }
+
+    .empty-cart__btn {
+        text-decoration: none;
+        margin-top: 25px;
+        margin-bottom: 200px;
+        border: 1px solid #292929;
+        border-radius: 10px;
+        font-size: 18px;
+        padding-block: 15px;
+        padding-inline: 50px;
+        color: #292929;
+    }
+}

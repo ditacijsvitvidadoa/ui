@@ -1,0 +1,379 @@
+@media (min-width: 1601px) {
+    .WhoAreWe-block {
+        display: flex;
+        justify-content: center;
+        margin-top: 50px;
+    }
+
+    .WhoAreWe-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .WhoAreWe-content__h1 {
+        color: #373737;
+        font-size: 26px;
+        font-weight: 500;
+    }
+
+    .WhoAreWe-content__p {
+        margin-top: 75px;
+        width: 600px;
+        color: #373737;
+        font-size: 18px;
+        letter-spacing: 0.8px;
+        line-height: 20px;
+        span {
+            color: #FF5756;
+            font-weight: 600;
+            font-size: 20px;
+        }
+    }
+
+    .WhoAreWe-slide {
+        margin-left: 50px;
+    }
+
+    .WhoAreWe-content__button {
+        margin-top: 75px;
+        font-family: "Oswald", sans-serif;
+        font-size: 26px;
+        color: #FFFAFF;
+        background-color: #FF5756;
+        padding-inline: 30px;
+        padding-block: 10px;
+        border: 1px solid #BC5046;
+        border-radius: 5px;
+        text-decoration: none;
+    }
+}
+
+@media (min-width: 1201px) and (max-width: 1600px) {
+    .WhoAreWe-block {
+        display: flex;
+        justify-content: center;
+        margin-top: 50px;
+    }
+
+    .WhoAreWe-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .WhoAreWe-content__h1 {
+        color: #373737;
+        font-size: 26px;
+        font-weight: 500;
+    }
+
+    .WhoAreWe-content__p {
+        margin-top: 75px;
+        width: 400px;
+        color: #373737;
+        font-size: 17px;
+        letter-spacing: 0.7px;
+        line-height: 18px;
+        span {
+            color: #FF5756;
+            font-weight: 600;
+            font-size: 20px;
+        }
+    }
+
+    .WhoAreWe-slide {
+        margin-left: 70px;
+    }
+
+    .WhoAreWe-img {
+        width: 500px;
+    }
+
+    .WhoAreWe-content__button {
+        margin-top: 75px;
+        font-family: "Oswald", sans-serif;
+        font-size: 26px;
+        color: #FFFAFF;
+        background-color: #FF5756;
+        padding-inline: 30px;
+        padding-block: 10px;
+        border: 1px solid #BC5046;
+        border-radius: 5px;
+        text-decoration: none;
+    }
+}
+
+@media (min-width: 1021px) and (max-width: 1200px) {
+    .WhoAreWe-block {
+        display: flex;
+        justify-content: center;
+        margin-top: 200px;
+    }
+
+    .WhoAreWe-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .WhoAreWe-content__h1 {
+        color: #373737;
+        font-size: 26px;
+        font-weight: 500;
+    }
+
+    .WhoAreWe-content__p {
+        margin-top: 50px;
+        width: 350px;
+        color: #373737;
+        font-size: 15px;
+        line-height: 18px;
+        span {
+            color: #FF5756;
+            font-weight: 600;
+            font-size: 18px;
+        }
+    }
+
+    .WhoAreWe-slide {
+        margin-left: 60px;
+    }
+
+    .WhoAreWe-img {
+        width: 450px;
+    }
+
+    .WhoAreWe-content__button {
+        margin-top: 60px;
+        font-family: "Oswald", sans-serif;
+        font-size: 24px;
+        color: #FFFAFF;
+        background-color: #FF5756;
+        padding-inline: 25px;
+        padding-block: 8px;
+        border: 1px solid #BC5046;
+        border-radius: 5px;
+        text-decoration: none;
+    }
+}
+
+@media (min-width: 921px) and (max-width: 1020px) {
+    .WhoAreWe-block {
+        display: flex;
+        justify-content: center;
+        margin-top: 200px;
+    }
+
+    .WhoAreWe-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .WhoAreWe-content__h1 {
+        color: #373737;
+        font-size: 26px;
+        font-weight: 500;
+    }
+
+    .WhoAreWe-content__p {
+        margin-top: 40px;
+        width: 350px;
+        color: #373737;
+        font-size: 14px;
+        line-height: 18px;
+        span {
+            color: #FF5756;
+            font-weight: 600;
+            font-size: 16px;
+        }
+    }
+
+    .WhoAreWe-slide {
+        margin-left: 50px;
+    }
+
+    .WhoAreWe-img {
+        width: 400px;
+    }
+
+    .WhoAreWe-content__button {
+        margin-top: 60px;
+        font-family: "Oswald", sans-serif;
+        font-size: 24px;
+        color: #FFFAFF;
+        background-color: #FF5756;
+        padding-inline: 25px;
+        padding-block: 8px;
+        border: 1px solid #BC5046;
+        border-radius: 5px;
+        text-decoration: none;
+    }
+}
+
+@media (min-width: 841px) and (max-width: 920px) {
+    .WhoAreWe-block {
+        display: flex;
+        justify-content: center;
+        margin-top: 200px;
+    }
+
+    .WhoAreWe-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .WhoAreWe-content__h1 {
+        color: #373737;
+        font-size: 26px;
+        font-weight: 500;
+    }
+
+    .WhoAreWe-content__p {
+        margin-top: 40px;
+        width: 350px;
+        color: #373737;
+        font-size: 14px;
+        line-height: 18px;
+        span {
+            color: #FF5756;
+            font-weight: 600;
+            font-size: 16px;
+        }
+    }
+
+    .WhoAreWe-slide {
+        margin-left: 50px;
+    }
+
+    .WhoAreWe-img {
+        width: 400px;
+    }
+
+    .WhoAreWe-content__button {
+        margin-top: 60px;
+        font-family: "Oswald", sans-serif;
+        font-size: 24px;
+        color: #FFFAFF;
+        background-color: #FF5756;
+        padding-inline: 25px;
+        padding-block: 8px;
+        border: 1px solid #BC5046;
+        border-radius: 5px;
+        text-decoration: none;
+    }
+}
+
+@media (min-width: 451px) and (max-width: 840px) {
+    .WhoAreWe-block {
+        display: flex;
+        flex-direction: column-reverse;
+        justify-content: center;
+        margin-top: 150px;
+    }
+
+    .WhoAreWe-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .WhoAreWe-content__h1 {
+        color: #373737;
+        font-size: 26px;
+        font-weight: 500;
+        margin-top: 50px;
+    }
+
+    .WhoAreWe-content__p {
+        margin-top: 40px;
+        width: 350px;
+        color: #373737;
+        font-size: 14px;
+        line-height: 18px;
+        span {
+            color: #FF5756;
+            font-weight: 600;
+            font-size: 16px;
+        }
+    }
+
+    .WhoAreWe-slide {
+        margin: 0 auto;
+    }
+
+    .WhoAreWe-img {
+        width: 400px;
+    }
+
+    .WhoAreWe-content__button {
+        margin-top: 60px;
+        font-family: "Oswald", sans-serif;
+        font-size: 24px;
+        color: #FFFAFF;
+        background-color: #FF5756;
+        padding-inline: 25px;
+        padding-block: 8px;
+        border: 1px solid #BC5046;
+        border-radius: 5px;
+        text-decoration: none;
+    }
+}
+
+@media (max-width: 450px) {
+    .WhoAreWe-block {
+        display: flex;
+        flex-direction: column-reverse;
+        justify-content: center;
+        margin-top: 150px;
+    }
+
+    .WhoAreWe-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .WhoAreWe-content__h1 {
+        color: #373737;
+        font-size: 26px;
+        font-weight: 500;
+        margin-top: 50px;
+    }
+
+    .WhoAreWe-content__p {
+        margin-top: 40px;
+        width: 280px;
+        color: #373737;
+        font-size: 14px;
+        line-height: 17px;
+        span {
+            color: #FF5756;
+            font-weight: 600;
+            font-size: 17px;
+        }
+    }
+
+    .WhoAreWe-slide {
+        margin: 0 auto;
+    }
+
+    .WhoAreWe-img {
+        width: 280px;
+    }
+
+    .WhoAreWe-content__button {
+        margin-top: 60px;
+        font-family: "Oswald", sans-serif;
+        font-size: 24px;
+        color: #FFFAFF;
+        background-color: #FF5756;
+        padding-inline: 25px;
+        padding-block: 8px;
+        border: 1px solid #BC5046;
+        border-radius: 5px;
+        text-decoration: none;
+    }
+}

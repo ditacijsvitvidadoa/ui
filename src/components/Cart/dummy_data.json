@@ -1,0 +1,33 @@
+[
+  {
+    "Title": "Рюкзак спортивний Puma Phase Small",
+    "Code": " 200000000",
+    "Articul": "10000000",
+    "Image_url": "./src/components/shared/MainProductsSlider/images/image.png",
+    "Price": 999,
+    "Discount": 259
+  },
+  {
+    "Title": "Рюкзак спортивний Puma Phase Small",
+    "Code": " 200000000",
+    "Articul": "10000000",
+    "Image_url": "./src/components/shared/MainProductsSlider/images/image.png",
+    "Price": 999,
+    "Discount": 259
+  },
+  {
+    "Title": "Рюкзак спортивний Puma Phase Small",
+    "Code": " 200000000",
+    "Articul": "10000000",
+    "Image_url": "./src/components/shared/MainProductsSlider/images/image.png",
+    "Price": 999,
+    "Discount": 259
+  },
+  {
+    "Title": "Рюкзак спортивний Puma Phase Small",
+    "Code": " 200000000",
+    "Articul": "10000000",
+    "Image_url": "./src/components/shared/MainProductsSlider/images/image.png",
+    "Price": 999
+  }
+]
