@@ -1,11 +1,11 @@
 // App.jsx
 import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import MainPage from "./components/MainPage/MainPage";
+import MainPage from "./pages/MainPage/MainPage.jsx";
 import NotFound from "./components/NotFound/NotFound";
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer.jsx";
-import Cart from "./components/Cart/Cart.jsx";
+import CartPage from "./pages/CartPage/CartPage.jsx";
 import AccountPage from "./pages/AccountPage/AccountPage.jsx";
 import ProductsPage from "./components/ProductsPage/ProductsPage.jsx";
 import LogIn from "./components/LogIn/LogIn.jsx";
@@ -20,7 +20,7 @@ function App() {
                 <Header/>
                 <Routes>
                     <Route path="/" element={<MainPage/>}/>
-                    <Route path="/cart" element={<Cart/>}/>
+                    <Route path="/cart" element={<CartPage/>}/>
                     <Route path="/account" element={<AccountPage/>}/>
                     <Route path="/products" element={<ProductsPage/>}/>
                     <Route path="/account/login" element={<LogIn/>}/>

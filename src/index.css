@@ -25,7 +25,7 @@ footer, header, hgroup, menu, nav, section {
 }
 body {
 	line-height: 1;
-	background-image: url("./assets/images/background/main-background.jpg");
+	background-image: url("assets/images/Background/main-background.jpg");
 }
 ol, ul {
 	list-style: none;

@@ -1,13 +1,13 @@
 import "./css/Footer.css";
 import FooterBlock from "./FooterElements/FooterElements.jsx";
 
-import Logo from "../../assets/images/logo.svg";
+import Logo from "../../assets/images/Logo/logo.svg";
 import Phone from "./images/phone.svg";
 import Clock from "./images/clock.svg";
 
-import Instagram from "../../assets/images/Instagram.svg";
-import Email from "../../assets/images/Email.svg";
-import Facebook from "../../assets/images/Facebook.svg";
+import Instagram from "../../assets/images/SocialNetwork/Instagram.svg";
+import Email from "../../assets/images/SocialNetwork/Email.svg";
+import Facebook from "../../assets/images/SocialNetwork/Facebook.svg";
 import {useAuth} from "../shared/context/AuthContext.jsx";
 
 function Footer() {

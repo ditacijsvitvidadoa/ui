@@ -1,9 +1,9 @@
 import { useSearchParams } from 'react-router-dom';
-import PrivacyData from "../../components/AccountPage/PrivacyData/PrivacyData.jsx";
-import OrderHistory from "../../components/AccountPage/OrderHistory/OrderHistory.jsx";
-import Support from "../../components/AccountPage/Support/Support.jsx";
+import PrivacyData from "../../components/Account/PrivacyData/PrivacyData.jsx";
+import OrderHistory from "../../components/Account/OrderHistory/OrderHistory.jsx";
+import Support from "../../components/Account/Support/Support.jsx";
 
-import "../../components/AccountPage/AccountPage.css";
+import "./AccountPage.css";
 import UseBreadcrumbs from "../../components/shared/Breadcrumbs/Breadcrumbs.jsx";
 
 function AccountPage() {
