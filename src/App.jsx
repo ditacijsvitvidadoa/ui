@@ -12,6 +12,7 @@ import LogIn from "./components/LogIn/LogIn.jsx";
 import {fetchdata} from "./components/shared/fetchData/fetchdata.js";
 import {AuthProvider} from "./components/shared/context/AuthContext.jsx";
 import SignUp from "./components/SignUp/SignUp.jsx";
+import AllProductsPage from "./pages/AllProductsPage/AllProductsPage.jsx";
 
 function App() {
     return (
@@ -22,7 +23,7 @@ function App() {
                     <Route path="/" element={<MainPage/>}/>
                     <Route path="/cart" element={<CartPage/>}/>
                     <Route path="/account" element={<AccountPage/>}/>
-                    <Route path="/products" element={<ProductsPage/>}/>
+                    <Route path="/products" element={<AllProductsPage/>}/>
                     <Route path="/account/login" element={<LogIn/>}/>
                     <Route path="/account/sign-up" element={<SignUp/>} />
                     <Route path="*" element={<NotFound/>}/>

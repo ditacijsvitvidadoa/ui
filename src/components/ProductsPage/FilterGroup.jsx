@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import Arrow from "../../components/Header/images/arrow.svg";
 
-const FilterBlock = ({ filters, title, queryKey, children }) => {
+const FilterGroup = ({ filters, title, queryKey, children }) => {
     const location = useLocation();
     const navigate = useNavigate();
     const [activeFilters, setActiveFilters] = useState([]);
@@ -92,4 +92,4 @@ const FilterBlock = ({ filters, title, queryKey, children }) => {
     );
 };
 
-export default FilterBlock;
+export default FilterGroup;
