@@ -17,7 +17,6 @@ function FooterBlock({ title, content }) {
                             </a>
                         );
                     }
-                    // Рендерим изображения
                     else if (item.type === "image" && item.link) {
                         return (
                             <a key={index} href={item.link} target="_blank" rel="noopener noreferrer">

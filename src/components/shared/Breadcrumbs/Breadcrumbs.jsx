@@ -7,15 +7,17 @@ function UseBreadcrumbs() {
         switch (path) {
             case '/cart':
                 return 'Головна / Кошик';
+            case '/account':
+                return 'Головна / Особистий кабінет'
             default:
                 return 'Головна / Сторінка не знайдена';
         }
     };
 
     return (
-        <div>
+        <>
             {getBreadcrumbs(location.pathname)}
-        </div>
+        </>
     );
 }
 

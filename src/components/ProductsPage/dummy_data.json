@@ -1,0 +1,265 @@
+{
+  "categories": {
+    "title": "Категорії",
+    "items": [
+      {
+        "labelEN": "ForBoys",
+        "labelUA": "Хлопці",
+        "value": "ForBoys"
+      },
+      {
+        "labelEN": "ForGirls",
+        "labelUA": "Дівчата",
+        "value": "ForGirls"
+      },
+      {
+        "labelEN": "ForInfants",
+        "labelUA": "Немовлята",
+        "value": "ForInfants"
+      },
+      {
+        "labelEN": "SoftToys",
+        "labelUA": "М'які іграшки",
+        "value": "SoftToys"
+      },
+      {
+        "labelEN": "BuildingSets",
+        "labelUA": "Конструктори",
+        "value": "BuildingSets"
+      },
+      {
+        "labelEN": "Bookstore",
+        "labelUA": "Книги",
+        "value": "Bookstore"
+      },
+      {
+        "labelEN": "Creativity",
+        "labelUA": "Мистецтво",
+        "value": "Creativity"
+      },
+      {
+        "labelEN": "ForSchool",
+        "labelUA": "Школа",
+        "value": "ForSchool"
+      },
+      {
+        "labelEN": "ForSport",
+        "labelUA": "Спорт",
+        "value": "ForSport"
+      },
+      {
+        "labelEN": "Footswear",
+        "labelUA": "Взуття",
+        "value": "Footswear"
+      },
+      {
+        "labelEN": "Accessories",
+        "labelUA": "Аксесуари",
+        "value": "Accessories"
+      }
+    ]
+  },
+  "age": {
+    "title": "Вік",
+    "items": [
+      {
+        "labelEN": "A",
+        "labelUA": "0-3 роки",
+        "value": "A"
+      },
+      {
+        "labelEN": "B",
+        "labelUA": "4-7 років",
+        "value": "B"
+      },
+      {
+        "labelEN": "C",
+        "labelUA": "8-12 років",
+        "value": "C"
+      },
+      {
+        "labelEN": "D",
+        "labelUA": "13+ років",
+        "value": "D"
+      }
+    ]
+  },
+  "brand": {
+    "title": "Бренд",
+    "items": [
+      {
+        "labelEN": "LEGO",
+        "labelUA": "LEGO",
+        "value": "LEGO"
+      },
+      {
+        "labelEN": "Mattel",
+        "labelUA": "Mattel",
+        "value": "Mattel"
+      },
+      {
+        "labelEN": "Hasbro",
+        "labelUA": "Hasbro",
+        "value": "Hasbro"
+      },
+      {
+        "labelEN": "Fisher-Price",
+        "labelUA": "Fisher-Price",
+        "value": "Fisher-Price"
+      }
+    ]
+  },
+  "material": {
+    "title": "Матеріали",
+    "items": [
+      {
+        "labelEN": "Plastic",
+        "labelUA": "Пластик",
+        "value": "plastic"
+      },
+      {
+        "labelEN": "Wood",
+        "labelUA": "Дерево",
+        "value": "wood"
+      },
+      {
+        "labelEN": "Metal",
+        "labelUA": "Метал",
+        "value": "metal"
+      },
+      {
+        "labelEN": "Fabric",
+        "labelUA": "Тканина",
+        "value": "fabric"
+      },
+      {
+        "labelEN": "Rubber",
+        "labelUA": "Гума",
+        "value": "rubber"
+      },
+      {
+        "labelEN": "Foam",
+        "labelUA": "Піна",
+        "value": "foam"
+      },
+      {
+        "labelEN": "Silicone",
+        "labelUA": "Силікон",
+        "value": "silicone"
+      },
+      {
+        "labelEN": "Cardboard",
+        "labelUA": "Картон",
+        "value": "cardboard"
+      },
+      {
+        "labelEN": "Paper",
+        "labelUA": "Папір",
+        "value": "paper"
+      },
+      {
+        "labelEN": "Plush",
+        "labelUA": "Плюш",
+        "value": "plush"
+      },
+      {
+        "labelEN": "Ceramic",
+        "labelUA": "Кераміка",
+        "value": "ceramic"
+      },
+      {
+        "labelEN": "Glass",
+        "labelUA": "Скло",
+        "value": "glass"
+      }
+    ]
+  },
+  "type": {
+    "title": "Типи",
+    "items": [
+      {
+        "labelEN": "Action Figures",
+        "labelUA": "Фігурки героїв",
+        "value": "actionFigures"
+      },
+      {
+        "labelEN": "Dolls",
+        "labelUA": "Ляльки",
+        "value": "dolls"
+      },
+      {
+        "labelEN": "Plush Toys",
+        "labelUA": "Плюшеві іграшки",
+        "value": "plushToys"
+      },
+      {
+        "labelEN": "Building Sets",
+        "labelUA": "Конструктори",
+        "value": "buildingSets"
+      },
+      {
+        "labelEN": "Educational Toys",
+        "labelUA": "Освітні іграшки",
+        "value": "educationalToys"
+      },
+      {
+        "labelEN": "Vehicles",
+        "labelUA": "Транспорт",
+        "value": "vehicles"
+      },
+      {
+        "labelEN": "Puzzles",
+        "labelUA": "Пазли",
+        "value": "puzzles"
+      },
+      {
+        "labelEN": "Outdoor Toys",
+        "labelUA": "Іграшки для вулиці",
+        "value": "outdoorToys"
+      },
+      {
+        "labelEN": "Arts and Crafts",
+        "labelUA": "Мистецтво та ремесло",
+        "value": "artsAndCrafts"
+      },
+      {
+        "labelEN": "Electronic Toys",
+        "labelUA": "Електронні іграшки",
+        "value": "electronicToys"
+      },
+      {
+        "labelEN": "Musical Toys",
+        "labelUA": "Музичні іграшки",
+        "value": "musicalToys"
+      },
+      {
+        "labelEN": "Board Games",
+        "labelUA": "Настільні ігри",
+        "value": "boardGames"
+      }
+    ]
+  },
+  "itemsPerPage": {
+    "title": "Кількість товарів на сторінці",
+    "default": 24,
+    "values": [18, 24, 36]
+  },
+  "sortOrder": {
+    "title": "Сортування",
+    "default": "Найпопулярніші товари",
+    "values": [
+      {
+        "label": "Від найдешевших до найдорожчих",
+        "value": "ascending"
+      },
+      {
+        "label": "Від найдорожчих до найдешевших",
+        "value": "descending"
+      },
+      {
+        "label": "Найпопулярніші товари",
+        "value": "popular"
+      }
+    ]
+  }
+}

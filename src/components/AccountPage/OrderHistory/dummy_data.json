@@ -1,0 +1,26 @@
+[
+  {
+    "orderId": 10101010,
+    "imageUrl": "./src/components/shared/MainProductsSlider/images/image.png",
+    "title": "Рюкзак спортивний Puma Phase Small",
+    "status": "DELIVERED",
+    "statusText": "Доставлено",
+    "date": "2024-09-16"
+  },
+  {
+    "orderId": 20202020,
+    "imageUrl": "./src/components/shared/MainProductsSlider/images/image.png",
+    "title": "Рюкзак спортивний Puma Phase Small",
+    "status": "DELIVERED",
+    "statusText": "Доставлено",
+    "date": "2024-09-16"
+  },
+  {
+    "orderId": 30303030,
+    "imageUrl": "./src/components/shared/MainProductsSlider/images/image.png",
+    "title": "Рюкзак спортивний Puma Phase Small",
+    "status": "DELIVERED",
+    "statusText": "Доставлено",
+    "date": "2024-09-16"
+  }
+]

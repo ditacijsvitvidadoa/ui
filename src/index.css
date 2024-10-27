@@ -43,7 +43,7 @@ table {
 	border-spacing: 0;
 }
 
-p {
+p, input {
 	color: #373737;
 }
 

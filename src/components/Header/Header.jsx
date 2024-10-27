@@ -39,16 +39,19 @@ import Contacts from "./images/contacts.svg"
 import "./css/Header.css"
 import CollapsibleBlock from "./HeaderElements/HeaderElements"
 import SecondHeader from "./SecondHeader.jsx";
+import { useAuth } from "../shared/context/AuthContext.jsx";
+import MainHeaderUserBlock from "./HeaderElements/MainHeaderUserBlock.jsx";
 
 function Header() {
+    const [showUserBlock, setShowUserBlock] = useState(false);
     const [menuOpen, setMenuOpen] = useState(false);
     const [showSecondHeader, setShowSecondHeader] = useState(false);
     const headerRef = useRef(null);
+    const { isAuthenticated } = useAuth();
 
     const handleScroll = () => {
         if (headerRef.current) {
             const headerHeight = headerRef.current.getBoundingClientRect().bottom;
-            console.log(headerRef.current.getBoundingClientRect().bottom)
             if (headerHeight < -10) {
                 setShowSecondHeader(true);
             } else {
@@ -139,52 +142,64 @@ function Header() {
         </a>
 
         <div className="main-header__stick"></div>
-        <a href="#" className="main-header-svg-a">
-            <img src={User} alt={User} className="main-header-svg" />
-        </a>
+        {isAuthenticated ? (
+            <a href="/account" className="main-header-svg-a">
+                <img src={User} alt={User} className="main-header-svg"/>
+            </a>
+        ) : (
+            <>
+                <p
+                    className="main-header-svg-a main-header-svg-static"
+                    onClick={() => setShowUserBlock(!showUserBlock)}
+                >
+                    <img src={User} alt={User} className="main-header-svg"/>
+                </p>
+                {showUserBlock && <MainHeaderUserBlock />}
+            </>
+        )}
     </div>
     <div className="categories" ref={headerRef}>
-        <a href="categories/Boys" className="category">
+        <a href="/products?categories=ForBoys" className="category">
             <img src={Boy} alt={Boy} />
             <p>Хлопцям</p>
         </a>
-        <a href="categories/Girls" className="category">
+        <a href="/products?categories=ForGirls" className="category">
             <img src={Girl} alt={Girl} />
             <p>Дівчатам</p>
         </a>
-        <a href="categories/infants" className="category">
+        <a href="/products?categories=ForInfants" className="category">
             <img src={Infants} alt={Infants} />
             <p>Немовлятам</p>
         </a>
-        <a href="categories/Soft-toys" className="category">
+        <a href="/products?categories=SoftToys" className="category">
             <img src={SoftToy} alt={SoftToy} />
             <p>М’які іграшки</p>
         </a>
-        <a href="categories/Building-sets" className="category">
+        <a href="/products?categories=BuildingSets" className="category">
             <img src={BuildingSet} alt={BuildingSet} />
             <p>Конструктори</p>
         </a>
-        <a href="categories/Bookstore" className="category">
+        <a href="/products?categories=Bookstore" className="category">
             <img src={Bookstore} alt={Bookstore} />
             <p>Книгарня</p>
         </a>
-        <a href="categories/Creativity" className="category">
+        <a href="/products?categories=Creativity" className="category">
             <img src={Creativity} alt={Creativity} />
             <p>Творчість</p>
         </a>
-        <a href="categories/School" className="category">
+        <a href="/products?categories=ForSchool" className="category">
             <img src={School} alt={School} />
             <p>Шкільне</p>
         </a>
-        <a href="categories/Sport" className="category">
+        <a href="/products?categories=ForSport" className="category">
             <img src={Sport} alt={Sport} />
             <p>Спорт</p>
         </a>
-        <a href="categories/Footwear" className="category">
+        <a href="/products?categories=Footswear" className="category">
             <img src={Footwear} alt={Footwear} />
             <p>Взуття</p>
         </a>
-        <a href="categories/Accessories" className="category">
+        <a href="/products?categories=Accessories" className="category">
             <img src={Accessories} alt={Accessories} />
             <p>Аксесуари</p>
         </a>
@@ -210,14 +225,23 @@ function Header() {
         <a href="/cart" className="mobile-header-svg-a">
             <img src={Cart} alt={Cart} className="mobile-header-svg mobile-header-svg__cart" />
         </a>
-        <a href="#" className="mobile-header-svg-a">
-            <img src={User} alt={User} className="mobile-header-svg mobile-header-svg__user" />
-        </a>
+        {isAuthenticated ? (
+            <a href="/account" className="mobile-header-svg-a">
+                <img src={User} alt={User} className="mobile-header-svg mobile-header-svg__user"/>
+            </a>
+        ) : (
+            <>
+                <a className="mobile-header-svg-a" onClick={() => setShowUserBlock(!showUserBlock)}>
+                    <img src={User} alt={User} className="mobile-header-svg mobile-header-svg__user"/>
+                </a>
+                {showUserBlock && <MainHeaderUserBlock/>}
+            </>
+        )}
     </div>
 </header>
-      <div className={`mobile-header-menu ${menuOpen ? 'active' : ''}`}>
-        <article className="close-menu-block">
-            <img src={CloseBurger} alt={CloseBurger} className="header-burder-close" onClick={closeMenu} />
+        <div className={`mobile-header-menu ${menuOpen ? 'active' : ''}`}>
+            <article className="close-menu-block">
+                <img src={CloseBurger} alt={CloseBurger} className="header-burder-close" onClick={closeMenu} />
         </article>
         <article className="header-burder__contact-info">
             <section className="header-burder__contact-info-item">
@@ -264,47 +288,47 @@ function Header() {
         <article className="header-burder__stick"></article>
           <CollapsibleBlock img={Categories} title="Категорії">
               <section className="header-burger__categories">
-                      <a href="categories/Boys" className="header-burger__category">
+                      <a href="/products?categories=ForBoys" className="header-burger__category">
                           <img src={Boy} alt={Boy}/>
                           <p>Хлопцям</p>
                       </a>
-                      <a href="categories/Girls" className="header-burger__category">
+                      <a href="/products?categories=ForGirls" className="header-burger__category">
                           <img src={Girl} alt={Girl}/>
                           <p>Дівчатам</p>
                       </a>
-                      <a href="categories/infants" className="header-burger__category">
+                      <a href="/products?categories=ForInfants" className="header-burger__category">
                           <img src={Infants} alt={Infants}/>
                           <p>Немовлятам</p>
                       </a>
-                      <a href="categories/Soft-toys" className="header-burger__category">
+                      <a href="/products?categories=SoftToys" className="header-burger__category">
                           <img src={SoftToy} alt={SoftToy}/>
                           <p>М’які іграшки</p>
                       </a>
-                      <a href="categories/Building-sets" className="header-burger__category">
+                      <a href="/products?categories=BuildingSets" className="header-burger__category">
                           <img src={BuildingSet} alt={BuildingSet}/>
                           <p>Конструктори</p>
                       </a>
-                      <a href="categories/Bookstore" className="header-burger__category">
+                      <a href="/products?categories=Bookstore" className="header-burger__category">
                           <img src={Bookstore} alt={Bookstore}/>
                           <p>Книгарня</p>
                       </a>
-                      <a href="categories/Creativity" className="header-burger__category">
+                      <a href="/products?categories=Creativity" className="header-burger__category">
                           <img src={Creativity} alt={Creativity}/>
                           <p>Творчість</p>
                       </a>
-                      <a href="categories/School" className="header-burger__category">
+                      <a href="/products?categories=ForSchool" className="header-burger__category">
                           <img src={School} alt={School}/>
                           <p>Шкільне</p>
                       </a>
-                      <a href="categories/Sport" className="header-burger__category">
+                      <a href="/products?categories=ForSport" className="header-burger__category">
                           <img src={Sport} alt={Sport}/>
                           <p>Спорт</p>
                       </a>
-                      <a href="categories/Footwear" className="header-burger__category">
+                      <a href="/products?categories=Footswear" className="header-burger__category">
                           <img src={Footwear} alt={Footwear}/>
                           <p>Взуття</p>
                       </a>
-                      <a href="categories/Accessories" className="header-burger__category">
+                      <a href="/products?categories=Accessories" className="header-burger__category">
                           <img src={Accessories} alt={Accessories}/>
                           <p>Аксесуари</p>
                       </a>
