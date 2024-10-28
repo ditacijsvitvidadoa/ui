@@ -1,4 +1,4 @@
-import { fetchdata } from "../fetchData/fetchdata.js";
+import { fetchdata } from "../../../services/fetchdata.js";
 
 export async function addToCart(productId) {
     try {

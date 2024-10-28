@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import FilterBlock from "./FilterGroup.jsx";
 import { useLocation, useNavigate } from "react-router-dom";
-import { fetchdata } from "../shared/fetchData/fetchdata.js";
+import { fetchdata } from "../../services/fetchdata.js";
 import filters from './dummy_data.json';
 import "../../pages/AllProductsPage/AllProductsPage.css";
 import Favourite from "../../assets/images/Product/Favourite.svg";

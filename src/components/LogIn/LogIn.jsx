@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { fetchdata } from "../shared/fetchData/fetchdata.js";
+import { fetchdata } from "../../services/fetchdata.js";
 import "./css/LogIn.css";
 
 function LogIn() {

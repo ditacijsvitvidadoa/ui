@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { fetchdata } from "../../components/shared/fetchData/fetchdata.js";
+import { fetchdata } from "../../services/fetchdata.js";
 import "./AllProductsPage.css";
 
 import ItemsPerPage from "../../components/ProductsPage/ProductsPageElements/itemsPerPage.jsx";

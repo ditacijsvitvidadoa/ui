@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import "./PrivacyData.css";
-import { fetchdata } from "../../shared/fetchData/fetchdata.js";
+import { fetchdata } from "../../../services/fetchdata.js";
 import BaseElement from "./Elements/BaseElement.jsx";
 import EniqueElement from "./Elements/EniqueElement.jsx";
 

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import InputMask from "react-input-mask";
-import { fetchdata } from "../shared/fetchData/fetchdata.js";
+import { fetchdata } from "../../services/fetchdata.js";
 
 function SignUp() {
         const [firstName, setFirstName] = useState("");

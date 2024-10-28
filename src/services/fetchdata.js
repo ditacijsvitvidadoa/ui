@@ -10,7 +10,7 @@ export const fetchdata = async (endpoint, options = {}) => {
         }
         const data = await response.json();
         console.log("Fetchdata response data:", data);
-        return { data, status: response.status }; // Добавляем статус в возвращаемые данные
+        return { data, status: response.status };
     } catch (error) {
         console.error("There was a problem with the request:", error.message || error);
         throw error;

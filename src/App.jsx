@@ -9,10 +9,11 @@ import CartPage from "./pages/CartPage/CartPage.jsx";
 import AccountPage from "./pages/AccountPage/AccountPage.jsx";
 import ProductsPage from "./components/ProductsPage/ProductsPage.jsx";
 import LogIn from "./components/LogIn/LogIn.jsx";
-import {fetchdata} from "./components/shared/fetchData/fetchdata.js";
+import {fetchdata} from "./services/fetchdata.js";
 import {AuthProvider} from "./components/shared/context/AuthContext.jsx";
 import SignUp from "./components/SignUp/SignUp.jsx";
 import AllProductsPage from "./pages/AllProductsPage/AllProductsPage.jsx";
+import ProductPage from "./pages/ProductPage/ProductPage.jsx";
 
 function App() {
     return (
@@ -27,6 +28,7 @@ function App() {
                     <Route path="/account/login" element={<LogIn/>}/>
                     <Route path="/account/sign-up" element={<SignUp/>} />
                     <Route path="*" element={<NotFound/>}/>
+                    <Route path="/product/:id/:title" element={<ProductPage/>} />
                 </Routes>
                 <Footer/>
             </Router>
