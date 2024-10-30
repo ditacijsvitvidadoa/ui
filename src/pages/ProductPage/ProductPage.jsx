@@ -54,7 +54,8 @@ export default function ProductPage() {
                     size_info={product.size_info}
                     discount={product.discount}
                     price={product.price}
-                    isFavourite={product.is_favourite}
+                    is_favourite={product.is_favourite}
+                    in_cart={product.in_cart}
                 />
             </section>
             {product.characteristic ? (

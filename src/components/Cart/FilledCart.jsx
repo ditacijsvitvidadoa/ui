@@ -1,20 +1,36 @@
-import products from "./dummy_data.json";
+import React, { useEffect, useState } from "react";
 import Trash from "../../assets/images/CartImages/trash.svg";
 import PriceComponent from "../Home/PriceComponent/PriceComponent.jsx";
-import React, {useEffect, useState} from "react";
-
+import {fetchdata} from "../../services/fetchdata.js";
 
 function FilledCart() {
+    const [products, setProducts] = useState([]);
     const [totalSum, setTotalSum] = useState(0);
-    const [counts, setCounts] = useState(products.map(() => 1));
+    const [counts, setCounts] = useState([]);
+    const fetchProducts = async () => {
+        try {
+            const { data, status } = await fetchdata("/api/get-cart-products");
+            if (status !== 200) {
+                throw new Error("Ошибка при получении товаров: " + status);
+            }
+            setProducts(data);
+            setCounts(data.map(() => 1));
+        } catch (error) {
+            console.error("Ошибка:", error);
+        }
+    };
+
+    useEffect(() => {
+        fetchProducts();
+    }, []);
 
     useEffect(() => {
         const initialTotal = products.reduce((sum, product, index) => {
-            const productPrice = product.Discount ? product.Discount : product.Price;
+            const productPrice = product.discount ? product.discount : product.price;
             return sum + productPrice * counts[index];
         }, 0);
         setTotalSum(initialTotal);
-    }, [counts]);
+    }, [counts, products]);
 
     const updateTotal = (index, newCount) => {
         const newCounts = [...counts];
@@ -41,14 +57,14 @@ function FilledCart() {
                         }
                     };
 
-                    const productPrice = product.Discount ? product.Discount : product.Price;
+                    const productPrice = product.discount ? product.discount : product.price;
                     const totalPrice = productPrice * count;
 
                     return (
-                        <article key={product.Code} className="cart-product">
+                        <article key={product.code} className="cart-product">
                             <img
-                                src={product.Image_url}
-                                alt={product.Title}
+                                src={product.image_urls[0]}
+                                alt={product.title}
                                 className="cart-product__img"
                             />
                             <section className="cart-product-content">
@@ -57,10 +73,10 @@ function FilledCart() {
                                     alt="trash-svg"
                                     className="cart-product-content__remove"
                                 />
-                                <h1 className="cart-product-content__title">{product.Title}</h1>
+                                <h1 className="cart-product-content__title">{product.title}</h1>
                                 <div className="cart-product-content__id">
-                                    <p>Код: {product.Code}</p>
-                                    <p>Артикул: {product.Articul}</p>
+                                    <p>Код: {product.code}</p>
+                                    <p>Артикул: {product.articul}</p>
                                 </div>
                                 <div className="cart-product-content__counter">
                                     <p
@@ -79,8 +95,8 @@ function FilledCart() {
                                 </div>
                                 <div className="product-price">
                                     <PriceComponent
-                                        price={totalPrice}
-                                        discount={product.Discount ? totalPrice : null}
+                                        price={product.price}
+                                        discount={product.discount ? totalPrice : null}
                                     />
                                 </div>
                             </section>
@@ -90,7 +106,7 @@ function FilledCart() {
             </div>
             <div className="cart-design-btn">Оформити</div>
         </section>
-    )
+    );
 }
 
 export default FilledCart;

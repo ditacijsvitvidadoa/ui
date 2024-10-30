@@ -5,8 +5,9 @@ import CartIcon from "../../assets/images/Svg/cart.jsx";
 import FavoritesIcon from "../../assets/images/Svg/favorites.jsx";
 import AddToFavourite from "../../services/FavouritesFetch/AddToFavourite.jsx";
 import DeleteFromFavourite from "../../services/FavouritesFetch/DeleteFromFavourite.jsx";
+import AddToCart from "../../services/CartFetch/AddToCart.jsx";
 
-export default function ProductContent({ id, title, description, articul, code, size_info, discount, price, isFavourite }) {
+export default function ProductContent({ id, title, description, articul, code, size_info, discount, price, is_favourite, in_cart }) {
     const [hasTable] = useState(size_info.has_table);
     const [hasSizes] = useState(size_info.sizes.has_sizes);
     const [sizes] = useState(size_info.sizes.size_values);
@@ -32,6 +33,19 @@ export default function ProductContent({ id, title, description, articul, code, 
         AddToFavourite(id)
         window.location.reload()
     }
+
+    const handleBuyClick = () => {
+        if (!in_cart) {
+            const url = new URL(window.location);
+            const size = url.searchParams.get('size');
+
+            AddToCart(id, size);
+            window.location.reload()
+        } else {
+            window.location.href = '/cart';
+
+        }
+    };
 
     return (
         <div className="product-content">
@@ -74,22 +88,32 @@ export default function ProductContent({ id, title, description, articul, code, 
                     </article>
                 )}
                 <article className="product-content__btns">
-                    <div className="product-content__buy-btn">
+                    <div
+                        className="product-content__buy-btn"
+                        style={{cursor: 'pointer'}}
+                        onClick={handleBuyClick}
+                    >
                         <article className="product-content__cart-block">
                             <CartIcon color="#fff" className="product-content__cart"/>
                         </article>
-                        <p className="product-content__buy-p">Купити</p>
+                        <p className="product-content__buy-p">
+                            {in_cart ? (
+                                <span>Відкрити кошик</span>
+                            ) : (
+                                <span>Купити</span>
+                            )}
+                        </p>
                     </div>
                     <div
                         className="product-content__favourite-btn"
-                        onClick={isFavourite ? handleRemoveFromFavourite : handleAddToFavourite}
-                        style={{cursor: 'pointer'}} // Визуальная подсказка о кликабельности
+                        onClick={is_favourite ? handleRemoveFromFavourite : handleAddToFavourite}
+                        style={{cursor: 'pointer'}}
                     >
                         <article className="product-content__favourite-block">
                             <FavoritesIcon fill="#FF5756" className="product-content__favourite"/>
                         </article>
                         <p className="product-content__favourite-p">
-                            {isFavourite ? (
+                            {is_favourite ? (
                                 <span>З улюблених</span>
                             ) : (
                                 <span>В улюблені</span>
