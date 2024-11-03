@@ -60,3 +60,42 @@ button {
 :focus {
 	outline: none;
 }
+
+a {
+	text-decoration: none;
+}
+
+input[type="radio"] {
+	appearance: none; /* Убираем стандартный вид радиокнопки */
+	width: 15px;
+	height: 15px;
+	border: 1px solid #373737;
+	border-radius: 50%;
+	cursor: pointer;
+	outline: none;
+	background-color: #fff;
+	position: relative;
+}
+
+input[type="radio"]:checked {
+	background-color: #fff;
+	border-color: #BC5046;
+}
+
+input[type="radio"]:checked::before {
+	content: "";
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	width: 10px;
+	height: 10px;
+	background-color: #FF5756;
+	border-radius: 50%;
+	transform: translate(-50%, -50%);
+}
+
+.no-scroll {
+	overflow: hidden;
+	height: 100vh;
+}
+

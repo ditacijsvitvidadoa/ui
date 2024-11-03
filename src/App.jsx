@@ -1,6 +1,6 @@
 // App.jsx
 import React from "react";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes, useLocation } from "react-router-dom";
 import MainPage from "./pages/MainPage/MainPage.jsx";
 import NotFound from "./components/NotFound/NotFound";
 import Header from "./components/Header/Header";
@@ -14,25 +14,46 @@ import {AuthProvider} from "./components/shared/context/AuthContext.jsx";
 import SignUp from "./components/SignUp/SignUp.jsx";
 import AllProductsPage from "./pages/AllProductsPage/AllProductsPage.jsx";
 import ProductPage from "./pages/ProductPage/ProductPage.jsx";
+import PurchaseProcessPage from "./pages/PurchaseProcessPage/PurchaseProcessPage.jsx";
+import AdminPanelPage from "./pages/AdminPanelPage/AdminPanelPage.jsx";
+import PrivacyPolicy from "./pages/TamplatePages/PrivacyPolicy.jsx";
+import PaymentDelivery from "./pages/TamplatePages/PaymentDelivery.jsx";
+import Temps from "./pages/TamplatePages/Temps.jsx";
 
 function App() {
     return (
         <AuthProvider>
             <Router>
-                <Header/>
-                <Routes>
-                    <Route path="/" element={<MainPage/>}/>
-                    <Route path="/cart" element={<CartPage/>}/>
-                    <Route path="/account" element={<AccountPage/>}/>
-                    <Route path="/products" element={<AllProductsPage/>}/>
-                    <Route path="/account/login" element={<LogIn/>}/>
-                    <Route path="/account/sign-up" element={<SignUp/>} />
-                    <Route path="*" element={<NotFound/>}/>
-                    <Route path="/product/:id/:title" element={<ProductPage/>} />
-                </Routes>
-                <Footer/>
+                <MainLayout />
             </Router>
         </AuthProvider>
+    );
+}
+
+function MainLayout() {
+    const location = useLocation();
+    const isAdminPanel = location.pathname === "/admin-panel";
+
+    return (
+        <>
+            {!isAdminPanel && <Header />}
+            <Routes>
+                <Route path="/" element={<MainPage />} />
+                <Route path="/cart" element={<CartPage />} />
+                <Route path="/account" element={<AccountPage />} />
+                <Route path="/products" element={<AllProductsPage />} />
+                <Route path="/account/login" element={<LogIn />} />
+                <Route path="/account/sign-up" element={<SignUp />} />
+                <Route path="*" element={<NotFound />} />
+                <Route path="/product/:id/:title" element={<ProductPage />} />
+                <Route path="/purchase-process" element={<PurchaseProcessPage />} />
+                <Route path="/admin-panel" element={<AdminPanelPage />} />
+                <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+                <Route path="/payment-delivery" element={<PaymentDelivery />} />
+                <Route path="/terms" element={<Temps />} />
+            </Routes>
+            {!isAdminPanel && <Footer />}
+        </>
     );
 }
 

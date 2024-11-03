@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Trash from "../../assets/images/CartImages/trash.svg";
 import PriceComponent from "../Home/PriceComponent/PriceComponent.jsx";
 import {fetchdata} from "../../services/fetchdata.js";
+import DeleteFromCart from "../../services/CartFetch/DeleteFromCart.jsx";
 
 function FilledCart() {
     const [products, setProducts] = useState([]);
@@ -38,6 +39,11 @@ function FilledCart() {
         setCounts(newCounts);
     };
 
+    const deleteFromCart = (id) => {
+        DeleteFromCart(id)
+        window.location.reload()
+    }
+
     return (
         <section className="cart">
             <p className="cart__total-price">
@@ -72,6 +78,8 @@ function FilledCart() {
                                     src={Trash}
                                     alt="trash-svg"
                                     className="cart-product-content__remove"
+                                    onClick={() => deleteFromCart(product.id)}
+                                    style={{ cursor: "pointer" }}
                                 />
                                 <h1 className="cart-product-content__title">{product.title}</h1>
                                 <div className="cart-product-content__id">
@@ -104,7 +112,7 @@ function FilledCart() {
                     );
                 })}
             </div>
-            <div className="cart-design-btn">Оформити</div>
+            <a href="/purchase-process" className="cart-design-btn">Оформити</a>
         </section>
     );
 }

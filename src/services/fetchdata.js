@@ -4,12 +4,14 @@ export const fetchdata = async (endpoint, options = {}) => {
             ...options,
             credentials: 'include',
         });
-        console.log("Fetchdata response status:", response.status);
-        if (!response.ok) {
-            return response;
+
+        if (response.status === 204) {
+            return { data: null, status: response.status };
         }
-        const data = await response.json();
-        console.log("Fetchdata response data:", data);
+
+        const isJson = response.headers.get("content-type")?.includes("application/json");
+        const data = isJson ? await response.json() : null;
+
         return { data, status: response.status };
     } catch (error) {
         console.error("There was a problem with the request:", error.message || error);

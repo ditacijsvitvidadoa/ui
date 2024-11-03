@@ -2,50 +2,39 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import InputMask from "react-input-mask";
 import { fetchdata } from "../../services/fetchdata.js";
+import {
+    validateName,
+    validateLastName,
+    validatePatronymic,
+    validatePhoneNumber,
+    validatePassword,
+    validateConfirmPassword,
+} from "../Validators/validators.jsx";
 
 function SignUp() {
-        const [firstName, setFirstName] = useState("");
-        const [lastName, setLastName] = useState("");
-        const [patronymic, setPatronymic] = useState("");
-        const [phoneNumber, setPhoneNumber] = useState("");
-        const [email, setEmail] = useState("");
-        const [password, setPassword] = useState("");
-        const [confirmPassword, setConfirmPassword] = useState("");
-        const [errors, setErrors] = useState({});
-        const navigate = useNavigate();
+    const [firstName, setFirstName] = useState("");
+    const [lastName, setLastName] = useState("");
+    const [patronymic, setPatronymic] = useState("");
+    const [phoneNumber, setPhoneNumber] = useState("");
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [confirmPassword, setConfirmPassword] = useState("");
+    const [errors, setErrors] = useState({});
+    const navigate = useNavigate();
 
-        const validateForm = () => {
-            const newErrors = {};
+    const validateForm = () => {
+        const newErrors = {};
 
-            if (/\d/.test(firstName)) {
-                newErrors.firstName = "Ім'я не може містити цифри";
-            }
-            if (/\d/.test(lastName)) {
-                newErrors.lastName = "Прізвище не може містити цифри";
-            }
-            if (/\d/.test(patronymic)) {
-                newErrors.patronymic = "По батькові не може містити цифри";
-            }
+        newErrors.firstName = validateName(firstName);
+        newErrors.lastName = validateLastName(lastName);
+        newErrors.patronymic = validatePatronymic(patronymic);
+        newErrors.phoneNumber = validatePhoneNumber(phoneNumber);
+        newErrors.password = validatePassword(password);
+        newErrors.confirmPassword = validateConfirmPassword(password, confirmPassword);
 
-            // Проверка номера телефона
-            const phonePattern = /^\+38\(0\d{2}\)-\d{3}-\d{2}-\d{2}$/;
-            if (!phonePattern.test(phoneNumber)) {
-                newErrors.phoneNumber = "Номер телефону повинен бути в форматі: +38(0xx)-xxx-xx-xx";
-            }
-
-            // Проверка пароля
-            if (password.length < 8 || password.length > 18 || !/[a-zA-Z]/.test(password)) {
-                newErrors.password = "Пароль повинен містити від 8 до 18 символів і включати хоча б одну букву";
-            }
-
-            // Проверка подтверждения пароля
-            if (password !== confirmPassword) {
-                newErrors.confirmPassword = "Паролі не співпадають";
-            }
-
-            setErrors(newErrors);
-            return Object.keys(newErrors).length === 0;
-        };
+        setErrors(newErrors);
+        return Object.keys(newErrors).every((key) => newErrors[key] === "");
+    };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -72,23 +61,21 @@ function SignUp() {
             if (response.status === 409) {
                 const result = await response.json();
                 console.log("Conflict: ", result);
-                setErrors({email: "Аккаунт з такою електронною адресою вже існує"});
+                setErrors({ email: "Аккаунт з такою електронною адресою вже існує" });
             } else if (response.status === 200) {
                 navigate("/account/login");
             } else {
                 const result = await response.json();
                 console.log("Error: ", result);
-                setErrors({form: result.message || "Не вдалося створити акаунт"});
+                setErrors({ form: result.message || "Не вдалося створити акаунт" });
             }
         } catch (err) {
             console.log("Catch error: ", err);
-            setErrors({form: "Не вдалося створити акаунт через помилку сервера. Спробуйте пізніше."});
+            setErrors({ form: "Не вдалося створити акаунт через помилку сервера. Спробуйте пізніше." });
         }
     };
 
-
-
-        return (
+    return (
         <div className="form-container">
             <h1 className="form-container-h1">Реєстрація</h1>
             <form onSubmit={handleSubmit} className="form-block">
@@ -101,6 +88,7 @@ function SignUp() {
                     required
                 />
                 {errors.firstName && <p className="error-message">{errors.firstName}</p>}
+
                 <input
                     type="text"
                     placeholder="Прізвище"
@@ -110,6 +98,7 @@ function SignUp() {
                     required
                 />
                 {errors.lastName && <p className="error-message">{errors.lastName}</p>}
+
                 <input
                     type="text"
                     placeholder="По батькові"
@@ -119,6 +108,7 @@ function SignUp() {
                     required
                 />
                 {errors.patronymic && <p className="error-message">{errors.patronymic}</p>}
+
                 <InputMask
                     mask="+38(099)-999-99-99"
                     value={phoneNumber}
@@ -128,6 +118,7 @@ function SignUp() {
                     required
                 />
                 {errors.phoneNumber && <p className="error-message">{errors.phoneNumber}</p>}
+
                 <input
                     type="email"
                     placeholder="Електронна пошта"
@@ -137,6 +128,7 @@ function SignUp() {
                     required
                 />
                 {errors.email && <p className="error-message">{errors.email}</p>}
+
                 <input
                     type="password"
                     placeholder="Пароль"
@@ -146,6 +138,7 @@ function SignUp() {
                     required
                 />
                 {errors.password && <p className="error-message">{errors.password}</p>}
+
                 <input
                     type="password"
                     placeholder="Повторіть пароль"
@@ -155,7 +148,9 @@ function SignUp() {
                     required
                 />
                 {errors.confirmPassword && <p className="error-message">{errors.confirmPassword}</p>}
+
                 {errors.form && <p className="error-message">{errors.form}</p>}
+
                 <button type="submit" className="form-group-button">Зареєструватися</button>
             </form>
         </div>
