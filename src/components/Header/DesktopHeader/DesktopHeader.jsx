@@ -98,10 +98,10 @@ export default function DesktopHeader() {
                         <img src={Giveaway} alt={Giveaway} className="main-header-svg" />
                     </a>
                     <a href="#" className="main-header-svg-a">
-                        <img src={Favorites} alt={Favorites} className="main-header-svg" />
+                        <Favorites className="main-header-svg" />
                     </a>
                     <a href="/cart" className="main-header-svg-a">
-                        <img src={Cart} alt={Cart} className="main-header-svg" />
+                        <Cart className="main-header-svg" />
                     </a>
 
                     <div className="main-header__stick"></div>

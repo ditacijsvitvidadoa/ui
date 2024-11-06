@@ -14,9 +14,9 @@ function Footer() {
     const { isAuthenticated } = useAuth();
 
     const AboutUs = [
-        { text: "Історія компанії", link: "/about" },
+        { text: "Історія компанії", link: "/company-history" },
         { text: "Місії та цінності", link: "/values" },
-        { text: "Контакти", link: "/contacts" }
+        { text: "Контакти", link: "/about-us" }
     ];
 
     const CarefulInformation = [

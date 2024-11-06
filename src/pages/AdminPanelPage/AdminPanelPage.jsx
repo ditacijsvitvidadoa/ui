@@ -9,8 +9,9 @@ import PrivacyData from "../../components/Account/PrivacyData/PrivacyData.jsx";
 import OrderHistory from "../../components/Account/OrderHistory/OrderHistory.jsx";
 import Support from "../../components/Account/Support/Support.jsx";
 import {useSearchParams} from "react-router-dom";
+import CreateProduct from "../../components/AdminPanel/CreateProduct.jsx";
 
-const allowedIPs = ['192.168.1.1', '203.0.113.5', '195.43.71.240'];
+const allowedIPs = ['192.168.1.1', '203.0.113.5', '195.43.70.169'];
 
 export default function AdminPanelPage() {
     const [accessGranted, setAccessGranted] = useState(false);
@@ -62,8 +63,8 @@ export default function AdminPanelPage() {
         switch (content) {
             case 'orders':
                 return <Orders orders={orders}/>;
-            case 'OrderHistory':
-                return <OrderHistory />;
+            case 'createProduct':
+                return <CreateProduct />;
             case 'Support':
                 return <Support />;
             default:

@@ -19,6 +19,9 @@ import AdminPanelPage from "./pages/AdminPanelPage/AdminPanelPage.jsx";
 import PrivacyPolicy from "./pages/TamplatePages/PrivacyPolicy.jsx";
 import PaymentDelivery from "./pages/TamplatePages/PaymentDelivery.jsx";
 import Temps from "./pages/TamplatePages/Temps.jsx";
+import Returns from "./pages/TamplatePages/Returns.jsx";
+import CompanyHistory from "./pages/TamplatePages/CompanyHistory.jsx";
+import Values from "./pages/TamplatePages/Values.jsx";
 
 function App() {
     return (
@@ -51,6 +54,9 @@ function MainLayout() {
                 <Route path="/privacy-policy" element={<PrivacyPolicy />} />
                 <Route path="/payment-delivery" element={<PaymentDelivery />} />
                 <Route path="/terms" element={<Temps />} />
+                <Route path="/returns" element={<Returns />} />
+                <Route path="/company-history" element={<CompanyHistory />} />
+                <Route path="/values" element={<Values />} />
             </Routes>
             {!isAdminPanel && <Footer />}
         </>

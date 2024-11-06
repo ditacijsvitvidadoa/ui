@@ -85,6 +85,7 @@
     
     .main-header-svg {
         margin-left: 15px;
+        width: 30px;
     }
 
     .main-header-svg-a {
@@ -776,6 +777,10 @@
         position: relative;
     }
 
+    .mobile-header-svg {
+        width: 30px;
+    }
+
     .mobile-header-svg-a {
         margin-left: 20px;
     }
@@ -877,6 +882,10 @@
     .mobile-header__search-form-btn-content {
         width: 17px;
         position: relative;
+    }
+
+    .mobile-header-svg {
+        width: 30px;
     }
 
     .mobile-header-svg-a {

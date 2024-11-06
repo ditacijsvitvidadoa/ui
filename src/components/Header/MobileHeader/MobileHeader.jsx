@@ -72,10 +72,10 @@ export default function MobileHeader() {
                 </form>
                 <div>
                     <a href="#" className="mobile-header-svg-a">
-                        <img src={Favorites} alt={Favorites} className="mobile-header-svg mobile-header-svg__favourites" />
+                        <Favorites className="mobile-header-svg mobile-header-svg__favourites" />
                     </a>
                     <a href="/cart" className="mobile-header-svg-a">
-                        <img src={Cart} alt={Cart} className="mobile-header-svg mobile-header-svg__cart" />
+                        <Cart className="mobile-header-svg mobile-header-svg__cart" />
                     </a>
                     {isAuthenticated ? (
                         <a href="/account" className="mobile-header-svg-a">
