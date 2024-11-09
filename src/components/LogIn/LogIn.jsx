@@ -23,7 +23,14 @@ function LogIn() {
                 body: formData,
             });
 
-            navigate("/account");
+            console.log(response.status)
+
+            if (response.status === 200) {
+                navigate("/account");
+            } else {
+                setError("Неправильна електронна пошта або пароль")
+            }
+
         } catch (err) {
             setError("Неправильна електронна пошта або пароль");
         }

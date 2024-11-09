@@ -69,7 +69,7 @@ function FilledCart() {
                     return (
                         <article key={product.code} className="cart-product">
                             <img
-                                src={product.image_urls[0]}
+                                src={product.image_url}
                                 alt={product.title}
                                 className="cart-product__img"
                             />
@@ -79,9 +79,12 @@ function FilledCart() {
                                     alt="trash-svg"
                                     className="cart-product-content__remove"
                                     onClick={() => deleteFromCart(product.id)}
-                                    style={{ cursor: "pointer" }}
+                                    style={{cursor: "pointer"}}
                                 />
-                                <h1 className="cart-product-content__title">{product.title}</h1>
+                                <h1 className="cart-product-content__title">
+                                    {product.title} {product.size === "null" ? "" : product.size }
+                                </h1>
+
                                 <div className="cart-product-content__id">
                                     <p>Код: {product.code}</p>
                                     <p>Артикул: {product.articul}</p>
@@ -103,7 +106,7 @@ function FilledCart() {
                                 </div>
                                 <div className="product-price">
                                     <PriceComponent
-                                        price={product.price}
+                                        price={product.price ? totalPrice : null}
                                         discount={product.discount ? totalPrice : null}
                                     />
                                 </div>

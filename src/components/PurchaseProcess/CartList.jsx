@@ -4,9 +4,9 @@ export default function CartList({ products }) {
         <div className="purchase-process-block">
             <h2>Замовлення</h2>
             {products.map((product, index) => (
-                <div key={product.id}>
+                <div key={product.id + index}>
                     <article className="purchase-process__product">
-                        <img src={product.image_urls[0] || ""} alt={product.title} className="purchase-process__product-img" />
+                        <img src={product.image_url || ""} alt={product.title} className="purchase-process__product-img" />
                         <p className="purchase-process__product-title">{product.title} x {product.count}</p>
                         {product.discount ? (
                             <article className="purchase-process__product-price-component purchase-process__product-component--with-discount">

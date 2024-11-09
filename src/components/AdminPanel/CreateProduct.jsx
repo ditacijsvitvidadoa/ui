@@ -319,7 +319,7 @@ const CreateProduct = () => {
                                 type="radio"
                                 name="type"
                                 value="Одяг"
-                                required
+                                required={isSizeChecked}
                                 checked={type === "clothing"}
                                 onChange={handleTypeChange}
                             />
@@ -330,7 +330,7 @@ const CreateProduct = () => {
                                 type="radio"
                                 name="type"
                                 value="Взуття"
-                                required
+                                required={isSizeChecked}
                                 checked={type === "footwear"}
                                 onChange={handleTypeChange}
                             />

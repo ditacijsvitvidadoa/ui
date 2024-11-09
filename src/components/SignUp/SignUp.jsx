@@ -55,19 +55,15 @@ function SignUp() {
             const response = await fetchdata("/api/create-account", {
                 method: "POST",
                 body: formData,
-                credentials: 'include'
             });
 
             if (response.status === 409) {
-                const result = await response.json();
-                console.log("Conflict: ", result);
                 setErrors({ email: "Аккаунт з такою електронною адресою вже існує" });
             } else if (response.status === 200) {
                 navigate("/account/login");
             } else {
-                const result = await response.json();
-                console.log("Error: ", result);
-                setErrors({ form: result.message || "Не вдалося створити акаунт" });
+                console.log("Error: ", response.data);
+                setErrors({ form: response.data?.message || "Не вдалося створити акаунт" });
             }
         } catch (err) {
             console.log("Catch error: ", err);

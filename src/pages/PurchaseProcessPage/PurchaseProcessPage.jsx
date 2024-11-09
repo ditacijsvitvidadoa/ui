@@ -97,9 +97,7 @@ export default function PurchaseProcessPage() {
         formData.append("floor", formPostal.floor);
 
         products.forEach((product, index) => {
-            product.image_urls.forEach((url) => {
-                formData.append(`products[${index}][image_urls][]`, url);
-            });
+            formData.append(`products[${index}][image_url][]`, product.image_url);
             formData.append(`products[${index}][title]`, product.title);
             formData.append(`products[${index}][price]`, product.price);
             formData.append(`products[${index}][discount]`, product.discount || 0);

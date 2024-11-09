@@ -5,6 +5,7 @@ import Cart from "../../assets/images/Product/Cart.svg";
 import { addToCart } from "../shared/managementCart/addToCart.jsx";
 
 const ProductsList = ({ products }) => {
+    console.log(products)
     return (
         <div className="products-list">
             {products.map(product => (

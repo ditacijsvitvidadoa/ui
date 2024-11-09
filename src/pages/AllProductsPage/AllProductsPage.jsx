@@ -14,7 +14,7 @@ export default function AllProductsPage() {
     const [products, setProducts] = useState([]);
     const [details, setDetails] = useState(null);
     const [loading, setLoading] = useState(true);
-    const [filterOpen, setFilterOpen] = useState(false); // Состояние для открытия фильтров
+    const [filterOpen, setFilterOpen] = useState(false);
     const location = useLocation();
     const navigate = useNavigate();
     const [value, setValue] = useState([0, 0]);
