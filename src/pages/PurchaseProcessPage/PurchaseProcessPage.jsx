@@ -35,7 +35,6 @@ export default function PurchaseProcessPage() {
     const [isPurchaseSuccessful, setIsPurchaseSuccessful] = useState(false);
     const [isValidCity, setValidCity] = useState(true)
 
-
     useEffect(() => {
         const fetchProducts = async () => {
             try {
@@ -71,10 +70,11 @@ export default function PurchaseProcessPage() {
     useEffect(() => {
         const initialTotal = products.reduce((sum, product) => {
             const productPrice = product.discount ? product.discount : product.price;
-            return sum + productPrice;
+            return sum + (productPrice * product.count);
         }, 0);
         setTotalSum(initialTotal);
     }, [products]);
+
 
     const handleConfirmOrder = async () => {
         if (!isValidCity) {

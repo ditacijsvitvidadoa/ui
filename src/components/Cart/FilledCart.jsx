@@ -1,13 +1,16 @@
 import React, { useEffect, useState } from "react";
 import Trash from "../../assets/images/CartImages/trash.svg";
 import PriceComponent from "../Home/PriceComponent/PriceComponent.jsx";
-import {fetchdata} from "../../services/fetchdata.js";
+import { fetchdata } from "../../services/fetchdata.js";
 import DeleteFromCart from "../../services/CartFetch/DeleteFromCart.jsx";
+import UpdateCount from "../../services/CartFetch/UpdateCount.jsx";
 
 function FilledCart() {
     const [products, setProducts] = useState([]);
     const [totalSum, setTotalSum] = useState(0);
     const [counts, setCounts] = useState([]);
+    const [timer, setTimer] = useState(null);
+
     const fetchProducts = async () => {
         try {
             const { data, status } = await fetchdata("/api/get-cart-products");
@@ -15,7 +18,7 @@ function FilledCart() {
                 throw new Error("Ошибка при получении товаров: " + status);
             }
             setProducts(data);
-            setCounts(data.map(() => 1));
+            setCounts(data.map(product => product.count));  // используем count из API
         } catch (error) {
             console.error("Ошибка:", error);
         }
@@ -40,9 +43,38 @@ function FilledCart() {
     };
 
     const deleteFromCart = (id) => {
-        DeleteFromCart(id)
-        window.location.reload()
-    }
+        DeleteFromCart(id);
+        window.location.reload();
+    };
+
+    const handleCountChange = (index, newCount) => {
+        if (timer) {
+            clearTimeout(timer);
+        }
+
+        const newTimer = setTimeout(() => {
+            const product = products[index];
+            const { id, size, color } = product;
+            UpdateCount(id, size, color, newCount).then(() => {
+                window.location.reload();  // Перезагрузка страницы после изменения количества
+            });
+        }, 300);
+
+        setTimer(newTimer);
+        updateTotal(index, newCount);
+    };
+
+    const increment = (index) => {
+        const newCount = counts[index] + 1;
+        handleCountChange(index, newCount);
+    };
+
+    const decrement = (index) => {
+        if (counts[index] > 1) {
+            const newCount = counts[index] - 1;
+            handleCountChange(index, newCount);
+        }
+    };
 
     return (
         <section className="cart">
@@ -52,19 +84,6 @@ function FilledCart() {
             <div>
                 {products.map((product, index) => {
                     const count = counts[index];
-
-                    const increment = () => {
-                        updateTotal(index, count + 1);
-                    };
-
-                    const decrement = () => {
-                        if (count > 1) {
-                            updateTotal(index, count - 1);
-                        }
-                    };
-
-                    const productPrice = product.discount ? product.discount : product.price;
-                    const totalPrice = productPrice * count;
 
                     return (
                         <article key={product.code} className="cart-product">
@@ -79,10 +98,10 @@ function FilledCart() {
                                     alt="trash-svg"
                                     className="cart-product-content__remove"
                                     onClick={() => deleteFromCart(product.id)}
-                                    style={{cursor: "pointer"}}
+                                    style={{ cursor: "pointer" }}
                                 />
                                 <h1 className="cart-product-content__title">
-                                    {product.title} {product.size === "null" ? "" : product.size }
+                                    {product.title} {product.size === "null" ? "" : product.size}
                                 </h1>
 
                                 <div className="cart-product-content__id">
@@ -91,14 +110,14 @@ function FilledCart() {
                                 </div>
                                 <div className="cart-product-content__counter">
                                     <p
-                                        onClick={decrement}
+                                        onClick={() => decrement(index)}
                                         className="cart-product-content__counter-decrement"
                                     >
                                         -
                                     </p>
                                     <p className="cart-product-content__counter-value">{count}</p>
                                     <p
-                                        onClick={increment}
+                                        onClick={() => increment(index)}
                                         className="cart-product-content__counter-increment"
                                     >
                                         +
@@ -106,8 +125,8 @@ function FilledCart() {
                                 </div>
                                 <div className="product-price">
                                     <PriceComponent
-                                        price={product.price ? totalPrice : null}
-                                        discount={product.discount ? totalPrice : null}
+                                        price={product.price ? product.price * count : null}
+                                        discount={product.discount ? product.discount * count : null}
                                     />
                                 </div>
                             </section>
@@ -115,7 +134,9 @@ function FilledCart() {
                     );
                 })}
             </div>
-            <a href="/purchase-process" className="cart-design-btn">Оформити</a>
+            <a href="/purchase-process" className="cart-design-btn">
+                Оформити
+            </a>
         </section>
     );
 }

@@ -11,7 +11,7 @@ import Support from "../../components/Account/Support/Support.jsx";
 import {useSearchParams} from "react-router-dom";
 import CreateProduct from "../../components/AdminPanel/CreateProduct.jsx";
 
-const allowedIPs = ['192.168.1.1', '203.0.113.5', '195.43.70.169'];
+const allowedIPs = ['192.168.1.1', '203.0.113.5', '195.43.70.169', '188.163.69.35'];
 
 export default function AdminPanelPage() {
     const [accessGranted, setAccessGranted] = useState(false);

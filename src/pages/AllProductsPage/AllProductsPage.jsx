@@ -18,6 +18,8 @@ export default function AllProductsPage() {
     const location = useLocation();
     const navigate = useNavigate();
     const [value, setValue] = useState([0, 0]);
+    const defaultPageSize = 24;
+    const [pageCount, setPageCount] = useState(0);
 
     useEffect(() => {
         if (filterOpen) {
@@ -35,26 +37,77 @@ export default function AllProductsPage() {
         const fetchProducts = async () => {
             setLoading(true);
             try {
+                console.log("Fetching products...");
                 const response = await fetchdata(`/api/get-products${location.search}`);
+                console.log("API response:", response);  // Логируем весь ответ
+
                 if (response.status === 200) {
                     const { products, details } = response.data;
-                    setProducts(products);
+
+                    // Проверка на структуру данных
+                    console.log("Products:", products);  // Логируем только товары
+                    console.log("Details:", details);  // Логируем детали
+
+                    if (!products || products.length === 0) {
+                        console.log("No products found");
+                        setProducts([]);
+                    } else {
+                        setProducts(products);
+                    }
+
                     setDetails(details);
-                    setValue([details.min_price_product.price, details.max_price_product.price]);
+
+                    if (details) {
+                        setValue([details.min_price_product.price, details.max_price_product.price]);
+
+                        const params = new URLSearchParams(location.search);
+                        const pageSize = params.get('pageSize') ? parseInt(params.get('pageSize'), 10) : defaultPageSize;
+
+                        const pageCount = Math.ceil(details.total_count / pageSize);
+                        setPageCount(pageCount);
+                    }
                 } else {
                     console.warn(`Failed to fetch products: Status ${response.status}`);
+                    setProducts([]); // Поставим пустой массив на случай ошибки
                 }
             } catch (error) {
                 console.error("Error fetching products:", error.message);
+                setProducts([]); // Поставим пустой массив в случае ошибки запроса
             } finally {
                 setLoading(false);
             }
         };
+
         fetchProducts();
     }, [location.search]);
 
     if (loading) {
-        return <div className="loading"></div>;
+        return <div className="loading">Загрузка...</div>;
+    }
+
+    if (products.length === 0) {
+        return (
+            <section className="all-products-list__desktop-v">
+                <div className="products-options">
+                    <ItemsPerPage values={filters.itemsPerPage.values} defaultValue={filters.itemsPerPage.default}/>
+                    <SortProducts values={filters.sortOrder.values} defaultValue="popular"/>
+                </div>
+                <div className="products-block">
+                    <FiltersBlock
+                        value={value}
+                        setValue={setValue}
+                        details={details}
+                        handleResetClick={handleResetClick}
+                        handleApplyClick={handleApplyClick}
+                        filterOpen={filterOpen}
+                        setFilterOpen={setFilterOpen}
+                    />
+                    <div className="no-products-message">
+                        <p>К сожалению, мы не нашли ни одного товара по вашему запросу. Попробуйте изменить фильтры или вернуться позже.</p>
+                    </div>
+                </div>
+            </section>
+        );
     }
 
     const handleApplyClick = () => {
@@ -95,7 +148,7 @@ export default function AllProductsPage() {
                         filterOpen={filterOpen}
                         setFilterOpen={setFilterOpen}
                     />
-                    <ProductsList products={products}/>
+                    <ProductsList products={products} pageCount={pageCount}/>
                 </div>
             </section>
 
@@ -108,7 +161,7 @@ export default function AllProductsPage() {
                     </article>
                 </div>
                 <div className="products-block">
-                    <ProductsList products={products}/>
+                    <ProductsList products={products} pageCount={pageCount}/>
                 </div>
                 <FiltersBlock
                     value={value}

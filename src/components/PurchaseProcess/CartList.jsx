@@ -1,5 +1,4 @@
 export default function CartList({ products }) {
-
     return (
         <div className="purchase-process-block">
             <h2>Замовлення</h2>
@@ -10,12 +9,12 @@ export default function CartList({ products }) {
                         <p className="purchase-process__product-title">{product.title} x {product.count}</p>
                         {product.discount ? (
                             <article className="purchase-process__product-price-component purchase-process__product-component--with-discount">
-                                <p className="purchase-process__product-component__original-price">{product.price} ₴</p>
-                                <p className="purchase-process__product-component__discount">{product.discount} ₴</p>
+                                <p className="purchase-process__product-component__original-price">{product.price * product.count} ₴</p>
+                                <p className="purchase-process__product-component__discount">{product.discount * product.count} ₴</p>
                             </article>
                         ) : (
-                            <article className="purchase-process__product-component purchase-process__product-component--no-discount">
-                                <p className="purchase-process__product-component__price">{product.price} ₴</p>
+                            <article className="purchase-process__product-price-component purchase-process__product-component--no-discount">
+                                <p className="purchase-process__product-component__price">{product.price * product.count} ₴</p>
                             </article>
                         )}
                     </article>
