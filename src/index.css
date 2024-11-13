@@ -102,3 +102,43 @@ input[type="radio"]:checked::before {
 	height: 100vh;
 }
 
+@media (min-width: 1601px) {
+	.breadcrumbs {
+		width: 1330px;
+		margin: 20px auto;
+		font-size: 13px;
+	}
+}
+
+@media (min-width: 1201px) and (max-width: 1600px) {
+	.breadcrumbs {
+		width: 1030px;
+		margin: 20px auto;
+		font-size: 13px;
+	}
+}
+
+@media (min-width: 1021px) and (max-width: 1200px) {
+	.breadcrumbs {
+		width: 890px;
+		margin: 20px auto;
+		font-size: 12px;
+	}
+}
+
+@media (min-width: 921px) and (max-width: 1020px) {
+	.breadcrumbs {
+		width: 840px;
+		margin: 20px auto;
+		font-size: 11px;
+	}
+}
+
+@media (max-width: 920px) {
+	.breadcrumbs {
+		margin: 0 auto;
+		margin-top: 100px;
+		margin-left: 5%;
+		font-size: 11px;
+	}
+}

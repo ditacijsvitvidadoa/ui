@@ -18,7 +18,7 @@ function FilledCart() {
                 throw new Error("Ошибка при получении товаров: " + status);
             }
             setProducts(data);
-            setCounts(data.map(product => product.count));  // используем count из API
+            setCounts(data.map(product => product.count));
         } catch (error) {
             console.error("Ошибка:", error);
         }

@@ -37,16 +37,10 @@ export default function AllProductsPage() {
         const fetchProducts = async () => {
             setLoading(true);
             try {
-                console.log("Fetching products...");
                 const response = await fetchdata(`/api/get-products${location.search}`);
-                console.log("API response:", response);
 
                 if (response.status === 200) {
                     const { products, details } = response.data;
-
-                    // Проверка на структуру данных
-                    console.log("Products:", products);
-                    console.log("Details:", details);
 
                     if (!products || products.length === 0) {
                         console.log("No products found");

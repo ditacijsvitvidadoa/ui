@@ -8,16 +8,18 @@ function UseBreadcrumbs() {
             case '/cart':
                 return 'Головна / Кошик';
             case '/account':
-                return 'Головна / Особистий кабінет'
+                return 'Головна / Особистий кабінет';
+            case '/favourites':
+                return 'Головна / Улюблені товари';
             default:
                 return 'Головна / Сторінка не знайдена';
         }
     };
 
     return (
-        <>
+        <div className="breadcrumbs">
             {getBreadcrumbs(location.pathname)}
-        </>
+        </div>
     );
 }
 

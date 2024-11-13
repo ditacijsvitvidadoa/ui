@@ -4,6 +4,7 @@ import FilledFavourites from "../../components/Favourites/FilledFavourites.jsx";
 
 import "./FavouritesPage.css";
 import EmptyFavourites from "../../components/Favourites/EmptyFavourites.jsx";
+import UseBreadcrumbs from "../../components/shared/Breadcrumbs/Breadcrumbs.jsx";
 
 
 export default function FavouritesPage() {
@@ -28,6 +29,7 @@ export default function FavouritesPage() {
 
     return (
         <>
+            <UseBreadcrumbs />
             {products ? (
                 <FilledFavourites products={products} />
             ) : (<EmptyFavourites />)}
