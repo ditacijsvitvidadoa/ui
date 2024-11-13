@@ -94,10 +94,10 @@ export default function DesktopHeader() {
                             </button>
                         </form>
                     </article>
-                    <a href="#" className="main-header-svg-a">
+                    <a href="/bonuses" className="main-header-svg-a">
                         <img src={Giveaway} alt={Giveaway} className="main-header-svg" />
                     </a>
-                    <a href="#" className="main-header-svg-a">
+                    <a href="/favourites" className="main-header-svg-a">
                         <Favorites className="main-header-svg" />
                     </a>
                     <a href="/cart" className="main-header-svg-a">
@@ -114,6 +114,7 @@ export default function DesktopHeader() {
                             <p
                                 className="main-header-svg-a main-header-svg-static"
                                 onClick={() => setShowUserBlock(!showUserBlock)}
+                                style={{ cursor: "pointer" }}
                             >
                                 <img src={User} alt={User} className="main-header-svg"/>
                             </p>

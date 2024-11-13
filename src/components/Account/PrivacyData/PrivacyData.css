@@ -1,5 +1,17 @@
 .base-element {
-    margin: 30px 0;
+    display: flex;
+    margin: 50px 0;
+    align-items: center;
+}
+
+.enique-element {
+    width: 100%;
+    margin: 15px 0;
+    margin-bottom: 0;
+}
+
+.base-element__content {
+    width: 100%;
 }
 
 .privacy-data__content {
@@ -32,10 +44,6 @@
     margin-left: 5px;
 }
 
-.base-element {
-    display: flex;
-}
-
 .base-element__content-input {
     background-color: transparent;
     border-bottom: 1px solid #29292940;
@@ -49,11 +57,16 @@
 
 .base-element-btn {
     margin-left: auto;
-}
-
-.base-element {
-    display: flex;
-    flex-direction: column;
+    max-height: 40px;
+    background-color: transparent;
+    border: 1px solid #37373775;
+    border-radius: 10px;
+    padding-block: 10px;
+    padding-inline: 30px;
+    white-space: nowrap;
+    word-wrap: normal;
+    word-break: normal;
+    cursor: pointer;
 }
 
 .checkbox-block-content {
@@ -71,6 +84,34 @@
     width: 500px;
 }
 
-.base-element__content-block {
+.enuqie-element__content-block label {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 
+.delivery-city {
+    margin: 20px 0;
+}
+
+.delivery-city input {
+    background-color: transparent;
+    border-bottom: 1px solid #37373740;
+}
+
+.enique-element_p {
+    margin-left: 10px;
+    font-size: 15px;
+}
+
+.delivery-fields {
+    margin-top: 20px;
+}
+
+.base-element__content-input__last {
+    margin-left: 10px;
+}
+
+.enique-element_btn {
+    margin-top: 20px;
 }

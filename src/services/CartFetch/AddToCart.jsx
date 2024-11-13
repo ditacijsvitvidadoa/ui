@@ -1,6 +1,6 @@
 import {fetchdata} from "../fetchdata.js";
 
-export default async function AddToCart(id, size, color) {
+export default async function AddToCart(id, size = "", color = "") {
     try {
         const encodedColor = encodeURIComponent(color);
 

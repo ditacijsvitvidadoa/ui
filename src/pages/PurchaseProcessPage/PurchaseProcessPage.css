@@ -111,26 +111,6 @@
         border-bottom: 1px solid #FF5756;
     }
 
-    .purchase-process__suggestions-list {
-        position: absolute;
-        width: 250px;
-        color: #373737;
-        font-size: 15px;
-        max-height: 200px;
-        background-color: #ffffff;
-        overflow-y: auto;
-        z-index: 2;
-    }
-
-    .purchase-process__suggestions-list li {
-        padding-top: 10px;
-        padding-left: 10px;
-        margin-left: 5px;
-        margin-right: 5px;
-        border-bottom: 1px solid #37373725;
-        cursor: pointer;
-    }
-
     .purchase-process__city-block {
         margin-top: 20px;
     }
@@ -276,6 +256,37 @@
         margin-left: 5px;
         margin-top: 2px;
         color: red;
+    }
+
+    .purchase-process__suggestions-list {
+        position: absolute;
+        width: 305px;
+        color: #373737;
+        font-size: 15px;
+        max-height: 200px;
+        background-color: #ffffff;
+        overflow-y: auto;
+        z-index: 2;
+    }
+
+    .purchase-process__suggestions-list li {
+        padding-top: 10px;
+        padding-left: 10px;
+        margin-left: 5px;
+        margin-right: 5px;
+        border-bottom: 1px solid #37373725;
+        cursor: pointer;
+        font-size: 13px;
+    }
+
+    .purchase-process__suggestion-input {
+        background-color: transparent;
+        border-bottom: 1px solid #37373740;
+        width: 300px;
+    }
+
+    .purchase-process__suggestion-input.invalid {
+        border-bottom: 1px solid #FF5756;
     }
 }
 

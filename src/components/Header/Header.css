@@ -180,6 +180,9 @@
         margin-block: 5px;
         margin-inline: 12px;
         color: #373737;
+        word-wrap: normal;
+        word-break: normal;
+        white-space: nowrap;
     }
 }
 
@@ -362,6 +365,9 @@
         margin-inline: 12px;
         color: #373737;
         font-size: 14px;
+        word-wrap: normal;
+        word-break: normal;
+        white-space: nowrap;
     }
 }
 
@@ -543,6 +549,9 @@
         margin-inline: 11px;
         color: #373737;
         font-size: 13px;
+        word-wrap: normal;
+        word-break: normal;
+        white-space: nowrap;
     }
 }
 
@@ -724,6 +733,9 @@
         margin-inline: 11px;
         color: #373737;
         font-size: 11px;
+        word-wrap: normal;
+        word-break: normal;
+        white-space: nowrap;
     }
 }
 
@@ -819,6 +831,9 @@
         margin-inline: 11px;
         color: #373737;
         font-size: 11px;
+        word-wrap: normal;
+        word-break: normal;
+        white-space: nowrap;
     }
 }
 
@@ -923,6 +938,9 @@
         margin-inline: 11px;
         color: #373737;
         font-size: 11px;
+        word-wrap: normal;
+        word-break: normal;
+        white-space: nowrap;
     }
 }
 
@@ -1022,6 +1040,9 @@
         margin-inline: 11px;
         color: #373737;
         font-size: 11px;
+        word-wrap: normal;
+        word-break: normal;
+        white-space: nowrap;
     }
 }
 

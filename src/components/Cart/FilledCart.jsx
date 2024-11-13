@@ -56,7 +56,7 @@ function FilledCart() {
             const product = products[index];
             const { id, size, color } = product;
             UpdateCount(id, size, color, newCount).then(() => {
-                window.location.reload();  // Перезагрузка страницы после изменения количества
+                window.location.reload();
             });
         }, 300);
 

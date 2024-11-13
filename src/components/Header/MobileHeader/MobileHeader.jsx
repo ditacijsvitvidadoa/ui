@@ -71,7 +71,7 @@ export default function MobileHeader() {
                     </button>
                 </form>
                 <div>
-                    <a href="#" className="mobile-header-svg-a">
+                    <a href="/favourites" className="mobile-header-svg-a">
                         <Favorites className="mobile-header-svg mobile-header-svg__favourites" />
                     </a>
                     <a href="/cart" className="mobile-header-svg-a">

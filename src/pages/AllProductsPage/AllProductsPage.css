@@ -98,7 +98,7 @@
         height: 98vh;
         position: sticky;
         top: 10px;
-        z-index: 1;
+        z-index: 100000;
         overflow-y: auto;
     }
 
@@ -133,7 +133,7 @@
 
     .products-list {
         height: 100%;
-        margin-left: auto;
+        margin-left: 20px;
         display: grid;
         grid-template-columns: repeat(4, 200px);
         row-gap: 20px;
@@ -160,10 +160,14 @@
     }
 
     .products-list-title {
+        width: 90%;
+        margin: 0 auto;
         font-weight: 500;
         font-size: 15px;
         text-align: center;
         margin-top: 15px;
+        word-wrap: break-word;
+        white-space: normal;
     }
 
     .products-list__details {
@@ -519,7 +523,7 @@
 
     .products-list {
         height: 100%;
-        margin-left: auto;
+        margin-left: 20px;
         display: grid;
         grid-template-columns: repeat(4, 160px);
         row-gap: 15px;
@@ -549,6 +553,8 @@
         text-align: center;
         margin-top: 15px;
         font-weight: 500;
+        word-wrap: break-word;
+        white-space: normal;
     }
 
     .products-list__details {
@@ -910,9 +916,9 @@
 
     .products-list {
         height: 100%;
-        margin-left: auto;
+        margin-left: 20px;
         display: grid;
-        grid-template-columns: repeat(4, 140px);
+        grid-template-columns: repeat(4, 150px);
         row-gap: 15px;
         column-gap: 20px;
     }
@@ -924,7 +930,6 @@
     }
 
     .products-content {
-        margin-left: auto;
     }
 
     .products-list-img {
@@ -940,6 +945,8 @@
         text-align: center;
         margin-top: 10px;
         font-weight: 500;
+        word-wrap: break-word;
+        white-space: normal;
     }
 
     .products-list__details {
@@ -1329,6 +1336,8 @@
         text-align: center;
         margin-top: 10px;
         font-weight: 500;
+        word-wrap: break-word;
+        white-space: normal;
     }
 
     .products-list__details {
@@ -1735,6 +1744,8 @@
         text-align: center;
         margin-top: 10px;
         font-weight: 500;
+        word-wrap: break-word;
+        white-space: normal;
     }
 
     .products-list__details {
@@ -2151,6 +2162,8 @@
         text-align: center;
         margin-top: 10px;
         font-weight: 500;
+        word-wrap: break-word;
+        white-space: normal;
     }
 
     .products-list__details {
@@ -2568,6 +2581,8 @@
         text-align: center;
         margin-top: 10px;
         font-weight: 500;
+        word-wrap: break-word;
+        white-space: normal;
     }
 
     .products-list__details {
@@ -2983,6 +2998,8 @@
         text-align: center;
         margin-top: 10px;
         font-weight: 500;
+        word-wrap: break-word;
+        white-space: normal;
     }
 
     .products-list__details {

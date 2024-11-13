@@ -16,8 +16,8 @@ function MainProductsSlider({ title, products }) {
         infinite: false,
         slidesToShow: 4,
         slidesToScroll: 4,
-        prevArrow: <img src={Arrow} alt="Previous" />,
-        nextArrow: <img src={Arrow} alt="Next" />,
+        prevArrow: <img src={Arrow} alt="Previous" style={{ cursor: "pointer" }} />,
+        nextArrow: <img src={Arrow} alt="Next" style={{ cursor: "pointer" }} />,
         draggable: false,
         responsive: [
             {
@@ -25,8 +25,8 @@ function MainProductsSlider({ title, products }) {
                 settings: {
                     slidesToShow: 3,
                     slidesToScroll: 3,
-                    prevArrow: <img src={Arrow} alt="Previous" />,
-                    nextArrow: <img src={Arrow} alt="Next" />,
+                    prevArrow: <img src={Arrow} alt="Previous" style={{ cursor: "pointer" }} />,
+                    nextArrow: <img src={Arrow} alt="Next" style={{ cursor: "pointer" }} />,
                 }
             },
             {
@@ -34,8 +34,8 @@ function MainProductsSlider({ title, products }) {
                 settings: {
                     slidesToShow: 2,
                     slidesToScroll: 2,
-                    prevArrow: <img src={Arrow} alt="Previous" />,
-                    nextArrow: <img src={Arrow} alt="Next" />,
+                    prevArrow: <img src={Arrow} alt="Previous" style={{ cursor: "pointer" }} />,
+                    nextArrow: <img src={Arrow} alt="Next" style={{ cursor: "pointer" }} />,
                 }
             }
         ]

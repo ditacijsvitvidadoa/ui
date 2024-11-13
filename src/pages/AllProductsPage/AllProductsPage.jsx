@@ -39,14 +39,14 @@ export default function AllProductsPage() {
             try {
                 console.log("Fetching products...");
                 const response = await fetchdata(`/api/get-products${location.search}`);
-                console.log("API response:", response);  // Логируем весь ответ
+                console.log("API response:", response);
 
                 if (response.status === 200) {
                     const { products, details } = response.data;
 
                     // Проверка на структуру данных
-                    console.log("Products:", products);  // Логируем только товары
-                    console.log("Details:", details);  // Логируем детали
+                    console.log("Products:", products);
+                    console.log("Details:", details);
 
                     if (!products || products.length === 0) {
                         console.log("No products found");
@@ -68,11 +68,11 @@ export default function AllProductsPage() {
                     }
                 } else {
                     console.warn(`Failed to fetch products: Status ${response.status}`);
-                    setProducts([]); // Поставим пустой массив на случай ошибки
+                    setProducts([]);
                 }
             } catch (error) {
                 console.error("Error fetching products:", error.message);
-                setProducts([]); // Поставим пустой массив в случае ошибки запроса
+                setProducts([]);
             } finally {
                 setLoading(false);
             }

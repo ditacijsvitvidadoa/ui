@@ -22,6 +22,8 @@ import Temps from "./pages/TamplatePages/Temps.jsx";
 import Returns from "./pages/TamplatePages/Returns.jsx";
 import CompanyHistory from "./pages/TamplatePages/CompanyHistory.jsx";
 import Values from "./pages/TamplatePages/Values.jsx";
+import FavouritesPage from "./pages/FavouritesPage/FavouritesPage.jsx";
+import BonusesPage from "./pages/Bonuses/BonusesPage.jsx";
 
 function App() {
     return (
@@ -43,6 +45,8 @@ function MainLayout() {
             <Routes>
                 <Route path="/" element={<MainPage />} />
                 <Route path="/cart" element={<CartPage />} />
+                <Route path="/favourites" element={<FavouritesPage />} />
+                <Route path="/bonuses" element={<BonusesPage />} />
                 <Route path="/account" element={<AccountPage />} />
                 <Route path="/products" element={<AllProductsPage />} />
                 <Route path="/account/login" element={<LogIn />} />

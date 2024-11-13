@@ -18,7 +18,6 @@ const ProductsList = ({ products, pageCount }) => {
         navigate(`${location.pathname}?${params.toString()}`);
     };
 
-    // Рендер номеров страниц с учетом многоточий
     const renderPageNumbers = () => {
         const pages = [];
 
