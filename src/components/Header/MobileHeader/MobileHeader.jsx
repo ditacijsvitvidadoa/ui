@@ -1,8 +1,8 @@
 import OpenBurger from "../images/open-burger-btn.svg";
 import Logo from "../../../assets/images/Logo/logo.svg";
 import Search from "../images/search.svg";
-import Favorites from "../../../assets/images/Svg/favorites.jsx";
-import Cart from "../../../assets/images/Svg/cart.jsx";
+import Favorites from "../../../assets/images/Product/favorites.jsx";
+import Cart from "../../../assets/images/Product/cart.jsx";
 import User from "../images/user.svg";
 import MainHeaderUserBlock from "../HeaderElements/MainHeaderUserBlock.jsx";
 import React, {useEffect, useRef, useState} from "react";

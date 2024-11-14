@@ -4,13 +4,12 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { fetchdata } from "../../services/fetchdata.js";
 import filters from './dummy_data.json';
 import "../../pages/AllProductsPage/AllProductsPage.css";
-import Favourite from "../../assets/images/Product/Favourite.svg";
-import Cart from "../../assets/images/Product/Cart.svg";
+import Favourite from "../../assets/images/Product/favorites.jsx";
+import Cart from "../../assets/images/Product/cart.jsx";
 import { addToCart } from "../shared/managementCart/addToCart.jsx";
 import ItemsPerPage from "./ProductsPageElements/itemsPerPage.jsx";
 import RangeSlider from "./ProductsPageElements/RangeInput.jsx";
 import SortProducts from "./ProductsPageElements/sortProducts.jsx";
-
 
 function ProductsPage() {
 
@@ -28,8 +27,7 @@ function ProductsPage() {
                                      step={1} value={value} onChange={setValue} isShowTooltip={true}/>
                         <div className="products-price-filter__buttons">
                             <button className="products-price-filter__btn" onClick={handleResetClick}>Скинути</button>
-                            <button className="products-price-filter__btn" onClick={handleApplyClick}>Застосувати
-                            </button>
+                            <button className="products-price-filter__btn" onClick={handleApplyClick}>Застосувати</button>
                         </div>
                     </FilterBlock>
                     {["categories", "age", "brand", "material", "type"].map(key => (
@@ -45,17 +43,21 @@ function ProductsPage() {
                             <div className="products-list__details">
                                 <article>
                                     <section className="products-list-slider__actions">
-                                        <img src={Favourite} alt="Favourite" className="products-list-slider__action"
-                                             onClick={e => e.preventDefault()}/>
-                                        <img src={Cart} alt="Cart" className="products-list-slider__action"
-                                             onClick={async (e) => {
-                                                 e.preventDefault();
-                                                 try {
-                                                     await addToCart(product.id);
-                                                 } catch (error) {
-                                                     console.error("Error adding product to cart:", error.message);
-                                                 }
-                                             }}/>
+                                        <Favourite
+                                            className="products-list-slider__action"
+                                            onClick={e => e.preventDefault()}
+                                        />
+                                        <Cart
+                                            className="products-list-slider__action"
+                                            onClick={async (e) => {
+                                                e.preventDefault();
+                                                try {
+                                                    await addToCart(product.id);
+                                                } catch (error) {
+                                                    console.error("Error adding product to cart:", error.message);
+                                                }
+                                            }}
+                                        />
                                     </section>
                                     <section>
                                         <p className="products-list-slider__code">Код: {product.code}</p>
@@ -78,8 +80,8 @@ function ProductsPage() {
                     ))}
                 </div>
             </div>
-            </>
-            );
-            }
+        </>
+    );
+}
 
-            export default ProductsPage;
+export default ProductsPage;

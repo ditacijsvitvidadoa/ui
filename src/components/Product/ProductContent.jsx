@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Arrow from "../../assets/images/LeftArrow/leftArrow.svg";
-import CartIcon from "../../assets/images/Svg/cart.jsx";
-import FavoritesIcon from "../../assets/images/Svg/favorites.jsx";
+import CartIcon from "../../assets/images/Product/cart.jsx";
+import FavoritesIcon from "../../assets/images/Product/favorites.jsx";
 import AddToFavourite from "../../services/FavouritesFetch/AddToFavourite.jsx";
 import DeleteFromFavourite from "../../services/FavouritesFetch/DeleteFromFavourite.jsx";
 import AddToCart from "../../services/CartFetch/AddToCart.jsx";

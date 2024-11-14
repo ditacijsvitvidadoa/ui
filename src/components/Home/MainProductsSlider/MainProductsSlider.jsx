@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import Slider from "react-slick";
 import { useAuth } from "../../shared/context/AuthContext.jsx";
-import Favourite from "../../../assets/images/Product/Favourite.svg";
-import Cart from "../../../assets/images/Product/Cart.svg";
+import Favourite from "../../../assets/images/Product/favorites.jsx";
+import Cart from "../../../assets/images/Product/cart.jsx";
 import PriceComponent from "../PriceComponent/PriceComponent.jsx";
 import AuthToAccountBlock from "../../AuthToAccountBlock/AuthToAccountBlock.jsx";
 import useAuthBlock from "../../AuthToAccountBlock/UseAuthBlock.jsx";
@@ -102,41 +102,44 @@ function MainProductsSlider({ title, products }) {
                 <h1 className="main-products-slider-h1">{title}</h1>
                 <div className="main-products-slider-list">
                     <Slider {...QuadrupleSliderSettings}>
-                        {products.map(product => {
-                            return (
-                                <a href={`/product/${product.Id}/${encodeURIComponent(product.Title)}`} key={product.Id}
-                                   className="main-product__block">
-                                    <img src={product.Image_url} alt={product.Title} className="main-product-img"/>
-                                    <h1 className="main-product-title">{product.Title}</h1>
-                                    <div className="main-product__details">
-                                        <article>
-                                            <section className="main-products-slider__actions">
-                                                <img src={Favourite} alt="Favourite"
-                                                     className="main-products-slider__action"
-                                                     onClick={(e) => {
-                                                         e.preventDefault();
-                                                         e.stopPropagation();
-                                                         openAuthModal(product.Id, 'favourite');
-                                                     }} />
-                                                <img src={Cart} alt="CartPage" className="main-products-slider__action"
-                                                     onClick={(e) => {
-                                                         e.preventDefault();
-                                                         e.stopPropagation();
-                                                         openAuthModal(product.Id, 'cart');
-                                                     }} />
-                                            </section>
-                                            <section>
-                                                <p className="main-products-slider__code">Код: {product.Code}</p>
-                                                <p className="main-products-slider__articul">Артикул: {product.Articul}</p>
-                                            </section>
-                                        </article>
-                                        <div className="main-product-price">
-                                            <PriceComponent price={product.Price} discount={product.Discount}/>
-                                        </div>
+                        {products.map(product => (
+                            <a href={`/product/${product.Id}/${encodeURIComponent(product.Title)}`} key={product.Id}
+                               className="main-product__block">
+                                <img src={product.Image_url} alt={product.Title} className="main-product-img"/>
+                                <h1 className="main-product-title">{product.Title}</h1>
+                                <div className="main-product__details">
+                                    <article>
+                                        <section className="main-products-slider__actions">
+                                            <Favourite
+                                                fill="#29292999"
+                                                className="main-products-slider__action"
+                                                onClick={(e) => {
+                                                    e.preventDefault();
+                                                    e.stopPropagation();
+                                                    openAuthModal(product.Id, 'favourite');
+                                                }}
+                                            />
+                                            <Cart
+                                                color="#29292999"
+                                                className="main-products-slider__action"
+                                                onClick={(e) => {
+                                                    e.preventDefault();
+                                                    e.stopPropagation();
+                                                    openAuthModal(product.Id, 'cart');
+                                                }}
+                                            />
+                                        </section>
+                                        <section>
+                                            <p className="main-products-slider__code">Код: {product.Code}</p>
+                                            <p className="main-products-slider__articul">Артикул: {product.Articul}</p>
+                                        </section>
+                                    </article>
+                                    <div className="main-product-price">
+                                        <PriceComponent price={product.Price} discount={product.Discount}/>
                                     </div>
-                                </a>
-                            );
-                        })}
+                                </div>
+                            </a>
+                        ))}
                     </Slider>
                 </div>
             </section>

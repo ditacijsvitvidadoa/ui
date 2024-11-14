@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import Favourite from "../../assets/images/Product/Favourite.svg";
-import Cart from "../../assets/images/Product/Cart.svg";
+import Favourite from "../../assets/images/Product/favorites.jsx";
+import Cart from "../../assets/images/Product/cart.jsx";
 import { addToCart } from "../shared/managementCart/addToCart.jsx";
 import { useAuth } from "../shared/context/AuthContext.jsx";
 import AddToFavourite from "../../services/FavouritesFetch/AddToFavourite.jsx";
@@ -155,18 +155,16 @@ const ProductsList = ({ products, pageCount }) => {
                             <div className="products-list__details">
                                 <article>
                                     <section className="products-list-slider__actions">
-                                        <img
-                                            src={Favourite}
-                                            alt="Favourite"
+                                        <Favourite
+                                            fill="#29292999"
                                             className="products-list-slider__action"
                                             onClick={(e) => {
                                                 e.preventDefault();
                                                 openAuthModal(product.id, 'favourite');
                                             }}
                                         />
-                                        <img
-                                            src={Cart}
-                                            alt="Cart"
+                                        <Cart
+                                            color="#29292999"
                                             className="products-list-slider__action"
                                             onClick={(e) => {
                                                 e.preventDefault();
