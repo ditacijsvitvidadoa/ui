@@ -35,7 +35,7 @@ function CartPage() {
         <>
             <UseBreadcrumbs />
             {IsEmpty === null ? (
-                <p>Loading...</p>
+                <EmptyCart />
             ) : IsEmpty ? (
                 <EmptyCart />
             ) : (

@@ -3,6 +3,7 @@ import PopularProducts from "../../components/Home/PopularProducts/PopularProduc
 import DiscountProducts from "../../components/Home/DiscountProducts/DiscountProducts.jsx";
 import WhoAreWe from "../../components/Home/WhoAreWe/WhoAreWe.jsx";
 import WhereAreWe from "../../components/Home/WhereAreWe/WhereAreWe.jsx";
+import AuthToAccountBlock from "../../components/AuthToAccountBlock/AuthToAccountBlock.jsx";
 
 function MainPage() {
     return (

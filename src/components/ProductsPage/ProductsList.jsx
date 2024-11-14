@@ -1,15 +1,25 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import Favourite from "../../assets/images/Product/Favourite.svg";
 import Cart from "../../assets/images/Product/Cart.svg";
 import { addToCart } from "../shared/managementCart/addToCart.jsx";
+import { useAuth } from "../shared/context/AuthContext.jsx";
+import AddToFavourite from "../../services/FavouritesFetch/AddToFavourite.jsx";
+import DeleteFromFavourite from "../../services/FavouritesFetch/DeleteFromFavourite.jsx";
+import AuthToAccountBlock from "../AuthToAccountBlock/AuthToAccountBlock.jsx";
+import useAuthBlock from "../AuthToAccountBlock/UseAuthBlock.jsx";
 
 const ProductsList = ({ products, pageCount }) => {
     const navigate = useNavigate();
     const location = useLocation();
+    const { isAuthenticated } = useAuth();
+    const { showAuthBlock, toggleAuthBlock } = useAuthBlock();
+
+    const [showAuthModal, setShowAuthModal] = useState(false);
+    const [currentProductId, setCurrentProductId] = useState(null);
+    const [actionType, setActionType] = useState(""); // 'favourite' or 'cart'
 
     const pageNumbers = Array.from({ length: pageCount }, (_, i) => i + 1);
-
     const currentPage = parseInt(new URLSearchParams(location.search).get('pageNum')) || 1;
 
     const handlePageClick = (pageNum) => {
@@ -20,7 +30,6 @@ const ProductsList = ({ products, pageCount }) => {
 
     const renderPageNumbers = () => {
         const pages = [];
-
         if (pageCount <= 5) {
             return pageNumbers.map(pageNum => (
                 <p
@@ -76,6 +85,52 @@ const ProductsList = ({ products, pageCount }) => {
         return pages;
     };
 
+    const handleAddToFavourite = (productId) => {
+        if (!isAuthenticated) return toggleAuthBlock();
+        AddToFavourite(productId);
+        window.location.reload();
+    };
+
+    const handleRemoveFromFavourite = (productId) => {
+        if (!isAuthenticated) return toggleAuthBlock();
+        DeleteFromFavourite(productId);
+        window.location.reload();
+    };
+
+    const handleAddToCart = async (productId) => {
+        if (!isAuthenticated) return toggleAuthBlock();
+        try {
+            await addToCart(productId);
+        } catch (error) {
+            console.error("Error adding product to cart:", error.message);
+        }
+    };
+
+    const openAuthModal = (productId, type) => {
+        setCurrentProductId(productId);
+        setActionType(type);
+        setShowAuthModal(true);
+    };
+
+    const closeAuthModal = () => {
+        setShowAuthModal(false);
+        setCurrentProductId(null);
+        setActionType("");
+    };
+
+    const handleAction = () => {
+        if (actionType === 'favourite') {
+            if (products.find(product => product.id === currentProductId).is_favourite) {
+                handleRemoveFromFavourite(currentProductId);
+            } else {
+                handleAddToFavourite(currentProductId);
+            }
+        } else if (actionType === 'cart') {
+            handleAddToCart(currentProductId);
+        }
+        closeAuthModal();
+    };
+
     if (!products || products.length === 0) {
         return (
             <section className="all-products-list">
@@ -89,7 +144,6 @@ const ProductsList = ({ products, pageCount }) => {
             <div className="products-list">
                 {products.map(product => {
                     if (!product) {
-                        // Если продукт null, то его пропускаем
                         return null;
                     }
 
@@ -105,19 +159,18 @@ const ProductsList = ({ products, pageCount }) => {
                                             src={Favourite}
                                             alt="Favourite"
                                             className="products-list-slider__action"
-                                            onClick={e => e.preventDefault()}
+                                            onClick={(e) => {
+                                                e.preventDefault();
+                                                openAuthModal(product.id, 'favourite');
+                                            }}
                                         />
                                         <img
                                             src={Cart}
                                             alt="Cart"
                                             className="products-list-slider__action"
-                                            onClick={async (e) => {
+                                            onClick={(e) => {
                                                 e.preventDefault();
-                                                try {
-                                                    await addToCart(product.id);
-                                                } catch (error) {
-                                                    console.error("Error adding product to cart:", error.message);
-                                                }
+                                                openAuthModal(product.id, 'cart');
                                             }}
                                         />
                                     </section>
@@ -127,7 +180,7 @@ const ProductsList = ({ products, pageCount }) => {
                                     </section>
                                 </article>
                                 <div
-                                    className={`products-list-price-component ${product.discount ? "products-list-price-component--with-discount" : "price-component--no-discount"}`}>
+                                    className={`products-list-price-component ${product.discount ? "products-list-price-component--with-discount" : "price-component--no-discount"}`} >
                                     {product.discount ? (
                                         <>
                                             <p className="products-list-price-component__original-price">{product.price} ₴</p>
@@ -147,6 +200,11 @@ const ProductsList = ({ products, pageCount }) => {
                 <div className="page-nums-block">
                     {renderPageNumbers()}
                 </div>
+            )}
+
+            {showAuthBlock && <AuthToAccountBlock />}
+            {showAuthModal && (
+                <AuthToAccountBlock isOpen={showAuthModal} onClose={closeAuthModal} onAction={handleAction} />
             )}
         </section>
     );

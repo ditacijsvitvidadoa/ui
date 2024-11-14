@@ -1,15 +1,23 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Arrow from "../../assets/images/LeftArrow/leftArrow.svg";
 import CartIcon from "../../assets/images/Svg/cart.jsx";
 import FavoritesIcon from "../../assets/images/Svg/favorites.jsx";
 import AddToFavourite from "../../services/FavouritesFetch/AddToFavourite.jsx";
 import DeleteFromFavourite from "../../services/FavouritesFetch/DeleteFromFavourite.jsx";
 import AddToCart from "../../services/CartFetch/AddToCart.jsx";
+import { useAuth } from "../shared/context/AuthContext.jsx";
+import AuthToAccountBlock from "../AuthToAccountBlock/AuthToAccountBlock.jsx";
 
-export default function ProductContent({ id, title, description, articul, code, sizes_info, color_info, discount, price, is_favourite, in_cart }) {
-    // Инициализация активного цвета и размера из URL, если они есть
+export default function ProductContent({
+                                           id, title, description, articul, code, sizes_info, color_info, discount, price, is_favourite, in_cart
+                                       }) {
+    const { isAuthenticated } = useAuth();
+    const [showAuthBlock, setShowAuthBlock] = useState(false);
+
+    const openAuthBlock = () => setShowAuthBlock(true);
+    const closeAuthBlock = () => setShowAuthBlock(false);
+
     const getUrlParam = (param) => new URLSearchParams(window.location.search).get(param);
-
     const [activeColor, setActiveColor] = useState(getUrlParam('color') || color_info?.default_color || "");
     const [activeSize, setActiveSize] = useState(getUrlParam('size') || sizes_info?.sizes.default_size || "");
 
@@ -30,16 +38,19 @@ export default function ProductContent({ id, title, description, articul, code, 
     };
 
     const handleRemoveFromFavourite = () => {
+        if (!isAuthenticated) return openAuthBlock();
         DeleteFromFavourite(id);
         window.location.reload();
     };
 
     const handleAddToFavourite = () => {
+        if (!isAuthenticated) return openAuthBlock();
         AddToFavourite(id);
         window.location.reload();
     };
 
     const handleBuyClick = () => {
+        if (!isAuthenticated) return openAuthBlock();
         if (!in_cart) {
             const url = new URL(window.location);
             const size = url.searchParams.get('size');
@@ -106,7 +117,7 @@ export default function ProductContent({ id, title, description, articul, code, 
                 <article className="product-content__btns">
                     <div
                         className="product-content__buy-btn"
-                        style={{cursor: 'pointer'}}
+                        style={{ cursor: 'pointer' }}
                         onClick={handleBuyClick}
                     >
                         <article className="product-content__cart-block">
@@ -123,7 +134,7 @@ export default function ProductContent({ id, title, description, articul, code, 
                     <div
                         className="product-content__favourite-btn"
                         onClick={is_favourite ? handleRemoveFromFavourite : handleAddToFavourite}
-                        style={{cursor: 'pointer'}}
+                        style={{ cursor: 'pointer' }}
                     >
                         <article className="product-content__favourite-block">
                             <FavoritesIcon fill="#FF5756" className="product-content__favourite"/>
@@ -138,6 +149,7 @@ export default function ProductContent({ id, title, description, articul, code, 
                     </div>
                 </article>
             </div>
+            {showAuthBlock && <AuthToAccountBlock isOpen={showAuthBlock} onClose={closeAuthBlock} />}
         </div>
     );
 }

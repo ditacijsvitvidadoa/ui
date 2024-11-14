@@ -1,24 +1,28 @@
-import {useEffect, useState} from "react";
-import {fetchdata} from "../../services/fetchdata.js";
+import { useEffect, useState } from "react";
+import { fetchdata } from "../../services/fetchdata.js";
 import FilledFavourites from "../../components/Favourites/FilledFavourites.jsx";
-
-import "./FavouritesPage.css";
 import EmptyFavourites from "../../components/Favourites/EmptyFavourites.jsx";
 import UseBreadcrumbs from "../../components/shared/Breadcrumbs/Breadcrumbs.jsx";
 
+import "./FavouritesPage.css";
 
 export default function FavouritesPage() {
-    const [products, setProducts] = useState([]);
+    const [isEmpty, setIsEmpty] = useState(null); // Понимание, пусто ли
+    const [products, setProducts] = useState([]); // Состояние для товаров
 
     const fetchProducts = async () => {
         try {
             const { data, status } = await fetchdata("/api/get-favoutires-products");
-            if (status !== 200) {
-                throw new Error("Ошибка при получении товаров: " + status);
+            if (status === 204) {
+                setIsEmpty(true); // Если данных нет
+            } else if (status === 200 && data.length > 0) {
+                setProducts(data);
+                setIsEmpty(false); // Если товары есть
+            } else {
+                console.warn(`Failed to fetch products: Status ${status}`);
             }
-            setProducts(data);
         } catch (error) {
-            console.error("Ошибка:", error);
+            console.error("Error:", error);
         }
     };
 
@@ -26,13 +30,16 @@ export default function FavouritesPage() {
         fetchProducts();
     }, []);
 
-
     return (
         <>
             <UseBreadcrumbs />
-            {products ? (
+            {isEmpty === null ? (
+                <EmptyFavourites />
+            ) : isEmpty ? (
+                <EmptyFavourites />
+            ) : (
                 <FilledFavourites products={products} />
-            ) : (<EmptyFavourites />)}
+            )}
         </>
-    )
+    );
 }

@@ -1,9 +1,10 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { fetchdata } from "../../services/fetchdata.js";
-import "./css/LogIn.css";
+import React, {useEffect, useState} from 'react';
+import "./AuthToAccountBlock.css";
+import {useNavigate} from "react-router-dom";
+import {fetchdata} from "../../services/fetchdata.js";
+import Cross from "../../assets/images/Cross/cross.svg";
 
-function LogIn() {
+export default function AuthToAccountBlock({ isOpen, onClose }) {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState(null);
@@ -36,10 +37,28 @@ function LogIn() {
         }
     };
 
+
+    useEffect(() => {
+        if (isOpen) {
+            document.body.classList.add('no-scroll');
+        } else {
+            document.body.classList.remove('no-scroll');
+        }
+
+        return () => {
+            document.body.classList.remove('no-scroll');
+        };
+    }, [isOpen]);
+
+    if (!isOpen) return null;
+
     return (
-        <div className="form-container">
-            <h1 className="form-container-h1">Вхід в профіль</h1>
-            <form onSubmit={handleSubmit} className="form-block">
+        <>
+            <div className="auth-account-overlay" onClick={onClose}></div>
+            <div className="auth-account-block">
+                <img src={Cross} onClick={onClose} alt="cross" className="auth-account-block__cross"/>
+                <h1 className="auth-account-block__h1">Вхід</h1>
+                <form onSubmit={handleSubmit} className="form-block">
                     <input
                         type="email"
                         id="email"
@@ -58,11 +77,11 @@ function LogIn() {
                         onChange={(e) => setPassword(e.target.value)}
                         required
                     />
-                {error && <p className="error-message">{error}</p>}
-                <button type="submit" className="form-group-button">Війти</button>
-            </form>
-        </div>
+                    {error && <p className="error-message">{error}</p>}
+                    <button type="submit" className="form-group-button">Війти</button>
+                </form>
+                <p className="auth-account-block__p">Ще немає свого особистого кабінету? <a href="/account/sign-up">Зареєструвати.</a></p>
+            </div>
+        </>
     );
 }
-
-export default LogIn;

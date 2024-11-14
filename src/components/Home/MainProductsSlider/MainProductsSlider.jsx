@@ -1,15 +1,26 @@
 import React, { useState } from 'react';
 import Slider from "react-slick";
+import { useAuth } from "../../shared/context/AuthContext.jsx";
+import Favourite from "../../../assets/images/Product/Favourite.svg";
+import Cart from "../../../assets/images/Product/Cart.svg";
+import PriceComponent from "../PriceComponent/PriceComponent.jsx";
+import AuthToAccountBlock from "../../AuthToAccountBlock/AuthToAccountBlock.jsx";
+import useAuthBlock from "../../AuthToAccountBlock/UseAuthBlock.jsx";
+import AddToFavourite from "../../../services/FavouritesFetch/AddToFavourite.jsx";
+import DeleteFromFavourite from "../../../services/FavouritesFetch/DeleteFromFavourite.jsx";
+import { addToCart } from "../../shared/managementCart/addToCart.jsx";
 
 import "./MainProductsSlider.css";
 import Arrow from "../../../assets/images/LeftArrow/leftArrow.svg";
 
-// For Products
-import Favourite from "../../../assets/images/Product/Favourite.svg"
-import Cart from "../../../assets/images/Product/Cart.svg"
-import PriceComponent from "../PriceComponent/PriceComponent.jsx";
-
 function MainProductsSlider({ title, products }) {
+    const { isAuthenticated } = useAuth();
+    const { showAuthBlock, toggleAuthBlock } = useAuthBlock();
+
+    const [showAuthModal, setShowAuthModal] = useState(false);
+    const [currentProductId, setCurrentProductId] = useState(null);
+    const [actionType, setActionType] = useState(""); // 'favourite' or 'cart'
+
     const QuadrupleSliderSettings = {
         arrows: true,
         dots: false,
@@ -41,6 +52,50 @@ function MainProductsSlider({ title, products }) {
         ]
     };
 
+    const handleAddToFavourite = (productId) => {
+        if (!isAuthenticated) return toggleAuthBlock();
+        AddToFavourite(productId);
+    };
+
+    const handleRemoveFromFavourite = (productId) => {
+        if (!isAuthenticated) return toggleAuthBlock();
+        DeleteFromFavourite(productId);
+    };
+
+    const handleAddToCart = async (productId) => {
+        if (!isAuthenticated) return toggleAuthBlock();
+        try {
+            await addToCart(productId);
+        } catch (error) {
+            console.error("Error adding product to cart:", error.message);
+        }
+    };
+
+    const openAuthModal = (productId, type) => {
+        setCurrentProductId(productId);
+        setActionType(type);
+        setShowAuthModal(true);
+    };
+
+    const closeAuthModal = () => {
+        setShowAuthModal(false);
+        setCurrentProductId(null);
+        setActionType("");
+    };
+
+    const handleAction = () => {
+        if (actionType === 'favourite') {
+            if (products.find(product => product.id === currentProductId).is_favourite) {
+                handleRemoveFromFavourite(currentProductId);
+            } else {
+                handleAddToFavourite(currentProductId);
+            }
+        } else if (actionType === 'cart') {
+            handleAddToCart(currentProductId);
+        }
+        closeAuthModal();
+    };
+
     return (
         <>
             <section className="main-products-slider">
@@ -61,12 +116,14 @@ function MainProductsSlider({ title, products }) {
                                                      onClick={(e) => {
                                                          e.preventDefault();
                                                          e.stopPropagation();
-                                                     }}/>
+                                                         openAuthModal(product.Id, 'favourite');
+                                                     }} />
                                                 <img src={Cart} alt="CartPage" className="main-products-slider__action"
                                                      onClick={(e) => {
                                                          e.preventDefault();
                                                          e.stopPropagation();
-                                                     }}/>
+                                                         openAuthModal(product.Id, 'cart');
+                                                     }} />
                                             </section>
                                             <section>
                                                 <p className="main-products-slider__code">Код: {product.Code}</p>
@@ -83,8 +140,13 @@ function MainProductsSlider({ title, products }) {
                     </Slider>
                 </div>
             </section>
+
+            {showAuthBlock && <AuthToAccountBlock />}
+            {showAuthModal && (
+                <AuthToAccountBlock isOpen={showAuthModal} onClose={closeAuthModal} onAction={handleAction} />
+            )}
         </>
-    )
+    );
 }
 
 export default MainProductsSlider;

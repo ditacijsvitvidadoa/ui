@@ -1,0 +1,48 @@
+.auth-account-block {
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    width: 400px;
+    height: 400px;
+    border-radius: 15px;
+    z-index: 1000000;
+    display: flex;
+    flex-direction: column;
+}
+
+.auth-account-block__cross {
+    width: 22px;
+    margin-left: auto;
+    margin-right: 10px;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+.auth-account-block__h1 {
+    font-size: 23px;
+    margin-left: 25px;
+    margin-top: 60px;
+}
+
+.auth-account-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 999999;
+}
+
+.auth-account-block__p {
+    font-size: 15px;
+    margin-left: 25px;
+    margin-top: 15px;
+}
+
+.auth-account-block__p a {
+    color: #FF5756;
+    text-decoration: underline;
+}

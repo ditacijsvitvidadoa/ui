@@ -2,7 +2,7 @@ import React from "react";
 import RangeSlider from "./ProductsPageElements/RangeInput.jsx";
 import filters from './dummy_data.json';
 import FilterGroup from "./FilterGroup.jsx";
-import CloseBurger from "../Header/images/close-burger.svg";
+import CloseBurger from "../../assets/images/Cross/cross.svg";
 
 const FiltersBlock = ({ value, setValue, details, handleResetClick, handleApplyClick, filterOpen, setFilterOpen }) => {
     return (
