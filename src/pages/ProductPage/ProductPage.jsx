@@ -41,10 +41,6 @@ export default function ProductPage() {
         return <div className="loading">Loading...</div>;
     }
 
-    if (!product) {
-        return <div>No product found.</div>;
-    }
-
     return (
         <>
             <section className="product-block" key={product.id}>

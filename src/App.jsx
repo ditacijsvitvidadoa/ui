@@ -1,4 +1,4 @@
-// App.jsx
+
 import React from "react";
 import { BrowserRouter as Router, Route, Routes, useLocation } from "react-router-dom";
 import MainPage from "./pages/MainPage/MainPage.jsx";
@@ -24,6 +24,8 @@ import CompanyHistory from "./pages/TamplatePages/CompanyHistory.jsx";
 import Values from "./pages/TamplatePages/Values.jsx";
 import FavouritesPage from "./pages/FavouritesPage/FavouritesPage.jsx";
 import BonusesPage from "./pages/Bonuses/BonusesPage.jsx";
+import AboutUs from "./pages/TamplatePages/AboutUs.jsx";
+import CatalogPage from "./pages/CatalogPage/CatalogPage.jsx";
 
 function App() {
     return (
@@ -44,6 +46,8 @@ function MainLayout() {
             {!isAdminPanel && <Header />}
             <Routes>
                 <Route path="/" element={<MainPage />} />
+                <Route path="/catalog" element={<CatalogPage />} />
+                <Route path="/about-us" element={<AboutUs />} />
                 <Route path="/cart" element={<CartPage />} />
                 <Route path="/favourites" element={<FavouritesPage />} />
                 <Route path="/bonuses" element={<BonusesPage />} />

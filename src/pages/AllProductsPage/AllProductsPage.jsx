@@ -10,6 +10,8 @@ import ProductsList from "../../components/ProductsPage/ProductsList.jsx";
 import FiltersBlock from "../../components/ProductsPage/FiltersBlock.jsx";
 import FilterSvg from "../../assets/images/ProductFilter/product-filter.svg";
 
+import NoProductsSvg from "./images/empty-products-list.svg";
+
 export default function AllProductsPage() {
     const [products, setProducts] = useState([]);
     const [details, setDetails] = useState(null);
@@ -27,7 +29,6 @@ export default function AllProductsPage() {
         } else {
             document.body.classList.remove('no-scroll');
         }
-
         return () => {
             document.body.classList.remove('no-scroll');
         };
@@ -38,27 +39,16 @@ export default function AllProductsPage() {
             setLoading(true);
             try {
                 const response = await fetchdata(`/api/get-products${location.search}`);
-
                 if (response.status === 200) {
                     const { products, details } = response.data;
-
-                    if (!products || products.length === 0) {
-                        console.log("No products found");
-                        setProducts([]);
-                    } else {
-                        setProducts(products);
-                    }
-
-                    setDetails(details);
+                    setProducts(products || []);
+                    setDetails(details || null);
 
                     if (details) {
                         setValue([details.min_price_product.price, details.max_price_product.price]);
-
                         const params = new URLSearchParams(location.search);
                         const pageSize = params.get('pageSize') ? parseInt(params.get('pageSize'), 10) : defaultPageSize;
-
-                        const pageCount = Math.ceil(details.total_count / pageSize);
-                        setPageCount(pageCount);
+                        setPageCount(Math.ceil(details.total_count / pageSize));
                     }
                 } else {
                     console.warn(`Failed to fetch products: Status ${response.status}`);
@@ -75,35 +65,6 @@ export default function AllProductsPage() {
         fetchProducts();
     }, [location.search]);
 
-    if (loading) {
-        return <div className="loading">Загрузка...</div>;
-    }
-
-    if (products.length === 0) {
-        return (
-            <section className="all-products-list__desktop-v">
-                <div className="products-options">
-                    <ItemsPerPage values={filters.itemsPerPage.values} defaultValue={filters.itemsPerPage.default}/>
-                    <SortProducts values={filters.sortOrder.values} defaultValue="popular"/>
-                </div>
-                <div className="products-block">
-                    <FiltersBlock
-                        value={value}
-                        setValue={setValue}
-                        details={details}
-                        handleResetClick={handleResetClick}
-                        handleApplyClick={handleApplyClick}
-                        filterOpen={filterOpen}
-                        setFilterOpen={setFilterOpen}
-                    />
-                    <div className="no-products-message">
-                        <p>К сожалению, мы не нашли ни одного товара по вашему запросу. Попробуйте изменить фильтры или вернуться позже.</p>
-                    </div>
-                </div>
-            </section>
-        );
-    }
-
     const handleApplyClick = () => {
         const params = new URLSearchParams(location.search);
         params.set('minPrice', value[0]);
@@ -112,25 +73,27 @@ export default function AllProductsPage() {
     };
 
     const handleResetClick = () => {
-        const url = new URL(window.location.href);
-        const params = new URLSearchParams(url.search);
+        const params = new URLSearchParams(location.search);
         params.delete('minPrice');
         params.delete('maxPrice');
-        window.history.replaceState({}, '', `${url.pathname}?${params.toString()}`);
+        navigate(`${location.pathname}?${params.toString()}`);
         setValue([details.min_price_product.price, details.max_price_product.price]);
-        window.location.reload();
     };
 
     const toggleFilter = () => {
         setFilterOpen(!filterOpen);
     };
 
+    if (loading) {
+        return <div className="loading">Загрузка...</div>;
+    }
+
     return (
         <>
             <section className="all-products-list__desktop-v">
                 <div className="products-options">
-                    <ItemsPerPage values={filters.itemsPerPage.values} defaultValue={filters.itemsPerPage.default}/>
-                    <SortProducts values={filters.sortOrder.values} defaultValue="popular"/>
+                    <ItemsPerPage values={filters.itemsPerPage.values} defaultValue={filters.itemsPerPage.default} />
+                    <SortProducts values={filters.sortOrder.values} defaultValue="popular" />
                 </div>
                 <div className="products-block">
                     <FiltersBlock
@@ -142,7 +105,14 @@ export default function AllProductsPage() {
                         filterOpen={filterOpen}
                         setFilterOpen={setFilterOpen}
                     />
-                    <ProductsList products={products} pageCount={pageCount}/>
+                    {products.length > 0 ? (
+                        <ProductsList products={products} pageCount={pageCount} />
+                    ) : (
+                        <div className="no-products-message__desktop-v">
+                            <img src={NoProductsSvg || ""} alt="no products svg" />
+                            <p>На жаль, ми не знайшли жодного товару за вашим запитом. Спробуйте змінити фільтри або поверніться пізніше.</p>
+                        </div>
+                    )}
                 </div>
             </section>
 
@@ -150,13 +120,21 @@ export default function AllProductsPage() {
                 <div className="products-options">
                     <img src={FilterSvg} alt="Open filter svg" onClick={toggleFilter} className="products-filters__open-burger" />
                     <article className="products-options__filters">
-                        <ItemsPerPage values={filters.itemsPerPage.values} defaultValue={filters.itemsPerPage.default}/>
-                        <SortProducts values={filters.sortOrder.values} defaultValue="popular"/>
+                        <ItemsPerPage values={filters.itemsPerPage.values} defaultValue={filters.itemsPerPage.default} />
+                        <SortProducts values={filters.sortOrder.values} defaultValue="popular" />
                     </article>
                 </div>
-                <div className="products-block">
-                    <ProductsList products={products} pageCount={pageCount}/>
-                </div>
+                    {products.length > 0 ? (
+                        <div className="products-block">
+                            <ProductsList products={products} pageCount={pageCount} />
+                        </div>
+                    ) : (
+                        <div className="no-products-message__mobile-v">
+                            <img src={NoProductsSvg || ""} alt="no products svg"/>
+                            <p>На жаль, ми не знайшли жодного товару за вашим запитом. Спробуйте змінити фільтри або
+                                поверніться пізніше.</p>
+                        </div>
+                    )}
                 <FiltersBlock
                     value={value}
                     setValue={setValue}

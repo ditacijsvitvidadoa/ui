@@ -30,12 +30,15 @@ import School from "../../../assets/images/Categories/forSchool.svg";
 import Sport from "../../../assets/images/Categories/forSport.svg";
 import Footwear from "../../../assets/images/Categories/footswear.svg";
 import Accessories from "../../../assets/images/Categories/accessories.svg";
+import {useNavigate} from "react-router-dom";
 
 
 export default function MobileHeader() {
     const [showUserBlock, setShowUserBlock] = useState(false);
     const [menuOpen, setMenuOpen] = useState(false);
+    const [searchValue, setSearchValue] = useState("");
     const { isAuthenticated } = useAuth();
+    const navigate = useNavigate();
 
     useEffect(() => {
         if (menuOpen) {
@@ -57,25 +60,36 @@ export default function MobileHeader() {
         setMenuOpen(false);
     };
 
+    const handleSearchSubmit = (e) => {
+        e.preventDefault();
+        if (searchValue.trim()) {
+            navigate(`/products?search=${searchValue}`);
+        }
+    }
+
     return (
         <>
             <header className="mobile-header">
-                <img src={OpenBurger} alt="Open Menu" className="mobile-header__open-burger" onClick={toggleMenu} />
+                <img src={OpenBurger} alt="Open Menu" className="mobile-header__open-burger" onClick={toggleMenu}/>
                 <a href="/" className="mobile-header__logo-a">
-                    <img src={Logo} alt={Logo} className="mobile-header__logo" />
+                    <img src={Logo} alt={Logo} className="mobile-header__logo"/>
                 </a>
-                <form className="mobile-header__search-form">
-                    <input className="mobile-header__search-form-input" />
+                <form className="mobile-header__search-form" onSubmit={handleSearchSubmit}>
+                    <input
+                        className="mobile-header__search-form-input"
+                        value={searchValue}
+                        onChange={(e) => setSearchValue(e.target.value)}
+                    />
                     <button type="submit" className="mobile-header__search-form-btn">
-                        <img src={Search} alt={Search} className="mobile-header__search-form-btn-content" />
+                        <img src={Search} alt={Search} className="mobile-header__search-form-btn-content"/>
                     </button>
                 </form>
                 <div>
                     <a href="/favourites" className="mobile-header-svg-a">
-                        <Favorites className="mobile-header-svg mobile-header-svg__favourites" />
+                        <Favorites className="mobile-header-svg mobile-header-svg__favourites"/>
                     </a>
                     <a href="/cart" className="mobile-header-svg-a">
-                        <Cart className="mobile-header-svg mobile-header-svg__cart" />
+                        <Cart className="mobile-header-svg mobile-header-svg__cart"/>
                     </a>
                     {isAuthenticated ? (
                         <a href="/account" className="mobile-header-svg-a">
@@ -93,20 +107,20 @@ export default function MobileHeader() {
             </header>
             <div className={`mobile-header-menu ${menuOpen ? 'active' : ''}`}>
                 <article className="close-menu-block">
-                    <img src={CloseBurger} alt={CloseBurger} className="header-burder-close" onClick={closeMenu} />
+                    <img src={CloseBurger} alt={CloseBurger} className="header-burder-close" onClick={closeMenu}/>
                 </article>
                 <article className="header-burder__contact-info">
                     <section className="header-burder__contact-info-item">
-                        <img src={Phone} alt={Phone} className="" />
+                        <img src={Phone} alt={Phone} className=""/>
                         <p className="header-burder__contact-info-phone">+38(012)-345-67-89</p>
                     </section>
                     <section className="header-burder__contact-info-item">
-                        <img src={Clock} alt={Clock} className="" />
+                        <img src={Clock} alt={Clock} className=""/>
                         <p>Працюємо з 00:00 до 00:00</p>
                     </section>
                     <section className="header-burder__contact-info-networks">
                         <a href="#" className="header-burder__contact-info-instargram-link">
-                            <img src={Instagram} alt={Instagram} className="header-burder__contact-info-network" />
+                            <img src={Instagram} alt={Instagram} className="header-burder__contact-info-network"/>
                         </a>
                         <a href="#">
                             <img src={Email} alt={Email} className="header-burder__contact-info-network"/>
@@ -120,19 +134,19 @@ export default function MobileHeader() {
                 <nav className="header-burder__nav">
                     <ul className="header-burder__nav-ul">
                         <li><a className="header-burder__nav-link" href="/">
-                            <img src={Home} alt={Home} className="header-burder__nav-link-img" />
+                            <img src={Home} alt={Home} className="header-burder__nav-link-img"/>
                             <p>Головна</p>
                         </a></li>
                         <li><a className="header-burder__nav-link" href="/about-us">
-                            <img src={AboutUs} alt={AboutUs} className="header-burder__nav-link-img" />
+                            <img src={AboutUs} alt={AboutUs} className="header-burder__nav-link-img"/>
                             <p>Про нас</p>
                         </a></li>
                         <li><a className="header-burder__nav-link" href="/discount-products">
-                            <img src={Discount} alt={Discount} className="header-burder__nav-link-img" />
+                            <img src={Discount} alt={Discount} className="header-burder__nav-link-img"/>
                             <p>Акції</p>
                         </a></li>
                         <li><a className="header-burder__nav-link" href="/contacts">
-                            <img src={Contacts} alt={Contacts} className="header-burder__nav-link-img" />
+                            <img src={Contacts} alt={Contacts} className="header-burder__nav-link-img"/>
                             <p>Контакти</p>
                         </a></li>
                     </ul>

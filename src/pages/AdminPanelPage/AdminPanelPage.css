@@ -222,6 +222,23 @@
     box-sizing: border-box;
 }
 
+.create-product__suggestions {
+    position: absolute;
+    background-color: #fff;
+    width: 200px;
+    max-height: 150px;
+    overflow-y: auto;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #FF575699;
+    border-top: none;
+    border-bottom: none;
+}
+
+.create-product__suggestions p {
+    padding: 8px 0;
+}
+
 .create-product__textarea {
     resize: vertical;
     width: 100%;

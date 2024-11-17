@@ -9,7 +9,8 @@ import DeleteFromFavourite from "../../services/FavouritesFetch/DeleteFromFavour
 import AuthToAccountBlock from "../AuthToAccountBlock/AuthToAccountBlock.jsx";
 import useAuthBlock from "../AuthToAccountBlock/UseAuthBlock.jsx";
 
-const ProductsList = ({ products, pageCount }) => {
+const ProductsList = ({ products = [], pageCount = 1 }) => {
+    console.log(products)
     const navigate = useNavigate();
     const location = useLocation();
     const { isAuthenticated } = useAuth();
@@ -21,6 +22,14 @@ const ProductsList = ({ products, pageCount }) => {
 
     const pageNumbers = Array.from({ length: pageCount }, (_, i) => i + 1);
     const currentPage = parseInt(new URLSearchParams(location.search).get('pageNum')) || 1;
+
+    if (!products || products.length === 0) {
+        return (
+            <section className="all-products-list">
+                <p className="no-products-message">Не знайдено товарів</p>
+            </section>
+        );
+    }
 
     const handlePageClick = (pageNum) => {
         const params = new URLSearchParams(location.search);

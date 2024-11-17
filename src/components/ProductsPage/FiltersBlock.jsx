@@ -20,8 +20,8 @@ const FiltersBlock = ({ value, setValue, details, handleResetClick, handleApplyC
                     <p>{value[1]}</p>
                 </div>
                 <RangeSlider
-                    min={details.min_price_product.price}
-                    max={details.max_price_product.price}
+                    min={details?.min_price_product?.price || 0}
+                    max={details?.max_price_product?.price || 0}
                     step={1}
                     value={value}
                     onChange={setValue}

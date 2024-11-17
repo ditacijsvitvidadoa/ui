@@ -1,13 +1,83 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import Trash from "../../assets/images/CartImages/trash.svg";
-import filters from "../ProductsPage/dummy_data.json";
 import CreateOrder from "../../services/OrderFetch/CreateOrder.jsx";
 import CreateProductFetch from "../../services/ProductsFetch/CreateProduct.jsx";
 
 const sizes = ["XXS", "XS", "S", "M", "L", "XL", "XXL"];
 const availableColors = ["#ffffff", "#000", "#d30000", "#878787", "#FFFF00"];
 
-const CreateProduct = () => {
+const CustomInput = ({ label, options, value, onChange }) => {
+    const [inputValue, setInputValue] = useState(value || "");
+    const [filteredOptions, setFilteredOptions] = useState(options);
+    const [showSuggestions, setShowSuggestions] = useState(false);
+    const [searchTimeout, setSearchTimeout] = useState(null);
+
+    const handleInputChange = (e) => {
+        const { value } = e.target;
+        setInputValue(value);
+
+        setShowSuggestions(true);
+
+        if (searchTimeout) clearTimeout(searchTimeout);
+        setSearchTimeout(setTimeout(() => filterOptions(value), 500));
+
+        if (onChange) onChange(value);
+    };
+
+    const filterOptions = (query) => {
+        const lowercasedQuery = query.toLowerCase();
+        const filtered = options.filter(option =>
+            option.labelUA.toLowerCase().includes(lowercasedQuery)
+        );
+        setFilteredOptions(filtered);
+    };
+
+    const handleSelect = (option) => {
+        setInputValue(option.labelUA);
+        if (onChange) onChange(option.labelUA);
+        setFilteredOptions([]);
+        setShowSuggestions(false);
+    };
+
+    useEffect(() => {
+        setInputValue(value);
+    }, [value]);
+
+    const handleFocus = () => {
+        setShowSuggestions(true);
+        setFilteredOptions(options);
+    };
+
+    return (
+        <div>
+            <input
+                placeholder={label}
+                type="text"
+                value={inputValue}
+                onChange={handleInputChange}
+                onFocus={handleFocus}
+                onBlur={() => setTimeout(() => setShowSuggestions(false), 100)}
+                className="create-product__input"
+            />
+            {showSuggestions && filteredOptions.length > 0 && (
+                <div className="create-product__suggestions">
+                    {filteredOptions.map((option, index) => (
+                        <p
+                            key={index}
+                            onClick={() => handleSelect(option)}
+                            style={{ cursor: "pointer" }}
+                        >
+                            {option.labelUA}
+                        </p>
+                    ))}
+                </div>
+            )}
+        </div>
+    );
+};
+
+
+const CreateProduct = ({ filters }) => {
     const [images, setImages] = useState([]);
     const [previews, setPreviews] = useState([]);
     const [activeIndex, setActiveIndex] = useState(0);
@@ -19,14 +89,20 @@ const CreateProduct = () => {
     const [customColor, setCustomColor] = useState("#000000");
     const [characteristics, setCharacteristics] = useState([]);
     const [newCharacteristic, setNewCharacteristic] = useState({ key: '', value: '' });
-    const [selectedCategory, setSelectedCategory] = useState('');
-    const [customValues, setCustomValues] = useState({ material: '', age: '', category: '', brand: '' });
+    const [customValues, setCustomValues] = useState({
+        material: '',
+        age: '',
+        category: '',
+        brand: '',
+        type: ''
+    });
     const [isSizeTableChecked, setIsSizeTableChecked] = useState(false);
-    const [categories] = useState(filters.categories.items);
-    const [materials] = useState(filters.material.items);
-    const [ages] = useState(filters.age.items);
-    const [brands] = useState(filters.brand.items);
 
+    const [categories] = useState(filters?.categories?.items || []);
+    const [materials] = useState(filters?.material?.items || []);
+    const [ages] = useState(filters?.age?.items || []);
+    const [brands] = useState(filters?.brand?.items || []);
+    const [types] = useState(filters?.type?.items || []);
 
     const handleSizeTableChange = (event) => {
         setIsSizeTableChecked(event.target.checked);
@@ -114,12 +190,12 @@ const CreateProduct = () => {
         setCharacteristics((prev) => prev.filter((_, i) => i !== index));
     };
 
-    const handleCategoryChange = (e) => {
-        setSelectedCategory(e.target.value);
-    };
-
-    const handleCustomValueChange = (name, value) => {
-        setCustomValues((prev) => ({ ...prev, [name]: value }));
+    const handleCustomValueChange = (key, value) => {
+        console.log(key, value)
+        setCustomValues((prevValues) => ({
+            ...prevValues,
+            [key]: value
+        }));
     };
 
     const handleSubmit = (e) => {
@@ -127,14 +203,17 @@ const CreateProduct = () => {
         const formData = new FormData();
 
         formData.append('title', e.target.title.value);
-        formData.append('description', e.target.description.value);
-        formData.append('material', customValues.material);
-        formData.append('age', customValues.age);
-        formData.append('category', customValues.category);
-        formData.append('brand', customValues.brand);
         formData.append('articul', e.target.articul.value);
         formData.append('code', e.target.code.value);
+        formData.append('description', e.target.description.value);
         formData.append('price', e.target.price.value);
+        console.log(customValues.category)
+        formData.append('category', customValues.category);
+        formData.append('material', customValues.material);
+        formData.append('brand', customValues.brand);
+        formData.append('age', customValues.age);
+        formData.append('type', customValues.type);
+
         formData.append('discount', e.target.discount.value);
         formData.append("has_sizes", isSizeChecked)
         formData.append("has_table", isSizeTableChecked)
@@ -164,7 +243,6 @@ const CreateProduct = () => {
 
         CreateProductFetch(formData);
     };
-
 
     return (
         <form onSubmit={handleSubmit} className="create-product">
@@ -219,60 +297,36 @@ const CreateProduct = () => {
                     placeholder="Опис товару"
                 />
                 <article>
-                    <select
+                    <CustomInput
+                        label="Виберіть матеріал"
+                        options={materials}
                         value={customValues.material}
-                        onChange={(e) => handleCustomValueChange('material', e.target.value)}
-                        className="create-product__input"
-                        required
-                    >
-                        <option value="" disabled>Виберіть матеріал</option>
-                        {materials.map((material) => (
-                            <option key={material.value} value={material.value}>
-                                {material.labelUA}
-                            </option>
-                        ))}
-                    </select>
-
-                    <select
+                        onChange={(value) => handleCustomValueChange('material', value)}
+                    />
+                    <CustomInput
+                        label="Виберіть вік"
+                        options={ages}
                         value={customValues.age}
-                        onChange={(e) => handleCustomValueChange('age', e.target.value)}
-                        className="create-product__input"
-                        required
-                    >
-                        <option value="" disabled>Виберіть вік</option>
-                        {ages.map((age) => (
-                            <option key={age.value} value={age.value}>
-                                {age.labelUA}
-                            </option>
-                        ))}
-                    </select>
-                    <select
+                        onChange={(value) => handleCustomValueChange('age', value)}
+                    />
+                    <CustomInput
+                        label="Виберіть категорію"
+                        options={categories}
                         value={customValues.category}
-                        onChange={(e) => handleCustomValueChange('category', e.target.value)}
-                        className="create-product__input"
-                        required
-                    >
-                        <option value="" disabled>Виберіть категорію</option>
-                        {categories.map((category) => (
-                            <option key={category.value} value={category.value}>
-                                {category.labelUA}
-                            </option>
-                        ))}
-                    </select>
-
-                    <select
+                        onChange={(value) => handleCustomValueChange('category', value)}
+                    />
+                    <CustomInput
+                        label="Виберіть бренд"
+                        options={brands}
                         value={customValues.brand}
-                        onChange={(e) => handleCustomValueChange('brand', e.target.value)}
-                        className="create-product__input"
-                        required
-                    >
-                        <option value="" disabled>Виберіть бренд</option>
-                        {brands.map((brand) => (
-                            <option key={brand.value} value={brand.value}>
-                                {brand.labelUA}
-                            </option>
-                        ))}
-                    </select>
+                        onChange={(value) => handleCustomValueChange('brand', value)}
+                    />
+                    <CustomInput
+                        label="Виберіть тип"
+                        options={types}
+                        value={customValues.type}
+                        onChange={(value) => handleCustomValueChange('type', value)}
+                    />
                 </article>
                 <article>
                     <input

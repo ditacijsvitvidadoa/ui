@@ -24,22 +24,21 @@ import Accessories from "../../../assets/images/Categories/accessories.svg";
 import SecondDesktopHeader from "../SecondDesktopHeader/SecondDesktopHeader.jsx";
 import React, {useEffect, useRef, useState} from "react";
 import {useAuth} from "../../shared/context/AuthContext.jsx";
+import {useNavigate} from "react-router-dom";
 
 
 export default function DesktopHeader() {
     const [showSecondHeader, setShowSecondHeader] = useState(false);
     const [showUserBlock, setShowUserBlock] = useState(false);
+    const [searchValue, setSearchValue] = useState("");
     const headerRef = useRef(null);
     const { isAuthenticated } = useAuth();
+    const navigate = useNavigate();
 
     const handleScroll = () => {
         if (headerRef.current) {
             const headerHeight = headerRef.current.getBoundingClientRect().bottom;
-            if (headerHeight < -10) {
-                setShowSecondHeader(true);
-            } else {
-                setShowSecondHeader(false);
-            }
+            setShowSecondHeader(headerHeight < -10);
         }
     };
 
@@ -49,6 +48,13 @@ export default function DesktopHeader() {
             window.removeEventListener("scroll", handleScroll);
         };
     }, []);
+
+    const handleSearchSubmit = (e) => {
+        e.preventDefault();
+        if (searchValue.trim()) {
+            navigate(`/products?search=${searchValue}`);
+        }
+    };
 
     return (
         <>
@@ -67,16 +73,16 @@ export default function DesktopHeader() {
                     </a>
                     <article className="main-header__contact-info">
                         <section className="main-header__contact-info-point">
-                            <img src={Phone} alt={Phone} />
+                            <img src={Phone} alt={Phone}/>
                             <p className="main-header__phone">+38(012)-345-67-89</p>
                         </section>
                         <section className="main-header__contact-info-point">
-                            <img src={Clock} alt={Clock} />
+                            <img src={Clock} alt={Clock}/>
                             <p>Працюємо з 00:00 до 00:00</p>
                         </section>
                         <section className="main-header__contact-info-networks">
                             <a href="#">
-                                <img src={Instagram} alt={Instagram} />
+                                <img src={Instagram} alt={Instagram}/>
                             </a>
                             <a href="#">
                                 <img src={Email} alt={Email} className="main-header__contact-info-network"/>
@@ -87,21 +93,25 @@ export default function DesktopHeader() {
                         </section>
                     </article>
                     <article className="main-header__search">
-                        <form className="main-header__search-form">
-                            <input className="main-header__search-form-input" />
+                        <form className="main-header__search-form" onSubmit={handleSearchSubmit}>
+                            <input
+                                className="main-header__search-form-input"
+                                value={searchValue}
+                                onChange={(e) => setSearchValue(e.target.value)}
+                            />
                             <button type="submit" className="main-header__search-form-btn">
-                                <img src={Search} alt={Search} className="main-header__search-form-btn-content" />
+                                <img src={Search} alt="Search" className="main-header__search-form-btn-content"/>
                             </button>
                         </form>
                     </article>
                     <a href="/bonuses" className="main-header-svg-a">
-                        <img src={Giveaway} alt={Giveaway} className="main-header-svg" />
+                        <img src={Giveaway} alt={Giveaway} className="main-header-svg"/>
                     </a>
                     <a href="/favourites" className="main-header-svg-a">
-                        <Favorites className="main-header-svg" />
+                        <Favorites className="main-header-svg"/>
                     </a>
                     <a href="/cart" className="main-header-svg-a">
-                        <Cart className="main-header-svg" />
+                        <Cart className="main-header-svg"/>
                     </a>
 
                     <div className="main-header__stick"></div>
@@ -114,25 +124,25 @@ export default function DesktopHeader() {
                             <p
                                 className="main-header-svg-a main-header-svg-static"
                                 onClick={() => setShowUserBlock(!showUserBlock)}
-                                style={{ cursor: "pointer" }}
+                                style={{cursor: "pointer"}}
                             >
                                 <img src={User} alt={User} className="main-header-svg"/>
                             </p>
-                            {showUserBlock && <MainHeaderUserBlock />}
+                            {showUserBlock && <MainHeaderUserBlock/>}
                         </>
                     )}
                 </div>
                 <div className="categories" ref={headerRef}>
                     <a href="/products?categories=ForBoys" className="category">
-                        <img src={Boy} alt={Boy} />
+                        <img src={Boy} alt={Boy}/>
                         <p>Хлопцям</p>
                     </a>
                     <a href="/products?categories=ForGirls" className="category">
-                        <img src={Girl} alt={Girl} />
+                        <img src={Girl} alt={Girl}/>
                         <p>Дівчатам</p>
                     </a>
                     <a href="/products?categories=ForInfants" className="category">
-                        <img src={Infants} alt={Infants} />
+                        <img src={Infants} alt={Infants}/>
                         <p>Немовлятам</p>
                     </a>
                     <a href="/products?categories=SoftToys" className="category">

@@ -7,17 +7,17 @@ import UseBreadcrumbs from "../../components/shared/Breadcrumbs/Breadcrumbs.jsx"
 import "./FavouritesPage.css";
 
 export default function FavouritesPage() {
-    const [isEmpty, setIsEmpty] = useState(null); // Понимание, пусто ли
-    const [products, setProducts] = useState([]); // Состояние для товаров
+    const [isEmpty, setIsEmpty] = useState(null);
+    const [products, setProducts] = useState([]);
 
     const fetchProducts = async () => {
         try {
             const { data, status } = await fetchdata("/api/get-favoutires-products");
             if (status === 204) {
-                setIsEmpty(true); // Если данных нет
+                setIsEmpty(true);
             } else if (status === 200 && data.length > 0) {
                 setProducts(data);
-                setIsEmpty(false); // Если товары есть
+                setIsEmpty(false);
             } else {
                 console.warn(`Failed to fetch products: Status ${status}`);
             }

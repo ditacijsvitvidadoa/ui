@@ -53,17 +53,26 @@ function MainProductsSlider({ title, products }) {
     };
 
     const handleAddToFavourite = (productId) => {
-        if (!isAuthenticated) return toggleAuthBlock();
+        if (!isAuthenticated) {
+            toggleAuthBlock(); // show authentication block if not authenticated
+            return;
+        }
         AddToFavourite(productId);
     };
 
     const handleRemoveFromFavourite = (productId) => {
-        if (!isAuthenticated) return toggleAuthBlock();
+        if (!isAuthenticated) {
+            toggleAuthBlock(); // show authentication block if not authenticated
+            return;
+        }
         DeleteFromFavourite(productId);
     };
 
     const handleAddToCart = async (productId) => {
-        if (!isAuthenticated) return toggleAuthBlock();
+        if (!isAuthenticated) {
+            toggleAuthBlock(); // show authentication block if not authenticated
+            return;
+        }
         try {
             await addToCart(productId);
         } catch (error) {
