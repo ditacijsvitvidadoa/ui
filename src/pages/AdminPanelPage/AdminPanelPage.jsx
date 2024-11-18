@@ -58,7 +58,8 @@ export default function AdminPanelPage() {
             try {
                 const { data } = await fetchdata('/api/get-products-filter');
                 if (data) {
-                    setFilters(data[0]);
+                    console.log(data)
+                    setFilters(data);
                 }
             } catch (error) {
                 console.error('Error fetching filters:', error);

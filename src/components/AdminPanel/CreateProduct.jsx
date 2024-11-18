@@ -99,8 +99,10 @@ const CreateProduct = ({ filters }) => {
     const [isSizeTableChecked, setIsSizeTableChecked] = useState(false);
 
     const [categories] = useState(filters?.categories?.items || []);
+    console.log(categories)
     const [materials] = useState(filters?.material?.items || []);
     const [ages] = useState(filters?.age?.items || []);
+    console.log(ages)
     const [brands] = useState(filters?.brand?.items || []);
     const [types] = useState(filters?.type?.items || []);
 
@@ -297,37 +299,68 @@ const CreateProduct = ({ filters }) => {
                     placeholder="Опис товару"
                 />
                 <article>
-                    <CustomInput
-                        label="Виберіть матеріал"
-                        options={materials}
-                        value={customValues.material}
-                        onChange={(value) => handleCustomValueChange('material', value)}
-                    />
-                    <CustomInput
-                        label="Виберіть вік"
-                        options={ages}
+                    <div>
+                        <CustomInput
+                            label="Виберіть матеріал"
+                            options={materials}
+                            value={customValues.material}
+                            onChange={(value) => handleCustomValueChange('material', value)}
+                        />
+                    </div>
+
+                    <select
+                        id="age"
                         value={customValues.age}
-                        onChange={(value) => handleCustomValueChange('age', value)}
-                    />
-                    <CustomInput
-                        label="Виберіть категорію"
-                        options={categories}
+                        onChange={(e) => handleCustomValueChange('age', e.target.value)}
+                        className='create-product__input'
+                    >
+                        <option value="" disabled selected>
+                            Виберіть вік
+                        </option>
+                        {ages.map((age) => (
+                            <option key={age.value} value={age.value}>
+                                {age.labelUA}
+                            </option>
+                        ))}
+                    </select>
+
+                    <select
+                        aria-placeholder="saasd"
+                        id="category"
                         value={customValues.category}
-                        onChange={(value) => handleCustomValueChange('category', value)}
-                    />
-                    <CustomInput
-                        label="Виберіть бренд"
-                        options={brands}
-                        value={customValues.brand}
-                        onChange={(value) => handleCustomValueChange('brand', value)}
-                    />
-                    <CustomInput
-                        label="Виберіть тип"
-                        options={types}
-                        value={customValues.type}
-                        onChange={(value) => handleCustomValueChange('type', value)}
-                    />
+                        onChange={(e) => handleCustomValueChange('category', e.target.value)}
+                        className='create-product__input'
+                    >
+                        <option value="" disabled selected>
+                            Виберіть категорію
+                        </option>
+                        {categories.map((category) => (
+                            <option key={category.value} value={category.value}>
+                                {category.labelUA}
+                            </option>
+                        ))}
+                    </select>
+
+
+                    <div>
+                        <CustomInput
+                            label="Виберіть бренд"
+                            options={brands}
+                            value={customValues.brand}
+                            onChange={(value) => handleCustomValueChange('brand', value)}
+                        />
+                    </div>
+
+                    <div>
+                        <CustomInput
+                            label="Виберіть тип"
+                            options={types}
+                            value={customValues.type}
+                            onChange={(value) => handleCustomValueChange('type', value)}
+                        />
+                    </div>
                 </article>
+
                 <article>
                     <input
                         type="text"

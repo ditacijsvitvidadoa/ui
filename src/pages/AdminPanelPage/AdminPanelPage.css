@@ -160,6 +160,11 @@
     border-bottom: 1px solid #29292920;
 }
 
+.large-image {
+    width: 100%;
+    max-width: 600px;
+}
+
 .admin-panel-nav__link {
     color: #292929;
     padding-block: 15px;
