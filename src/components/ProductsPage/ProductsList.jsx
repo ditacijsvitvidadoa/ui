@@ -173,7 +173,7 @@ const ProductsList = ({ products = [], pageCount = 1 }) => {
                                             }}
                                         />
                                         <Cart
-                                            color="#29292999"
+                                            color={product.in_cart ? "#FF5756" : "#29292999"}
                                             className="products-list-slider__action"
                                             onClick={(e) => {
                                                 e.preventDefault();
