@@ -415,3 +415,40 @@
 .order-block__return {
     background-color: #007bff;
 }
+
+.admin-panel-login {
+    width: 400px;
+    height: 400px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+}
+
+.admin-panel-login form {
+    text-align: center;
+    margin-top: 50px;
+}
+
+.admin-panel-login__input {
+    width: 70%;
+
+    border: 1px solid #37373799;
+    border-radius: 5px;
+    padding: 10px;
+    padding-bottom: 5px;
+    margin: 15px 0;
+}
+
+.admin-panel-login__submit {
+    padding-block: 10px;
+    padding-inline: 30px;
+    border: 1px solid #BC5046;
+    background-color: #FF5756;
+    border-radius: 10px;
+    color: #fff;
+    font-weight: 700;
+    letter-spacing: 0.8px;
+    margin-top: 30px;
+}

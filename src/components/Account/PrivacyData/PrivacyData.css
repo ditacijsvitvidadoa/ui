@@ -1,4 +1,22 @@
 @media (min-width: 561px) {
+    .logout-btn {
+        padding-inline: 60px;
+        padding-block: 10px;
+        border-radius: 15px;
+        border: 1px solid #BC5046;
+        background-color: #FF5756;
+        width: 46px;
+        color: #fff;
+
+        margin: 0 auto;
+        -webkit-transition: 0.1s all;
+    }
+
+    .logout-btn:hover {
+        background-color: #ef5150;
+        transition: 0.1s all;
+    }
+
     .base-element {
         display: flex;
         margin: 50px 0;
@@ -106,7 +124,10 @@
     }
 
     .delivery-fields {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
         margin-top: 20px;
+        row-gap: 20px;
     }
 
     .base-element__content-input__last {
@@ -125,6 +146,26 @@
 }
 
 @media (max-width: 560px) {
+    .logout-btn {
+        padding-inline: 40px;
+        padding-block: 8px;
+        border-radius: 15px;
+        border: 1px solid #BC5046;
+        background-color: #FF5756;
+        width: 40px;
+        font-size: 14px;
+        color: #fff;
+
+        margin: 0 auto;
+        -webkit-transition: 0.1s all;
+        margin-bottom: 50px;
+    }
+
+    .logout-btn:hover {
+        background-color: #ef5150;
+        transition: 0.1s all;
+    }
+
     .base-element {
         display: flex;
         margin: 50px 0;
@@ -142,7 +183,7 @@
     }
 
     .privacy-data__content {
-        margin-left: 35px;
+        margin-left: 5px;
     }
 
     .base-element__content-title {

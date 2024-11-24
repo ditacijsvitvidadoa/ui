@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
+import InputMask from 'react-input-mask';
 import "./Support.css";
+import SendSupportFetch from "../../../services/AccountFatch/SendSupportFetch.jsx";
 
 function Support() {
     const [formData, setFormData] = useState({
@@ -30,9 +32,9 @@ function Support() {
             newErrors.email = 'Введіть коректну електронну пошту';
         }
 
-        const phonePattern = /^\+\d{10,}$/;
+        const phonePattern = /^\+38\(0\d{2}\)-\d{3}-\d{2}-\d{2}$/;
         if (!phonePattern.test(formData.phone)) {
-            newErrors.phone = 'Телефон повинен починатися з + і містити не менше 10 цифр';
+            newErrors.phone = 'Телефон має відповідати формату +38(099)-999-99-99';
         }
 
         if (!formData.title) {
@@ -50,33 +52,20 @@ function Support() {
         e.preventDefault();
 
         const validationErrors = validateForm();
-
         if (Object.keys(validationErrors).length > 0) {
             console.error('Помилки валідації:', validationErrors);
             return;
         }
 
-        const urlEncodedData = new URLSearchParams(formData).toString();
+        const formDataToSend = new FormData();
+        formDataToSend.append('Name', formData.firstName);
+        formDataToSend.append('Email', formData.email);
+        formDataToSend.append('Phone', formData.phone);
+        formDataToSend.append('Title', formData.title);
+        formDataToSend.append('Description', formData.description);
 
-        try {
-            await fetch('http://localhost:5173/api/support', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded'
-                },
-                body: urlEncodedData
-            });
-
-            setFormData({
-                firstName: '',
-                email: '',
-                phone: '',
-                title: '',
-                description: ''
-            });
-        } catch (error) {
-            console.error('Помилка:', error);
-        }
+        SendSupportFetch(formDataToSend)
+        window.location.reload();
     };
 
     return (
@@ -102,13 +91,13 @@ function Support() {
                         onChange={handleChange}
                         required
                     />
-                    <input
-                        className="support-form-input support-form-input-phone"
-                        type="tel"
-                        name="phone"
-                        placeholder="Номер телефону*"
+                    <InputMask
+                        mask="+38(099)-999-99-99"
                         value={formData.phone}
                         onChange={handleChange}
+                        name="phone"
+                        className="support-form-input support-form-input-phone"
+                        placeholder="Номер телефону*"
                         required
                     />
                 </section>

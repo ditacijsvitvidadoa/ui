@@ -1,43 +1,39 @@
 import { useEffect, useState } from 'react';
-import GetOrder from "../../services/OrderFetch/GetOrder.jsx";
-import NotFound from "../../components/NotFound/NotFound.jsx";
-import "./AdminPanelPage.css";
-import Orders from "../../components/AdminPanel/Orders.jsx";
-import Navigation from "../../components/AdminPanel/Navigation.jsx";
-import { useSearchParams } from "react-router-dom";
-import CreateProduct from "../../components/AdminPanel/CreateProduct.jsx";
-import { fetchdata } from "../../services/fetchdata";
+import { useSearchParams } from 'react-router-dom';
+import NotFound from '../../components/NotFound/NotFound';
+import Orders from '../../components/AdminPanel/Orders';
+import CreateProduct from '../../components/AdminPanel/CreateProduct.jsx';
+import Navigation from '../../components/AdminPanel/Navigation';
+import {fetchdata} from "../../services/fetchdata.js";
 
-const allowedIPs = ['192.168.1.1', '203.0.113.5', '195.43.70.169', '195.43.70.136'];
+import "./AdminPanelPage.css";
+import AdminPanelLogin from "../../components/AdminPanel/AdminPanelLogin.jsx";
+
+const checkAdminSession = async () => {
+    const { status } = await fetchdata('/api/check-admin-auth');
+    console.log(status)
+    return status === 200;
+};
 
 export default function AdminPanelPage() {
-    const [accessGranted, setAccessGranted] = useState(false);
     const [searchParams] = useSearchParams();
     const content = searchParams.get('content') || 'orders';
+
     const [orders, setOrders] = useState([]);
     const [filters, setFilters] = useState(null);
+    const [accessGranted, setAccessGranted] = useState(null);
+    console.log(accessGranted)
 
     useEffect(() => {
-        const getUserIP = async () => {
-            try {
-                const response = await fetch('https://api.ipify.org?format=json');
-                const data = await response.json();
-                const userIP = data.ip;
-
-                if (allowedIPs.includes(userIP)) {
-                    setAccessGranted(true);
-                } else {
-                    setAccessGranted(false);
-                }
-            } catch (error) {
-                console.error('Error fetching IP:', error);
-                setAccessGranted(false);
-            }
+        const checkSession = async () => {
+            const isLoggedIn = await checkAdminSession();
+            setAccessGranted(isLoggedIn);
         };
 
-        getUserIP();
+        checkSession();
     }, []);
 
+    // Загрузка заказов
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -53,6 +49,7 @@ export default function AdminPanelPage() {
         fetchData();
     }, []);
 
+    // Загрузка фильтров
     useEffect(() => {
         const fetchFilters = async () => {
             try {
@@ -69,8 +66,12 @@ export default function AdminPanelPage() {
         fetchFilters();
     }, []);
 
-    if (!accessGranted) {
-        return <><NotFound /></>;
+    if (accessGranted === false) {
+        return <><AdminPanelLogin /> </>;
+    }
+
+    if (accessGranted === null) {
+        return <div>Loading...</div>;
     }
 
     const renderContent = () => {
@@ -87,7 +88,6 @@ export default function AdminPanelPage() {
     return (
         <>
             <Navigation />
-
             <div className="account-content">{renderContent()}</div>
         </>
     );

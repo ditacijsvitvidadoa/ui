@@ -3,10 +3,28 @@ import "./PrivacyData.css";
 import { fetchdata } from "../../../services/fetchdata.js";
 import BaseElement from "./Elements/BaseElement.jsx";
 import EniqueElement from "./Elements/EniqueElement.jsx";
+import LogOutFetch from "../../../services/AccountFatch/LogOutFetch.jsx";
+import {useNavigate} from "react-router-dom";
+import AccountInfoFetch from "../../../services/AccountFatch/AccountInfoFetch.jsx";
 
 function PrivacyData() {
     const [user, setUser] = useState(null);
     const [isChecked, setIsChecked] = useState(false);
+    const navigate = useNavigate();
+
+    const LogOut = async () => {
+        try {
+            const status = await LogOutFetch();
+            console.log(status);
+            if (status === 200) {
+                navigate("/");
+            } else {
+                console.error("Error to log-out");
+            }
+        } catch (error) {
+            console.error("Error to log-out:", error);
+        }
+    };
 
     useEffect(() => {
         const getUserData = async () => {
@@ -28,9 +46,9 @@ function PrivacyData() {
 
     const handleConsentUpdate = () => {
         const formData = new FormData();
-        formData.append("marketing_consent", isChecked ? "yes" : "no");
+        formData.append("marketing-consent", isChecked ? "yes" : "no");
 
-        fetchdata("/api/user-consent", {
+        fetchdata("/api/marketing-consent", {
             method: "POST",
             body: formData
         }).catch((error) => console.error("Error updating consent:", error));
@@ -92,6 +110,7 @@ function PrivacyData() {
                         </div>
                     </section>
                 </article>
+                <p className="logout-btn" style={{ cursor: "pointer" }} onClick={LogOut}>Вийти</p>
             </div>
         </section>
     );

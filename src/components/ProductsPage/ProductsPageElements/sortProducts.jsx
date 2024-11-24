@@ -12,11 +12,9 @@ function SortProducts({ values, defaultValue }) {
     useEffect(() => {
         const params = new URLSearchParams(location.search);
         const sortOrder = params.get('sortOrder');
-        // Проверяем, если sortOrder существует и является допустимым значением
         if (sortOrder && values.some(option => option.value === sortOrder)) {
             setSelectedValue(sortOrder);
         } else {
-            // Если нет, то устанавливаем значение по умолчанию
             setSelectedValue(defaultValue);
         }
     }, [location.search, values, defaultValue]);

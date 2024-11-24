@@ -133,47 +133,47 @@ export default function DesktopHeader() {
                     )}
                 </div>
                 <div className="categories" ref={headerRef}>
-                    <a href="/products?categories=ForBoys" className="category">
+                    <a href="/products?categories=Khloptsiam" className="category">
                         <img src={Boy} alt={Boy}/>
                         <p>Хлопцям</p>
                     </a>
-                    <a href="/products?categories=ForGirls" className="category">
+                    <a href="/products?categories=Divchatam" className="category">
                         <img src={Girl} alt={Girl}/>
                         <p>Дівчатам</p>
                     </a>
-                    <a href="/products?categories=ForInfants" className="category">
+                    <a href="/products?categories=Nemovliatam" className="category">
                         <img src={Infants} alt={Infants}/>
                         <p>Немовлятам</p>
                     </a>
-                    <a href="/products?categories=SoftToys" className="category">
+                    <a href="/products?categories=M'iaki igrashki" className="category">
                         <img src={SoftToy} alt={SoftToy} />
                         <p>М’які іграшки</p>
                     </a>
-                    <a href="/products?categories=BuildingSets" className="category">
+                    <a href="/products?categories=Konstruktori" className="category">
                         <img src={BuildingSet} alt={BuildingSet} />
                         <p>Конструктори</p>
                     </a>
-                    <a href="/products?categories=Bookstore" className="category">
+                    <a href="/products?categories=Knigarnia" className="category">
                         <img src={Bookstore} alt={Bookstore} />
                         <p>Книгарня</p>
                     </a>
-                    <a href="/products?categories=Creativity" className="category">
+                    <a href="/products?categories=Tvorchist'" className="category">
                         <img src={Creativity} alt={Creativity} />
                         <p>Творчість</p>
                     </a>
-                    <a href="/products?categories=ForSchool" className="category">
+                    <a href="/products?categories=Shkil'ne" className="category">
                         <img src={School} alt={School} />
                         <p>Шкільне</p>
                     </a>
-                    <a href="/products?categories=ForSport" className="category">
+                    <a href="/products?categories=Sport" className="category">
                         <img src={Sport} alt={Sport} />
                         <p>Спорт</p>
                     </a>
-                    <a href="/products?categories=Footswear" className="category">
+                    <a href="/products?categories=Vzuttia" className="category">
                         <img src={Footwear} alt={Footwear} />
                         <p>Взуття</p>
                     </a>
-                    <a href="/products?categories=Accessories" className="category">
+                    <a href="/products?categories=Aksesuari" className="category">
                         <img src={Accessories} alt={Accessories} />
                         <p>Аксесуари</p>
                     </a>

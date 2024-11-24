@@ -4,7 +4,6 @@ import { fetchdata } from "../../services/fetchdata.js";
 import "./AllProductsPage.css";
 
 import ItemsPerPage from "../../components/ProductsPage/ProductsPageElements/itemsPerPage.jsx";
-import filters from "../../components/ProductsPage/dummy_data.json";
 import SortProducts from "../../components/ProductsPage/ProductsPageElements/sortProducts.jsx";
 import ProductsList from "../../components/ProductsPage/ProductsList.jsx";
 import FiltersBlock from "../../components/ProductsPage/FiltersBlock.jsx";
@@ -92,8 +91,19 @@ export default function AllProductsPage() {
         <>
             <section className="all-products-list__desktop-v">
                 <div className="products-options">
-                    <ItemsPerPage values={filters.itemsPerPage.values} defaultValue={filters.itemsPerPage.default} />
-                    <SortProducts values={filters.sortOrder.values} defaultValue="popular" />
+                    <ItemsPerPage values={[16, 24, 32]} defaultValue={16} />
+                    <SortProducts values={[{
+                        value: "ascending",
+                        label: "Від найдешевших до найдорожчих"
+                    },
+                        {
+                            value: "descending",
+                            label: "Від найдорожчих до найдешевших"
+                        },
+                        {
+                            value: "popular",
+                            label: "Популярні товари"
+                        }]} defaultValue="popular" />
                 </div>
                 <div className="products-block">
                     <FiltersBlock
@@ -120,8 +130,8 @@ export default function AllProductsPage() {
                 <div className="products-options">
                     <img src={FilterSvg} alt="Open filter svg" onClick={toggleFilter} className="products-filters__open-burger" />
                     <article className="products-options__filters">
-                        <ItemsPerPage values={filters.itemsPerPage.values} defaultValue={filters.itemsPerPage.default} />
-                        <SortProducts values={filters.sortOrder.values} defaultValue="popular" />
+                        <ItemsPerPage values={[16, 24, 32]} defaultValue={16} />
+                        <SortProducts values={[""]} defaultValue="popular" />
                     </article>
                 </div>
                     {products.length > 0 ? (

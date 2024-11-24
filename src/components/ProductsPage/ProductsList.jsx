@@ -8,17 +8,18 @@ import AddToFavourite from "../../services/FavouritesFetch/AddToFavourite.jsx";
 import DeleteFromFavourite from "../../services/FavouritesFetch/DeleteFromFavourite.jsx";
 import AuthToAccountBlock from "../AuthToAccountBlock/AuthToAccountBlock.jsx";
 import useAuthBlock from "../AuthToAccountBlock/UseAuthBlock.jsx";
+import ProductAnalyticsFetch from "../../services/ProductsFetch/ProductAnalytics.jsx";
+import logIn from "../LogIn/LogIn.jsx";
+import DeleteFromCart from "../../services/CartFetch/DeleteFromCart.jsx";
 
 const ProductsList = ({ products = [], pageCount = 1 }) => {
-    console.log(products)
     const navigate = useNavigate();
     const location = useLocation();
     const { isAuthenticated } = useAuth();
-    const { showAuthBlock, toggleAuthBlock } = useAuthBlock();
+    const [showAuthBlock, setShowAuthBlock] = useState(false);
 
-    const [showAuthModal, setShowAuthModal] = useState(false);
-    const [currentProductId, setCurrentProductId] = useState(null);
-    const [actionType, setActionType] = useState(""); // 'favourite' or 'cart'
+    const openAuthBlock = () => setShowAuthBlock(true);
+    const closeAuthBlock = () => setShowAuthBlock(false);
 
     const pageNumbers = Array.from({ length: pageCount }, (_, i) => i + 1);
     const currentPage = parseInt(new URLSearchParams(location.search).get('pageNum')) || 1;
@@ -94,113 +95,96 @@ const ProductsList = ({ products = [], pageCount = 1 }) => {
         return pages;
     };
 
-    const handleAddToFavourite = (productId) => {
-        if (!isAuthenticated) return toggleAuthBlock();
-        AddToFavourite(productId);
-        window.location.reload();
+    const handleAddToFavourite = async (productId) => {
+        if (!isAuthenticated) return openAuthBlock();
+        try {
+            await AddToFavourite(productId);
+            await ProductAnalyticsFetch(productId, "Favourites", 1);
+            window.location.reload();
+        } catch (error) {
+            console.error("Error adding to favourites:", error);
+        }
     };
 
-    const handleRemoveFromFavourite = (productId) => {
-        if (!isAuthenticated) return toggleAuthBlock();
-        DeleteFromFavourite(productId);
-        window.location.reload();
+    const handleRemoveFromFavourite = async (productId) => {
+        if (!isAuthenticated) return openAuthBlock();
+        try {
+            await DeleteFromFavourite(productId);
+            window.location.reload();
+        } catch (error) {
+            console.error("Error removing from favourites:", error);
+        }
     };
 
     const handleAddToCart = async (productId) => {
-        if (!isAuthenticated) return toggleAuthBlock();
+        if (!isAuthenticated) return openAuthBlock();
         try {
+            await ProductAnalyticsFetch(productId, "AddedToCart", 1);
             await addToCart(productId);
+            window.location.reload();
         } catch (error) {
-            console.error("Error adding product to cart:", error.message);
+            console.error("Error adding product to cart:", error);
         }
     };
 
-    const openAuthModal = (productId, type) => {
-        setCurrentProductId(productId);
-        setActionType(type);
-        setShowAuthModal(true);
-    };
-
-    const closeAuthModal = () => {
-        setShowAuthModal(false);
-        setCurrentProductId(null);
-        setActionType("");
-    };
-
-    const handleAction = () => {
-        if (actionType === 'favourite') {
-            if (products.find(product => product.id === currentProductId).is_favourite) {
-                handleRemoveFromFavourite(currentProductId);
-            } else {
-                handleAddToFavourite(currentProductId);
-            }
-        } else if (actionType === 'cart') {
-            handleAddToCart(currentProductId);
+    const handleRemoveFromCart = async (productId) => {
+        if (!isAuthenticated) return openAuthBlock();
+        try {
+            await DeleteFromCart(productId);
+            window.location.reload();
+        } catch (error) {
+            console.error("Error removing product to cart:", error);
         }
-        closeAuthModal();
-    };
-
-    if (!products || products.length === 0) {
-        return (
-            <section className="all-products-list">
-                <p className="no-products-message">Не знайдено товарів</p>
-            </section>
-        );
     }
 
     return (
         <section className="all-products-list">
             <div className="products-list">
-                {products.map(product => {
-                    if (!product) {
-                        return null;
-                    }
-
-                    return (
-                        <a href={`/product/${product.id}/${encodeURIComponent(product.title)}`} key={product.id}
-                           className="products-list__block">
-                            <img src={product.image_urls[0]} alt={product.title} className="products-list-img"/>
-                            <h1 className="products-list-title">{product.title}</h1>
-                            <div className="products-list__details">
-                                <article>
-                                    <section className="products-list-slider__actions">
-                                        <Favourite
-                                            fill="#29292999"
-                                            className="products-list-slider__action"
-                                            onClick={(e) => {
-                                                e.preventDefault();
-                                                openAuthModal(product.id, 'favourite');
-                                            }}
-                                        />
-                                        <Cart
-                                            color={product.in_cart ? "#FF5756" : "#29292999"}
-                                            className="products-list-slider__action"
-                                            onClick={(e) => {
-                                                e.preventDefault();
-                                                openAuthModal(product.id, 'cart');
-                                            }}
-                                        />
-                                    </section>
-                                    <section>
-                                        <p className="products-list-slider__code">Код: {product.code}</p>
-                                        <p className="products-list-slider__articul">Артикул: {product.articul}</p>
-                                    </section>
-                                </article>
-                                <div
-                                    className={`products-list-price-component ${product.discount ? "products-list-price-component--with-discount" : "price-component--no-discount"}`} >
-                                    {product.discount ? (
-                                        <>
-                                            <p className="products-list-price-component__original-price">{product.price} ₴</p>
-                                            <p className="products-list-price-component__discount">{product.discount} ₴</p>
-                                        </>
-                                    ) : (
-                                        <p className="products-list-price-component__price">{product.price} ₴</p>
-                                    )}
-                                </div>
+                {products.map(product => (
+                    <a href={`/product/${product.id}/${encodeURIComponent(product.title)}`} key={product.id}
+                       className="products-list__block" onClick={() => ProductAnalyticsFetch(product.id, "Clicks", 1)}>
+                        <img src={product.image_urls[0]} alt={product.title} className="products-list-img"/>
+                        <h1 className="products-list-title">{product.title}</h1>
+                        <div className="products-list__details">
+                            <article>
+                                <section className="products-list-slider__actions">
+                                    <Favourite
+                                        fill={product.is_favourite ? "#FF5756" : "#29292999"}
+                                        className="products-list-slider__action"
+                                        onClick={(e) => {
+                                            e.preventDefault();
+                                            console.log(product.is_favourite)
+                                            {product.is_favourite ? handleRemoveFromFavourite(product.id) : handleAddToFavourite(product.id)}
+                                        }}
+                                    />
+                                    <Cart
+                                        color={product.in_cart ? "#FF5756" : "#29292999"}
+                                        className="products-list-slider__action"
+                                        onClick={(e) => {
+                                            e.preventDefault();
+                                            {product.in_cart ? handleRemoveFromCart(product.id) : handleAddToCart(product.id)}
+                                        }}
+                                    />
+                                </section>
+                                <section>
+                                    <p className="products-list-slider__code">Код: {product.code}</p>
+                                    <p className="products-list-slider__articul">Артикул: {product.articul}</p>
+                                </section>
+                            </article>
+                            <div
+                                className={`products-list-price-component ${product.discount ? "products-list-price-component--with-discount" : "price-component--no-discount"}`} >
+                                {product.discount ? (
+                                    <>
+                                        <p className="products-list-price-component__original-price">{product.price} ₴</p>
+                                        <p className="products-list-price-component__discount">{product.discount} ₴</p>
+                                    </>
+                                ) : (
+                                    <p className="products-list-price-component__price">{product.price} ₴</p>
+                                )}
                             </div>
-                        </a>
-                    );
-                })}
+                        </div>
+                    </a>
+                ))}
             </div>
 
             {pageCount > 1 && (
@@ -209,10 +193,7 @@ const ProductsList = ({ products = [], pageCount = 1 }) => {
                 </div>
             )}
 
-            {showAuthBlock && <AuthToAccountBlock />}
-            {showAuthModal && (
-                <AuthToAccountBlock isOpen={showAuthModal} onClose={closeAuthModal} onAction={handleAction} />
-            )}
+            {showAuthBlock && <AuthToAccountBlock isOpen={showAuthBlock} onClose={closeAuthBlock} />}
         </section>
     );
 };

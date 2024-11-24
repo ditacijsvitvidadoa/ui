@@ -5,6 +5,7 @@ import GetStatus from "../shared/GetStatus/GetStatus.jsx";
 import UpdateStatus from "../../services/OrderFetch/UpdateStatus.jsx";
 
 export default function Orders({ orders }) {
+    console.log(orders)
     const [clickedOrders, setClickedOrders] = useState(new Set());
     const [expandedOrders, setExpandedOrders] = useState(new Set());
     const [orderStatuses, setOrderStatuses] = useState({});
@@ -149,30 +150,32 @@ export default function Orders({ orders }) {
 
                             <div className="order-block__stick"></div>
 
-                            {order.Products && order.Products.map((product, index) => (
-                                <React.Fragment key={product.Id}>
-                                    <article className="order-block_content-block">
-                                        <img src={product.Image_urls[0]} alt="image"
-                                             className="order-block_content-block_img"/>
-                                        <div>
-                                            <h1 className="order-block_content-block_title">{product.Title}</h1>
-                                            {product.Discount ? (
-                                                <article
-                                                    className="product-content__price-component product-content__price-component--with-discount">
-                                                    <p className="product-content__price-component__original-price">{product.Price} ₴</p>
-                                                    <p className="product-content__price-component__discount">{product.Discount} ₴</p>
-                                                </article>
-                                            ) : (
-                                                <article
-                                                    className="product-content__price-component product-content__price-component--no-discount">
-                                                    <p className="product-content__price-component__price">{product.Price} ₴</p>
-                                                </article>
-                                            )}
-                                        </div>
-                                    </article>
-                                    {index < order.Products.length - 1 && <div className="separator-block"></div>}
-                                </React.Fragment>
-                            ))}
+                            {order.Products && order.Products.map((product, index) => {
+                                return (
+                                    <React.Fragment key={product.Id}>
+                                        <article className="order-block_content-block">
+                                            <img src={product.Image_urls[0]} alt="image"
+                                                 className="order-block_content-block_img"/>
+                                            <div>
+                                                <h1 className="order-block_content-block_title">{product.Title} x {product.Count}</h1>
+                                                {product.Discount ? (
+                                                    <article
+                                                        className="product-content__price-component product-content__price-component--with-discount">
+                                                        <p className="product-content__price-component__original-price">{product.Price * product.Count} ₴</p>
+                                                        <p className="product-content__price-component__discount">{product.Discount * product.Count} ₴</p>
+                                                    </article>
+                                                ) : (
+                                                    <article
+                                                        className="product-content__price-component product-content__price-component--no-discount">
+                                                        <p className="product-content__price-component__price">{product.Price * product.Count} ₴</p>
+                                                    </article>
+                                                )}
+                                            </div>
+                                        </article>
+                                        {index < order.Products.length - 1 && <div className="separator-block"></div>}
+                                    </React.Fragment>
+                                )
+                            })}
 
                             {getButtonsForStatus(orderStatuses[order._id] || order.Status, order._id)}
                         </div>

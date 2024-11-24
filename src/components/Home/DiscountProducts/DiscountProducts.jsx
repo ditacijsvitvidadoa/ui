@@ -1,5 +1,4 @@
 import MainProductsSlider from "../MainProductsSlider/MainProductsSlider.jsx";
-import product from "../MainProductsSlider/dummy_data.json"
 
 function DiscountProducts() {
     return (
@@ -8,5 +7,4 @@ function DiscountProducts() {
         </>
     )
 }
-
 export default DiscountProducts;

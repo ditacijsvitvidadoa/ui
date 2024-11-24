@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import NovaPoshta from "../../../../assets/images/Postal/Nova-poshta.svg";
+import { fetchdata } from "../../../../services/fetchdata.js";
 
 function EniqueElement({ title, postal_service_info }) {
     const [selectedService, setSelectedService] = useState("NovaPoshta");
@@ -9,7 +10,6 @@ function EniqueElement({ title, postal_service_info }) {
     const [house, setHouse] = useState("");
     const [branch, setBranch] = useState("");
     const [hasPostalInfo, setHasPostalInfo] = useState(!!postal_service_info);
-    const [formError, setFormError] = useState(""); // Для ошибок валидации
 
     const inputRef = useRef(null);
 
@@ -19,18 +19,32 @@ function EniqueElement({ title, postal_service_info }) {
 
     const handleShowInputs = () => setHasPostalInfo(true);
 
-    const handleSubmit = (e) => {
-        e.preventDefault(); // Останавливаем стандартную отправку формы
+    const handleSubmit = async (e) => {
+        e.preventDefault();
 
-        // Проверка обязательных полей
         if (!city || (deliveryType === "address" && (!street || !house)) || (deliveryType === "branch" && !branch)) {
-            setFormError("Будь ласка, заповніть усі обов'язкові поля.");
             return;
         }
 
-        setFormError(""); // Очистка ошибок, если все поля заполнены
-        // Тут будет логика отправки данных
-        console.log("Дані успішно надіслані:", { city, street, house, branch });
+        const payload = {
+            postal_service: selectedService,
+            delivery_type: deliveryType,
+            city,
+            ...(deliveryType === "address" && { street, house }),
+            ...(deliveryType === "branch" && { branch }),
+        };
+
+        try {
+            await fetchdata("/api/update-postal-info", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(payload),
+            });
+        } catch (error) {
+            console.error("Ошибка отправки данных:", error);
+        }
     };
 
     useEffect(() => {
@@ -46,7 +60,7 @@ function EniqueElement({ title, postal_service_info }) {
                     <form onSubmit={handleSubmit}>
                         <div className="base-element__content-block enuqie-element__content-block">
                             <label>
-                                <img src={NovaPoshta} alt="NovaPoshta"/>
+                                <img src={NovaPoshta} alt="NovaPoshta" />
                                 <input
                                     type="radio"
                                     value="NovaPoshta"
@@ -122,8 +136,6 @@ function EniqueElement({ title, postal_service_info }) {
                                 />
                             )}
                         </div>
-
-                        {formError && <p className="form-error">{formError}</p>}
 
                         <button
                             type="submit"
