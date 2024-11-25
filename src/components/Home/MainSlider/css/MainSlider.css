@@ -1,3 +1,15 @@
+@media (min-width: 921px) {
+    .main-slider__img-mobile {
+        display: none;
+    }
+}
+
+@media (max-width: 920px) {
+    .main-slider__img {
+        display: none;
+    }
+}
+
 @media (min-width: 1601px) {
     .main-slider {
         .slick-slider{

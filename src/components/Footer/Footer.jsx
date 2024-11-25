@@ -40,9 +40,9 @@ function Footer() {
     ];
 
     const Networks = [
-        { type: "image", src: Instagram, alt: "instagram-icon", link: "https://instagram.com" },
-        { type: "image", src: Email, alt: "email-icon", link: "mailto:info@example.com" },
-        { type: "image", src: Facebook, alt: "facebook-icon", link: "https://facebook.com" }
+        { type: "image", src: Instagram, alt: "instagram-icon", link: "https://www.instagram.com/vid_a_do_ya_" },
+        { type: "image", src: Email, alt: "email-icon", link: "mailto:dutyachuj@gmail.com" },
+        { type: "image", src: Facebook, alt: "facebook-icon", link: "https://www.facebook.com/profile.php?id=100016646042973" }
     ];
 
     return (

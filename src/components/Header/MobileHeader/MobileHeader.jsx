@@ -119,13 +119,13 @@ export default function MobileHeader() {
                         <p>Працюємо з 00:00 до 00:00</p>
                     </section>
                     <section className="header-burder__contact-info-networks">
-                        <a href="#" className="header-burder__contact-info-instargram-link">
+                        <a href="https://www.instagram.com/vid_a_do_ya_" className="header-burder__contact-info-instargram-link">
                             <img src={Instagram} alt={Instagram} className="header-burder__contact-info-network"/>
                         </a>
-                        <a href="#">
+                        <a href="mailto:dutyachuj@gmail.com">
                             <img src={Email} alt={Email} className="header-burder__contact-info-network"/>
                         </a>
-                        <a href="#">
+                        <a href="https://www.facebook.com/profile.php?id=100016646042973">
                             <img src={Facebook} alt={Facebook} className="header-burder__contact-info-network"/>
                         </a>
                     </section>
@@ -154,47 +154,47 @@ export default function MobileHeader() {
                 <article className="header-burder__stick"></article>
                 <CollapsibleBlock img={Categories} title="Категорії">
                     <section className="header-burger__categories">
-                        <a href="/products?categories=ForBoys" className="header-burger__category">
+                        <a href="/products?categories=Khloptsiam" className="header-burger__category">
                             <img src={Boy} alt={Boy}/>
                             <p>Хлопцям</p>
                         </a>
-                        <a href="/products?categories=ForGirls" className="header-burger__category">
+                        <a href="/products?categories=Divchatam" className="header-burger__category">
                             <img src={Girl} alt={Girl}/>
                             <p>Дівчатам</p>
                         </a>
-                        <a href="/products?categories=ForInfants" className="header-burger__category">
+                        <a href="/products?categories=Nemovliatam" className="header-burger__category">
                             <img src={Infants} alt={Infants}/>
                             <p>Немовлятам</p>
                         </a>
-                        <a href="/products?categories=SoftToys" className="header-burger__category">
+                        <a href="/products?categories=M'iaki igrashki" className="header-burger__category">
                             <img src={SoftToy} alt={SoftToy}/>
                             <p>М’які іграшки</p>
                         </a>
-                        <a href="/products?categories=BuildingSets" className="header-burger__category">
+                        <a href="/products?categories=Konstruktori" className="header-burger__category">
                             <img src={BuildingSet} alt={BuildingSet}/>
                             <p>Конструктори</p>
                         </a>
-                        <a href="/products?categories=Bookstore" className="header-burger__category">
+                        <a href="/products?categories=Knigarnia" className="header-burger__category">
                             <img src={Bookstore} alt={Bookstore}/>
                             <p>Книгарня</p>
                         </a>
-                        <a href="/products?categories=Creativity" className="header-burger__category">
+                        <a href="/products?categories=Tvorchist'" className="header-burger__category">
                             <img src={Creativity} alt={Creativity}/>
                             <p>Творчість</p>
                         </a>
-                        <a href="/products?categories=ForSchool" className="header-burger__category">
+                        <a href="/products?categories=Shkil'ne" className="header-burger__category">
                             <img src={School} alt={School}/>
                             <p>Шкільне</p>
                         </a>
-                        <a href="/products?categories=ForSport" className="header-burger__category">
+                        <a href="/products?categories=Sport" className="header-burger__category">
                             <img src={Sport} alt={Sport}/>
                             <p>Спорт</p>
                         </a>
-                        <a href="/products?categories=Footswear" className="header-burger__category">
+                        <a href="/products?categories=Vzuttia" className="header-burger__category">
                             <img src={Footwear} alt={Footwear}/>
                             <p>Взуття</p>
                         </a>
-                        <a href="/products?categories=Accessories" className="header-burger__category">
+                        <a href="/products?categories=Aksesuari" className="header-burger__category">
                             <img src={Accessories} alt={Accessories}/>
                             <p>Аксесуари</p>
                         </a>

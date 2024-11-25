@@ -9,7 +9,6 @@ import Slide3 from "../../../assets/images/MainSlide/slide3.jpg";
 import Slide4 from "../../../assets/images/MainSlide/slide4.jpg";
 import Slide5 from "../../../assets/images/MainSlide/slide5.jpg";
 
-
 function MainSlider() {
     const sliderSettings = {
         arrows: false,
@@ -27,18 +26,23 @@ function MainSlider() {
                 <Slider {...sliderSettings}>
                     <div className="main-slide">
                         <img src={Slide1} alt="Slide 1" className="main-slider__img"/>
+                        <img src={Slide1} alt="Slide 1" className="main-slider__img-mobile"/>
                     </div>
                     <div className="main-slide">
                         <img src={Slide2} alt="Slide 2" className="main-slider__img"/>
+                        <img src={Slide2} alt="Slide 2" className="main-slider__img-mobile"/>
                     </div>
                     <div className="main-slide">
                         <img src={Slide3} alt="Slide 3" className="main-slider__img"/>
+                        <img src={Slide3} alt="Slide 3" className="main-slider__img-mobile"/>
                     </div>
                     <div className="main-slide">
                         <img src={Slide4} alt="Slide 3" className="main-slider__img"/>
+                        <img src={Slide4} alt="Slide 3" className="main-slider__img-mobile"/>
                     </div>
                     <div className="main-slide">
                         <img src={Slide5} alt="Slide 3" className="main-slider__img"/>
+                        <img src={Slide5} alt="Slide 3" className="main-slider__img-mobile"/>
                     </div>
                 </Slider>
             </section>

@@ -19,8 +19,11 @@
         margin-bottom: 50px;
     }
 
-    .WhereAreWe-map img {
-        width: 600px;
+    .google-map-container {
+        width: 500px;
+        height: 500px;
+        border: 1px solid #29292920;
+        border-radius: 10px;
     }
 
     .WhereAreWe-content {
@@ -61,8 +64,11 @@
         margin-bottom: 50px;
     }
 
-    .WhereAreWe-map img {
+    .google-map-container {
         width: 500px;
+        height: 500px;
+        border: 1px solid #29292920;
+        border-radius: 10px;
     }
 
     .WhereAreWe-content {
@@ -103,8 +109,11 @@
         margin-bottom: 50px;
     }
 
-    .WhereAreWe-map img {
+    .google-map-container {
         width: 450px;
+        height: 450px;
+        border: 1px solid #29292920;
+        border-radius: 10px;
     }
 
     .WhereAreWe-content {
@@ -146,8 +155,11 @@
         font-size: 14px;
     }
 
-    .WhereAreWe-map img {
+    .google-map-container {
         width: 400px;
+        height: 400px;
+        border: 1px solid #29292920;
+        border-radius: 10px;
     }
 
     .WhereAreWe-content {
@@ -194,8 +206,11 @@
         font-size: 14px;
     }
 
-    .WhereAreWe-map img {
+    .google-map-container {
         width: 380px;
+        height: 380px;
+        border: 1px solid #29292920;
+        border-radius: 10px;
     }
 
     .WhereAreWe-content {
@@ -243,8 +258,11 @@
         font-size: 14px;
     }
 
-    .WhereAreWe-map img {
+    .google-map-container {
         width: 400px;
+        height: 400px;
+        border: 1px solid #29292920;
+        border-radius: 10px;
     }
 
     .WhereAreWe-content {
@@ -289,10 +307,14 @@
         margin-top: 25px;
         margin-bottom: 50px;
         font-size: 12px;
+
     }
 
-    .WhereAreWe-map img {
+    .google-map-container {
         width: 280px;
+        height: 280px;
+        border: 1px solid #29292920;
+        border-radius: 10px;
     }
 
     .WhereAreWe-content {

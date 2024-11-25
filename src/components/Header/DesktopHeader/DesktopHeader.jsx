@@ -63,7 +63,7 @@ export default function DesktopHeader() {
                     <ul className="main-header__nav-ul">
                         <li><a className="main-header__nav-link" href="/">Головна</a></li>
                         <li><a className="main-header__nav-link" href="/about-us">Про нас</a></li>
-                        <li><a className="main-header__nav-link" href="/discount-products">Акції</a></li>
+                        <li><a className="main-header__nav-link" href="/catalog">Каталог</a></li>
                         <li><a className="main-header__nav-link" href="/contacts">Контакти</a></li>
                     </ul>
                 </nav>
@@ -81,13 +81,13 @@ export default function DesktopHeader() {
                             <p>Працюємо з 00:00 до 00:00</p>
                         </section>
                         <section className="main-header__contact-info-networks">
-                            <a href="#">
+                            <a href="https://www.instagram.com/vid_a_do_ya_">
                                 <img src={Instagram} alt={Instagram}/>
                             </a>
-                            <a href="#">
+                            <a href="mailto:dutyachuj@gmail.com">
                                 <img src={Email} alt={Email} className="main-header__contact-info-network"/>
                             </a>
-                            <a href="#">
+                            <a href="https://www.facebook.com/profile.php?id=100016646042973">
                                 <img src={Facebook} alt={Facebook} className="main-header__contact-info-network"/>
                             </a>
                         </section>

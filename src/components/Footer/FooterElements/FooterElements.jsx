@@ -9,7 +9,6 @@ function FooterBlock({ title, content }) {
             </article>
             <article className={`footer-block__content ${isTextContent ? 'text' : 'images'}`}>
                 {content && content.map((item, index) => {
-                    // Рендерим текстовые элементы
                     if (item.text && item.link) {
                         return (
                             <a key={index} href={item.link} className="footer-block__content-link">
