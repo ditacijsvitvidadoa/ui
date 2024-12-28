@@ -1,4 +1,4 @@
-import Logo from "../../../assets/images/Logo/logo.svg";
+import Logo from "../../../assets/images/Logo/logo.png";
 import Phone from "../../../assets/images/Contacts/phone.svg";
 import Clock from "../../../assets/images/Contacts/clock.svg";
 import Instagram from "../../../assets/images/SocialNetwork/Instagram.svg";
@@ -64,7 +64,7 @@ export default function DesktopHeader() {
                         <li><a className="main-header__nav-link" href="/">Головна</a></li>
                         <li><a className="main-header__nav-link" href="/about-us">Про нас</a></li>
                         <li><a className="main-header__nav-link" href="/catalog">Каталог</a></li>
-                        <li><a className="main-header__nav-link" href="/contacts">Контакти</a></li>
+                        <li><a className="main-header__nav-link" href="/about-us">Контакти</a></li>
                     </ul>
                 </nav>
                 <div>
@@ -74,11 +74,11 @@ export default function DesktopHeader() {
                     <article className="main-header__contact-info">
                         <section className="main-header__contact-info-point">
                             <img src={Phone} alt={Phone}/>
-                            <p className="main-header__phone">+38(012)-345-67-89</p>
+                            <p className="main-header__phone">+38(050)-196-19-35</p>
                         </section>
                         <section className="main-header__contact-info-point">
                             <img src={Clock} alt={Clock}/>
-                            <p>Працюємо з 00:00 до 00:00</p>
+                            <p>Працюємо з 09:00 до 20:00</p>
                         </section>
                         <section className="main-header__contact-info-networks">
                             <a href="https://www.instagram.com/vid_a_do_ya_">
@@ -87,7 +87,7 @@ export default function DesktopHeader() {
                             <a href="mailto:dutyachuj@gmail.com">
                                 <img src={Email} alt={Email} className="main-header__contact-info-network"/>
                             </a>
-                            <a href="https://www.facebook.com/profile.php?id=100016646042973">
+                            <a href="https://www.facebook.com/share/1RqDvAz54w/">
                                 <img src={Facebook} alt={Facebook} className="main-header__contact-info-network"/>
                             </a>
                         </section>

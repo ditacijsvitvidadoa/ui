@@ -59,7 +59,7 @@ function LogIn() {
                         required
                     />
                 {error && <p className="error-message">{error}</p>}
-                <button type="submit" className="form-group-button">Війти</button>
+                <button type="submit" className="form-group-button">Увійти</button>
             </form>
         </div>
     );

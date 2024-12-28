@@ -2,35 +2,49 @@ import React, { useState, useEffect, useCallback } from "react";
 import SuggestionsList from "../shared/SuggestionsList/SuggestionsList.jsx";
 import { fetchdata } from "../../services/fetchdata.js";
 
-export default function PostalInfo({ formPostal, setFormPostal, isValidCity, setIsValidCity }) {
+export default function PostalInfo({ formPostal, setFormPostal }) {
     const [inputCity, setInputCity] = useState(formPostal.city || "");
+    const [inputPostalInfo, setInputPostalInfo] = useState(formPostal.postal_info || "");
     const [citySuggestions, setCitySuggestions] = useState([]);
+    const [postalInfoSuggestions, setPostalInfoSuggestions] = useState([]);
     const [showCitySuggestions, setShowCitySuggestions] = useState(false);
+    const [showPostalInfoSuggestions, setShowPostalInfoSuggestions] = useState(false);
+    const [cityRef, setCityRef] = useState(null);
     const [searchTimeout, setSearchTimeout] = useState(null);
 
     const fetchCitySuggestions = useCallback(async (query) => {
         if (!query) {
             setCitySuggestions([]);
-            setIsValidCity(false);
             return;
         }
         try {
             const response = await fetchdata(`/api/get-cities?search=${query}`);
             if (response.status === 200) {
                 setCitySuggestions(response.data);
-                const isCityValid = response.data.some(city => city.desc.toLowerCase() === query.toLowerCase());
-                setIsValidCity(isCityValid);
             } else {
                 console.warn(`Failed to fetch cities: Status ${response.status}`);
             }
         } catch (error) {
             console.error("Error fetching cities:", error.message);
         }
-    }, [setIsValidCity]);
+    }, []);
 
-    useEffect(() => {
-        setInputCity(formPostal.city || "");
-    }, [formPostal.city]);
+    const fetchPostalInfoSuggestions = useCallback(async (query) => {
+        if (!query || !cityRef) {
+            setPostalInfoSuggestions([]);
+            return;
+        }
+        try {
+            const response = await fetchdata(`/api/get-postals/${cityRef}`);
+            if (response.status === 200) {
+                setPostalInfoSuggestions(response.data);
+            } else {
+                console.warn(`Failed to fetch postal info: Status ${response.status}`);
+            }
+        } catch (error) {
+            console.error("Error fetching postal info:", error.message);
+        }
+    }, [cityRef]);
 
     const handleCityInputChange = useCallback((e) => {
         const { value } = e.target;
@@ -43,20 +57,46 @@ export default function PostalInfo({ formPostal, setFormPostal, isValidCity, set
 
     const selectCity = useCallback((city) => {
         setInputCity(city.desc);
-        setFormPostal(prevData => ({ ...prevData, city: city.desc }));
+        setFormPostal((prevData) => ({ ...prevData, city: city.desc }));
+        const cityRef = city.ref.replace('city:', '');
+        setCityRef(cityRef);
+        setFormPostal((prevData) => ({ ...prevData, cityRef: city.ref }));
         setCitySuggestions([]);
-        setIsValidCity(true);
         setShowCitySuggestions(false);
-    }, [setFormPostal, setIsValidCity]);
 
-    const handleInputChange = (e) => {
-        const { name, value } = e.target;
-        setFormPostal(prevData => ({ ...prevData, [name]: value }));
-    };
+        // Fetch postal information for the selected city
+        fetchPostalInfoSuggestions('');
+    }, [setFormPostal, fetchPostalInfoSuggestions]);
+
+    const handlePostalInfoInputChange = useCallback((e) => {
+        const { value } = e.target;
+        setInputPostalInfo(value);
+        setShowPostalInfoSuggestions(true);
+
+        if (searchTimeout) clearTimeout(searchTimeout);
+        setSearchTimeout(setTimeout(() => fetchPostalInfoSuggestions(value), 500));
+    }, [fetchPostalInfoSuggestions, searchTimeout, cityRef]);
+
+    const selectPostalInfo = useCallback((postalInfo) => {
+        // Directly update the input and form state when a suggestion is selected
+        setInputPostalInfo(postalInfo.desc);
+        setFormPostal((prevData) => ({
+            ...prevData,
+            postal_info: postalInfo.desc,
+            postal_info_ref: postalInfo.ref, // make sure to update the postal_info_ref as well
+        }));
+        setPostalInfoSuggestions([]);
+        setShowPostalInfoSuggestions(false);
+    }, [setFormPostal]);
+
+    useEffect(() => {
+        setInputPostalInfo(formPostal.postal_info || "");
+    }, [formPostal.postal_info]);
 
     return (
         <div className="purchase-process-block">
             <h2 className="contact-data-block__h2">Доставка</h2>
+
             <div className="purchase-process__city-block">
                 <input
                     type="text"
@@ -65,8 +105,8 @@ export default function PostalInfo({ formPostal, setFormPostal, isValidCity, set
                     onChange={handleCityInputChange}
                     onFocus={() => setShowCitySuggestions(true)}
                     onBlur={() => setTimeout(() => setShowCitySuggestions(false), 100)}
-                    placeholder="Місто"
-                    className={`purchase-process__suggestion-input ${!isValidCity ? "invalid" : ""}`}
+                    placeholder="Виберіть місто"
+                    className="purchase-process__suggestion-input"
                 />
                 {showCitySuggestions && (
                     <SuggestionsList suggestions={citySuggestions} onSelectCity={selectCity} />
@@ -81,7 +121,7 @@ export default function PostalInfo({ formPostal, setFormPostal, isValidCity, set
                             name="postal_type"
                             value={type}
                             checked={formPostal.postal_type === type}
-                            onChange={handleInputChange}
+                            onChange={(e) => setFormPostal({ ...formPostal, postal_type: e.target.value })}
                             className="postal-radio"
                             required
                         />
@@ -100,7 +140,7 @@ export default function PostalInfo({ formPostal, setFormPostal, isValidCity, set
                             name="receiving_type"
                             value={receivingType}
                             checked={formPostal.receiving_type === receivingType}
-                            onChange={handleInputChange}
+                            onChange={(e) => setFormPostal({ ...formPostal, receiving_type: e.target.value })}
                             className="postal-radio"
                             required
                         />
@@ -114,15 +154,39 @@ export default function PostalInfo({ formPostal, setFormPostal, isValidCity, set
                     <div className="separator-block"></div>
                     <article className="postal-options">
                         {formPostal.receiving_type === "Branches" ? (
-                            <input
-                                type="text"
-                                name="branch"
-                                value={formPostal.postal_info || ""}
-                                onChange={handleInputChange}
-                                placeholder="Виберіть відділення"
-                                className="contact-data-input"
-                                required
-                            />
+                            formPostal.postal_type === "NovaPoshta" ? (
+                                <div className="purchase-process__city-block">
+                                    <input
+                                        type="text"
+                                        value={inputPostalInfo}
+                                        required
+                                        onChange={handlePostalInfoInputChange}
+                                        onFocus={() => handlePostalInfoInputChange}
+                                        onBlur={() => setTimeout(() => setShowPostalInfoSuggestions(false), 100)}
+                                        placeholder="Виберіть відділення"
+                                        className="purchase-process__suggestion-input"
+                                    />
+                                    {showPostalInfoSuggestions && (
+                                        <SuggestionsList suggestions={postalInfoSuggestions} onSelectCity={selectPostalInfo} />
+                                    )}
+                                </div>
+                            ) : formPostal.postal_type === "UrkPoshta" ? (
+                                <>
+                                    <div className="purchase-process__city-block">
+                                        <input
+                                            type="text"
+                                            value={inputPostalInfo}
+                                            required
+                                            onChange={handlePostalInfoInputChange}
+                                            onFocus={() => setShowPostalInfoSuggestions(true)}
+                                            onBlur={() => setTimeout(() => setShowPostalInfoSuggestions(false), 100)}
+                                            placeholder="Виберіть відділення"
+                                            className="purchase-process__suggestion-input"
+                                        />
+                                    </div>
+                                    <p className="purchase-process__ukr-poshta-p">*Введіть коректне відділення Укрпошти</p>
+                                </>
+                            ) : null
                         ) : (
                             <article className="purchase-process-inputs">
                                 {["street", "house", "apartment", "floor"].map((field) => (
@@ -131,7 +195,7 @@ export default function PostalInfo({ formPostal, setFormPostal, isValidCity, set
                                         type="text"
                                         name={field}
                                         value={formPostal[field] || ""}
-                                        onChange={handleInputChange}
+                                        onChange={(e) => setFormPostal({...formPostal, [field]: e.target.value})}
                                         placeholder={field[0].toUpperCase() + field.slice(1)}
                                         className="contact-data-input"
                                         required={field === "street"}

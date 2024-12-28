@@ -1,11 +1,10 @@
 import MainProductsSlider from "../MainProductsSlider/MainProductsSlider.jsx";
 import {useEffect, useState} from "react";
 import {fetchdata} from "../../../services/fetchdata.js";
+import {AuthProvider} from "../../shared/context/AuthContext.jsx";
 
 function PopularProducts() {
     const [products, setProducts] = useState([]);
-
-    console.log(products)
 
     useEffect(() => {
         const fetchProducts = async () => {
@@ -30,9 +29,11 @@ function PopularProducts() {
 
     return(
         <>
-            <div className="popular-products-block">
-                <MainProductsSlider title="ПОПУЛЯРНІ ТОВАРИ" products={products} />
-            </div>
+            <AuthProvider>
+                <div className="popular-products-block">
+                    <MainProductsSlider title="ПОПУЛЯРНІ ТОВАРИ" products={products} />
+                </div>
+            </AuthProvider>
         </>
     )
 }

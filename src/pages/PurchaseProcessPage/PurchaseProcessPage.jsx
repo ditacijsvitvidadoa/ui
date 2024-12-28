@@ -7,7 +7,7 @@ import ContactInfo from "../../components/PurchaseProcess/ContactInfo.jsx";
 import PostalInfo from "../../components/PurchaseProcess/PostalInfo.jsx";
 import GetCartProducts from "../../services/CartFetch/GetCartProducts.jsx";
 import CreateOrder from "../../services/OrderFetch/CreateOrder.jsx";
-import DeleteFromCart from "../../services/CartFetch/DeleteFromCart.jsx";
+import DeleteFromCart from "../../services/CartFetch/Auth/DeleteFromCart.jsx";
 import SuccessfulPurchase from "../../components/PurchaseProcess/SuccessfulPurchase.jsx";
 
 export default function PurchaseProcessPage() {
@@ -24,6 +24,7 @@ export default function PurchaseProcessPage() {
     const [formPostal, setFormPostal] = useState({
         postal_type: '',
         city: '',
+        cityRef: '',
         receiving_type: '',
         postal_info: '',
         street: '',
@@ -31,6 +32,9 @@ export default function PurchaseProcessPage() {
         apartment: '',
         floor: ''
     });
+    console.log("formPostal.postal_type" + formPostal.postal_type)
+    console.log("formPostal.city" + formPostal.city)
+    console.log("formPostal.postal_info" + formPostal.postal_info)
     const [totalSum, setTotalSum] = useState(0);
     const [isPurchaseSuccessful, setIsPurchaseSuccessful] = useState(false);
     const [isValidCity, setValidCity] = useState(true)
@@ -74,7 +78,6 @@ export default function PurchaseProcessPage() {
         }, 0);
         setTotalSum(initialTotal);
     }, [products]);
-
 
     const handleConfirmOrder = async () => {
         if (!isValidCity) {

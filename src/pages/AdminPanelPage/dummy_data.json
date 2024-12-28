@@ -1,0 +1,57 @@
+[
+  {
+    "City": "Мукачево",
+    "Date": "2024-12-10T16:09:16.685Z",
+    "Email": "vaniakraich@gmail.com",
+    "FirstName": "Іван",
+    "LastName": "Крайч",
+    "OrderId": 457231,
+    "Patronymic": "Іванович",
+    "Phone": "+38(095)-243-43-19",
+    "PostalInfo": {
+      "Apartment": "",
+      "Floor": "",
+      "House": "20",
+      "Street": "Миру"
+    },
+    "PostalType": "NovaPoshta",
+    "Products": [
+      {
+        "Age": "",
+        "Articul": 0,
+        "Brand": {
+          "labelua": "",
+          "value": ""
+        },
+        "Category": {
+          "labelua": "",
+          "value": ""
+        },
+        "Code": 0,
+        "Count": 1,
+        "Description": "",
+        "Discount": 0,
+        "Id": "",
+        "Image_urls": [
+          "./image.webp"
+        ],
+        "InCart": false,
+        "IsFavourite": false,
+        "Material": {
+          "labelua": "",
+          "value": ""
+        },
+        "Price": 222,
+        "Title": "гр Боксерські рукавички Б-63620 6 унцій, колір синьо-жовті (1) \"TK Sport\"",
+        "Type": {
+          "labelua": "",
+          "value": ""
+        }
+      }
+    ],
+    "ReceivingType": "Courier",
+    "Status": 1,
+    "UserId": "6751f38547e9b1cdda90a5eb",
+    "_id": "675867ac01bf1f687eac5140"
+  }
+]

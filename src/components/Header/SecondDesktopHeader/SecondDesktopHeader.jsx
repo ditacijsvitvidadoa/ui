@@ -1,6 +1,6 @@
-import Logo from "../../../assets/images/Logo/logo.svg";
+import Logo from "../../../assets/images/Logo/logo.png";
 import Home from "../../../assets/images/NavigationSvgs/Home.svg";
-import Discount from "../../../assets/images/NavigationSvgs/discount.svg";
+import Catalog from "../../../assets/images/NavigationSvgs/Categories.svg";
 import Contacts from "../../../assets/images/NavigationSvgs/contacts.svg";
 import AboutUs from "../../../assets/images/NavigationSvgs/about-us.svg";
 import Giveaway from "../images/giveaway.svg";
@@ -32,11 +32,11 @@ function SecondDesktopHeader() {
                         <img src={AboutUs || ""} alt="about us" title="Про нас"
                              className="second-desktop-header__img"/>
                     </a>
-                    <a href="/discount">
-                        <img src={Discount || ""} alt="discount" title="Знижки"
+                    <a href="/catalog">
+                        <img src={Catalog || ""} alt="catalog" title="Каталог"
                              className="second-desktop-header__img"/>
                     </a>
-                    <a href="/contacts">
+                    <a href="/about-us">
                         <img src={Contacts || ""} alt="contacts" title="Контакти"
                              className="second-desktop-header__img"/>
                     </a>
@@ -73,7 +73,17 @@ function SecondDesktopHeader() {
                             >
                                 <img src={User} alt={User} className="second-desktop-header__img"/>
                             </p>
-                            {showUserBlock && <MainHeaderUserBlock/>}
+                            {showUserBlock &&
+                                (
+                                    <div className="second-header-container">
+                                        <div className="second-header-user-block">
+                                            <a href="/account/login" className="second-header-user-block__item">Увійти</a>
+                                            <div className="second-header-user-block__stick"></div>
+                                            <a href="/account/sign-up"
+                                               className="second-header-user-block__item">Зареєструватись</a>
+                                        </div>
+                                    </div>
+                                )}
                         </>
                     )}
                 </article>

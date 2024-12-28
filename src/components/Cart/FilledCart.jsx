@@ -1,32 +1,19 @@
 import React, { useEffect, useState } from "react";
 import Trash from "../../assets/images/CartImages/trash.svg";
 import PriceComponent from "../Home/PriceComponent/PriceComponent.jsx";
-import { fetchdata } from "../../services/fetchdata.js";
-import DeleteFromCart from "../../services/CartFetch/DeleteFromCart.jsx";
-import UpdateCount from "../../services/CartFetch/UpdateCount.jsx";
+import DeleteFromCart from "../../services/CartFetch/Auth/DeleteFromCart.jsx";
+import UpdateCount from "../../services/CartFetch/Auth/UpdateCount.jsx";
+import {useAuth} from "../shared/context/AuthContext.jsx";
+import UpdateUnAuthCount from "../../services/CartFetch/UnAuth/UpdateUnAuthCount.jsx";
+import DeleteFromUnAuthCart from "../../services/CartFetch/UnAuth/DeleteFromUnAuthCart.jsx";
 
-function FilledCart() {
-    const [products, setProducts] = useState([]);
+function FilledCart({ products }) {
     const [totalSum, setTotalSum] = useState(0);
-    const [counts, setCounts] = useState([]);
+    const { isAuthenticated } = useAuth();
+    const [counts, setCounts] = useState(() =>
+        products.map(product => product.count || 1)
+    );
     const [timer, setTimer] = useState(null);
-
-    const fetchProducts = async () => {
-        try {
-            const { data, status } = await fetchdata("/api/get-cart-products");
-            if (status !== 200) {
-                throw new Error("Ошибка при получении товаров: " + status);
-            }
-            setProducts(data);
-            setCounts(data.map(product => product.count));
-        } catch (error) {
-            console.error("Ошибка:", error);
-        }
-    };
-
-    useEffect(() => {
-        fetchProducts();
-    }, []);
 
     useEffect(() => {
         const initialTotal = products.reduce((sum, product, index) => {
@@ -43,6 +30,11 @@ function FilledCart() {
     };
 
     const deleteFromCart = (id) => {
+        if (!isAuthenticated) {
+            DeleteFromUnAuthCart(id);
+            return window.location.reload();
+        }
+
         DeleteFromCart(id);
         window.location.reload();
     };
@@ -55,6 +47,9 @@ function FilledCart() {
         const newTimer = setTimeout(() => {
             const product = products[index];
             const { id, size, color } = product;
+
+            if (!isAuthenticated) return UpdateUnAuthCount(id, newCount);
+
             UpdateCount(id, size, color, newCount).then(() => {
                 window.location.reload();
             });
@@ -105,8 +100,8 @@ function FilledCart() {
                                 </h1>
 
                                 <div className="cart-product-content__id">
-                                    <p>Код: {product.code}</p>
-                                    <p>Артикул: {product.articul}</p>
+                                    {product.code !== -1 && <p>Код: {product.code}</p>}
+                                    {product.articul !== -1 && <p>Артикул: {product.articul}</p>}
                                 </div>
                                 <div className="cart-product-content__counter">
                                     <p
@@ -125,7 +120,7 @@ function FilledCart() {
                                 </div>
                                 <div className="product-price">
                                     <PriceComponent
-                                        price={product.price ? product.price * count : null}
+                                        price={product.price * count}
                                         discount={product.discount ? product.discount * count : null}
                                     />
                                 </div>

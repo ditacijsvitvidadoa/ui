@@ -1,6 +1,6 @@
 export const fetchdata = async (endpoint, options = {}) => {
     try {
-        const response = await fetch(`http://localhost:8000${endpoint}`, {
+        const response = await fetch(`https://dutyachijsvit.com.ua/${endpoint}`, {
             ...options,
             credentials: 'include',
         });

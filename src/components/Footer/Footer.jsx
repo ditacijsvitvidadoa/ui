@@ -1,7 +1,7 @@
 import "./css/Footer.css";
 import FooterBlock from "./FooterElements/FooterElements.jsx";
 
-import Logo from "../../assets/images/Logo/logo.svg";
+import Logo from "../../assets/images/Logo/logo.png";
 import Phone from "./images/phone.svg";
 import Clock from "./images/clock.svg";
 
@@ -42,7 +42,7 @@ function Footer() {
     const Networks = [
         { type: "image", src: Instagram, alt: "instagram-icon", link: "https://www.instagram.com/vid_a_do_ya_" },
         { type: "image", src: Email, alt: "email-icon", link: "mailto:dutyachuj@gmail.com" },
-        { type: "image", src: Facebook, alt: "facebook-icon", link: "https://www.facebook.com/profile.php?id=100016646042973" }
+        { type: "image", src: Facebook, alt: "facebook-icon", link: "https://www.facebook.com/share/1RqDvAz54w/" }
     ];
 
     return (
@@ -62,11 +62,11 @@ function Footer() {
                     <article className="footer-content__info">
                         <section>
                             <img src={Phone} alt="Phone" />
-                            <p className="footer-content__info-phone">+38(012)-345-67-89</p>
+                            <p className="footer-content__info-phone">+38(050)-196-19-35</p>
                         </section>
                         <section>
                             <img src={Clock} alt="Clock" />
-                            <p className="footer-content__info-clock">Працюємо з 00:00 до 00:00</p>
+                            <p className="footer-content__info-clock">Працюємо з 9:00 до 20:00</p>
                         </section>
                     </article>
                 </div>
@@ -79,18 +79,18 @@ function Footer() {
                     <FooterBlock title="Корисна інформація" content={CarefulInformation} />
                     <FooterBlock
                         title="Клієнтам"
-                        content={ForUsersAuth}
+                        content={isAuthenticated ? ForUsersAuth : ForUsersGuest}
                     />
                     <FooterBlock title="Соціальні мережі" content={Networks} />
                 </div>
                 <div className="mobile-footer-content__info">
                     <article>
                         <img src={Phone} alt="Phone" />
-                        <p className="mobile-footer-content__info-phone">+38(012)-345-67-89</p>
+                        <p className="mobile-footer-content__info-phone">+38(050)-196-19-35</p>
                     </article>
                     <article>
                         <img src={Clock} alt="Clock" />
-                        <p className="mobile-footer-content__info-clock">Працюємо з 00:00 до 00:00</p>
+                        <p className="mobile-footer-content__info-clock">Працюємо з 9:00 до 20:00</p>
                     </article>
                 </div>
             </footer>

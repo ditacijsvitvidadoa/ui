@@ -8,12 +8,9 @@ import {fetchdata} from "../../services/fetchdata.js";
 
 import "./AdminPanelPage.css";
 import AdminPanelLogin from "../../components/AdminPanel/AdminPanelLogin.jsx";
-
-const checkAdminSession = async () => {
-    const { status } = await fetchdata('/api/check-admin-auth');
-    console.log(status)
-    return status === 200;
-};
+import GetOrder from "../../services/OrderFetch/GetOrder.jsx";
+import CheckAdminSession from "../../services/AdminPanelFetch/CheckAdminSession.jsx";
+// import orders_data from "./dummy_data.json";
 
 export default function AdminPanelPage() {
     const [searchParams] = useSearchParams();
@@ -22,18 +19,16 @@ export default function AdminPanelPage() {
     const [orders, setOrders] = useState([]);
     const [filters, setFilters] = useState(null);
     const [accessGranted, setAccessGranted] = useState(null);
-    console.log(accessGranted)
 
     useEffect(() => {
         const checkSession = async () => {
-            const isLoggedIn = await checkAdminSession();
+            const isLoggedIn = await CheckAdminSession();
             setAccessGranted(isLoggedIn);
         };
 
         checkSession();
     }, []);
 
-    // Загрузка заказов
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -49,14 +44,13 @@ export default function AdminPanelPage() {
         fetchData();
     }, []);
 
-    // Загрузка фильтров
     useEffect(() => {
         const fetchFilters = async () => {
             try {
-                const { data } = await fetchdata('/api/get-products-filter');
-                if (data) {
-                    console.log(data)
-                    setFilters(data);
+                const response = await fetchdata(`/api/get-products-filter`);
+                if (response.status === 200) {
+                    const filters = response.data || {};
+                    setFilters(filters);
                 }
             } catch (error) {
                 console.error('Error fetching filters:', error);

@@ -1,13 +1,21 @@
 import {fetchdata} from "../fetchdata.js";
-
-
 export default async function GetCartProducts() {
     try {
-        const response = await fetchdata(`/api/get-cart-products`, {
-            method: 'GET',
+        const cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+        const body = JSON.stringify({
+            cart: cart
         });
 
-        return response.data
+        const response = await fetchdata(`/api/get-cart-products`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: body
+        });
+
+        return response.data;
     } catch (error) {
         console.error("Error in GetCartProducts:", error.message || error);
     }

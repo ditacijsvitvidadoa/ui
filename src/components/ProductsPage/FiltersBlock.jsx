@@ -55,7 +55,7 @@ const FiltersBlock = ({ value, setValue, details, handleResetClick, handleApplyC
                     <button className="products-price-filter__btn" onClick={handleApplyClick}>Застосувати</button>
                 </div>
             </FilterGroup>
-            {["categories", "age", "brand", "material", "type", "discount"].map(key => {
+            {["categories", "age", "brand", "material", "type"].map(key => {
                 const group = filters[key];
                 return group ? (
                     <FilterGroup filters={group.items} title={group.title} queryKey={key} key={key} />

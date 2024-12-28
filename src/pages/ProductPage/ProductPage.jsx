@@ -7,8 +7,12 @@ import ProductSlider from "../../components/Product/ProductSlider.jsx";
 import ProductContent from "../../components/Product/ProductContent.jsx";
 import Characteristics from "../../components/Product/Characteristics.jsx";
 import PopularProducts from "../../components/Home/PopularProducts/PopularProducts.jsx";
+import CheckInCart from "../../components/Cart/CheckInCart.jsx";
+import CheckInFavourites from "../../components/Favourites/CheckInFavourites.jsx";
+import {useAuth} from "../../components/shared/context/AuthContext.jsx";
 
 export default function ProductPage() {
+    const { isAuthenticated } = useAuth();
     const { id } = useParams();
     const [loading, setLoading] = useState(true);
     const [product, setProduct] = useState(null);
@@ -42,8 +46,8 @@ export default function ProductPage() {
     }
 
     return (
-        <>
-            <section className="product-block" key={product.id}>
+        <section className="product-page">
+            <div className="product-block" key={product.id}>
                 <ProductSlider images={product.image_urls} />
                 <ProductContent
                     id={product.id}
@@ -55,10 +59,10 @@ export default function ProductPage() {
                     color_info={product.colors}
                     discount={product.discount}
                     price={product.price}
-                    is_favourite={product.is_favourite}
-                    in_cart={product.in_cart}
+                    is_favourite={CheckInFavourites(product, isAuthenticated)}
+                    in_cart={CheckInCart(product, isAuthenticated)}
                 />
-            </section>
+            </div>
             {product.characteristics && product.characteristics.length > 0 && (
                 <section className="characteristics-section">
                     <h1 className="characteristics-h1">Характеристики</h1>
@@ -66,6 +70,6 @@ export default function ProductPage() {
                 </section>
             )}
             <PopularProducts />
-        </>
+        </section>
     );
 }

@@ -7,40 +7,30 @@ import UseBreadcrumbs from "../../components/shared/Breadcrumbs/Breadcrumbs.jsx"
 import EmptyCart from "../../components/Cart/EmptyCart.jsx";
 import FilledCart from "../../components/Cart/FilledCart.jsx";
 import { fetchdata } from "../../services/fetchdata.js";
+import GetCartProducts from "../../services/CartFetch/GetCartProducts.jsx";
 
 function CartPage() {
-    const [IsEmpty, SetEmpty] = useState(null);
-    const [product, setProduct] = useState([]);
+    const [isEmpty, setIsEmpty] = useState(null);
+    const [products, setProducts] = useState([]);
 
     useEffect(() => {
-        const fetchProduct = async () => {
+        const fetchProducts = async () => {
             try {
-                const response = await fetchdata(`/api/get-cart-products`);
-                if (response.status === 204) {
-                    SetEmpty(true);
-                }else if (response.status === 200 && response.data.length > 0) {
-                    setProduct(response.data);
-                    SetEmpty(false);
-                }  else {
-                    console.warn(`Failed to fetch product: Status ${response.status}`);
-                }
+                const data = await GetCartProducts();
+                setProducts(data);
+                setIsEmpty(data.length === 0);
             } catch (error) {
-                console.error("Error fetching product:", error.message);
+                console.error("Error fetching products from cart:", error);
+                setIsEmpty(true);
             }
         };
-        fetchProduct();
+        fetchProducts();
     }, []);
 
     return (
         <>
             <UseBreadcrumbs />
-            {IsEmpty === null ? (
-                <EmptyCart />
-            ) : IsEmpty ? (
-                <EmptyCart />
-            ) : (
-                <FilledCart products={product} />
-            )}
+            {(isEmpty === null || isEmpty) ? <EmptyCart /> : <FilledCart products={products} />}
         </>
     );
 }

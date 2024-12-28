@@ -1,4 +1,4 @@
-import {fetchdata} from "../fetchdata.js";
+import {fetchdata} from "../../fetchdata.js";
 
 
 export default async function AddToFavourite(id) {

@@ -1,15 +1,30 @@
 import Trash from "../../assets/images/CartImages/trash.svg";
-import DeleteFromFavourite from "../../services/FavouritesFetch/DeleteFromFavourite.jsx";
-import AddToCart from "../../services/CartFetch/AddToCart.jsx";
+import DeleteFromFavourite from "../../services/FavouritesFetch/Auth/DeleteFromFavourite.jsx";
+import AddToCart from "../../services/CartFetch/Auth/AddToCart.jsx";
+import {useAuth} from "../shared/context/AuthContext.jsx";
+import AddToUnAuthCart from "../../services/CartFetch/UnAuth/AddToUnAuthCart.jsx";
+import DeleteFromUnAuthCart from "../../services/CartFetch/UnAuth/DeleteFromUnAuthCart.jsx";
+import DeleteFromUnAuthFavourite from "../../services/FavouritesFetch/UnAuth/DeleteFromUnAuthFavourite.jsx";
+import AddToUnAuthFavourite from "../../services/FavouritesFetch/UnAuth/AddToUnAuthFavourite.jsx";
 
 export default function FilledFavourites({ products }) {
+    const { isAuthenticated } = useAuth();
 
     const RemoveFromFavourites = (id) => {
+        if (!isAuthenticated) {
+            DeleteFromUnAuthFavourite(id);
+            return window.location.reload();
+        }
         DeleteFromFavourite(id)
         window.location.reload()
     }
 
     const AddToCartHandle = (id) => {
+        if (!isAuthenticated) {
+            AddToUnAuthFavourite(id);
+            DeleteFromUnAuthCart(id);
+            return window.location.reload();
+        }
         AddToCart(id)
         DeleteFromFavourite(id)
         window.location.reload()

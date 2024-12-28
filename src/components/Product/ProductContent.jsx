@@ -2,20 +2,19 @@ import { useState } from "react";
 import Arrow from "../../assets/images/LeftArrow/leftArrow.svg";
 import CartIcon from "../../assets/images/Product/cart.jsx";
 import FavoritesIcon from "../../assets/images/Product/favorites.jsx";
-import AddToFavourite from "../../services/FavouritesFetch/AddToFavourite.jsx";
-import DeleteFromFavourite from "../../services/FavouritesFetch/DeleteFromFavourite.jsx";
-import AddToCart from "../../services/CartFetch/AddToCart.jsx";
+import AddToFavourite from "../../services/FavouritesFetch/Auth/AddToFavourite.jsx";
+import DeleteFromFavourite from "../../services/FavouritesFetch/Auth/DeleteFromFavourite.jsx";
+import AddToCart from "../../services/CartFetch/Auth/AddToCart.jsx";
 import { useAuth } from "../shared/context/AuthContext.jsx";
 import AuthToAccountBlock from "../AuthToAccountBlock/AuthToAccountBlock.jsx";
+import AddToUnAuthCart from "../../services/CartFetch/UnAuth/AddToUnAuthCart.jsx";
+import DeleteFromUnAuthFavourite from "../../services/FavouritesFetch/UnAuth/DeleteFromUnAuthFavourite.jsx";
+import AddToUnAuthFavourite from "../../services/FavouritesFetch/UnAuth/AddToUnAuthFavourite.jsx";
 
 export default function ProductContent({
                                            id, title, description, articul, code, sizes_info, color_info, discount, price, is_favourite, in_cart
                                        }) {
     const { isAuthenticated } = useAuth();
-    const [showAuthBlock, setShowAuthBlock] = useState(false);
-
-    const openAuthBlock = () => setShowAuthBlock(true);
-    const closeAuthBlock = () => setShowAuthBlock(false);
 
     const getUrlParam = (param) => new URLSearchParams(window.location.search).get(param);
     const [activeColor, setActiveColor] = useState(getUrlParam('color') || color_info?.default_color || "");
@@ -38,19 +37,31 @@ export default function ProductContent({
     };
 
     const handleRemoveFromFavourite = () => {
-        if (!isAuthenticated) return openAuthBlock();
+        if (!isAuthenticated) {
+            DeleteFromUnAuthFavourite(id);
+            window.location.reload();
+            return
+        }
         DeleteFromFavourite(id);
         window.location.reload();
     };
 
     const handleAddToFavourite = () => {
-        if (!isAuthenticated) return openAuthBlock();
+        if (!isAuthenticated) {
+            AddToUnAuthFavourite(id);
+            window.location.reload();
+            return
+        }
         AddToFavourite(id);
         window.location.reload();
     };
 
     const handleBuyClick = () => {
-        if (!isAuthenticated) return openAuthBlock();
+        if (!isAuthenticated) {
+            AddToUnAuthCart(id);
+            window.location.href = '/cart';
+            return
+        }
         if (!in_cart) {
             const url = new URL(window.location);
             const size = url.searchParams.get('size');
@@ -67,8 +78,12 @@ export default function ProductContent({
             <h1 className="product-content__h1">{title}</h1>
             <p className="product-content__desc">{description}</p>
             <article className="product-content__actions">
-                <p className="product-content__action">Артикул: {articul}</p>
-                <p className="product-content__action">Код: {code}</p>
+                {articul !== -1 && (
+                    <p className="product-content__action">Артикул: {articul}</p>
+                )}
+                {code !== -1 && (
+                    <p className="product-content__action">Код: {code}</p>
+                )}
             </article>
             {sizes_info?.has_table && (
                 <div>
@@ -149,7 +164,6 @@ export default function ProductContent({
                     </div>
                 </article>
             </div>
-            {showAuthBlock && <AuthToAccountBlock isOpen={showAuthBlock} onClose={closeAuthBlock} />}
         </div>
     );
 }

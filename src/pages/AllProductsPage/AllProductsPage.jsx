@@ -131,7 +131,18 @@ export default function AllProductsPage() {
                     <img src={FilterSvg} alt="Open filter svg" onClick={toggleFilter} className="products-filters__open-burger" />
                     <article className="products-options__filters">
                         <ItemsPerPage values={[16, 24, 32]} defaultValue={16} />
-                        <SortProducts values={[""]} defaultValue="popular" />
+                        <SortProducts values={[{
+                            value: "ascending",
+                            label: "Від найдешевших до найдорожчих"
+                        },
+                            {
+                                value: "descending",
+                                label: "Від найдорожчих до найдешевших"
+                            },
+                            {
+                                value: "popular",
+                                label: "Популярні товари"
+                            }]} defaultValue="popular" />
                     </article>
                 </div>
                     {products.length > 0 ? (

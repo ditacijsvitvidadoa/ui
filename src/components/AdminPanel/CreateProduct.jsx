@@ -88,6 +88,7 @@ const CreateProduct = ({ filters }) => {
     const [productColors, setProductColors] = useState([]);
     const [customColor, setCustomColor] = useState("#000000");
     const [characteristics, setCharacteristics] = useState([]);
+    const [showMessage, setShowMessage] = useState(false);
     const [newCharacteristic, setNewCharacteristic] = useState({ key: '', value: '' });
     const [customValues, setCustomValues] = useState({
         material: '',
@@ -145,8 +146,10 @@ const CreateProduct = ({ filters }) => {
     };
 
     const handleRemoveImage = () => {
-        setImages((prevImages) => prevImages.filter((_, i) => i !== activeIndex));
-        setPreviews((prevPreviews) => prevPreviews.filter((_, i) => i !== activeIndex));
+        const updatedImages = images.filter((_, i) => i !== activeIndex);
+        const updatedPreviews = previews.filter((_, i) => i !== activeIndex);
+        setImages(updatedImages);
+        setPreviews(updatedPreviews);
         setActiveIndex(0);
     };
 
@@ -200,54 +203,90 @@ const CreateProduct = ({ filters }) => {
         }));
     };
 
-    const handleSubmit = (e) => {
+    async function handleSubmit(e) {
         e.preventDefault();
         const formData = new FormData();
 
+        console.log('title:', e.target.title.value);
         formData.append('title', e.target.title.value);
+
+        console.log('articul:', e.target.articul.value);
         formData.append('articul', e.target.articul.value);
+
+        console.log('code:', e.target.code.value);
         formData.append('code', e.target.code.value);
+
+        console.log('description:', e.target.description.value);
         formData.append('description', e.target.description.value);
+
+        console.log('price:', e.target.price.value);
         formData.append('price', e.target.price.value);
-        console.log(customValues.category)
+
+        console.log('category:', customValues.category);
         formData.append('category', customValues.category);
+
+        console.log('material:', customValues.material);
         formData.append('material', customValues.material);
+
+        console.log('brand:', customValues.brand);
         formData.append('brand', customValues.brand);
+
+        console.log('age:', customValues.age);
         formData.append('age', customValues.age);
+
+        console.log('type:', customValues.type);
         formData.append('type', customValues.type);
 
+        console.log('discount:', e.target.discount.value);
         formData.append('discount', e.target.discount.value);
-        formData.append("has_sizes", isSizeChecked)
-        formData.append("has_table", isSizeTableChecked)
-        formData.append("table.category", type)
 
-        if (selectedSizes.length > 0) {
-            selectedSizes.forEach(size => {
-                formData.append('size_value', size);
-            });
-        }
+        console.log('has_sizes:', isSizeChecked);
+        formData.append("has_sizes", isSizeChecked);
 
-        if (productColors.length > 0) {
-            productColors.forEach(color => {
-                formData.append('colors', color);
-            });
-        }
-        characteristics.forEach(characteristic => {
+        console.log('has_table:', isSizeTableChecked);
+        formData.append("has_table", isSizeTableChecked);
+
+        console.log('table.category:', type);
+        formData.append("table.category", type);
+
+
+        selectedSizes.forEach((size) => formData.append('size_value', size));
+        productColors.forEach((color) => formData.append('colors', color));
+        characteristics.forEach((characteristic) => {
             formData.append('characteristic_key', characteristic.key);
             formData.append('characteristic_value', characteristic.value);
         });
+        images.forEach((image) => formData.append('images', image));
 
-        images.forEach((image) => {
-            formData.append('images', image);
-        });
+        try {
+            const status = await CreateProductFetch(formData);
 
-        console.log(formData);
+            if (status === 200) {
+                window.location.reload();
+                setShowMessage(true);
 
-        CreateProductFetch(formData);
-    };
+                setTimeout(() => {
+                    setShowMessage(false);
+                }, 3000);
+            } else if (status === 400) {
+                console.error("Error: Bad Request");
+            } else if (status === 500) {
+                console.error("Server error occurred");
+            } else {
+                console.error("Unexpected error occurred");
+            }
+        } catch (error) {
+            console.error("Error during the request:", error);
+        }
+    }
 
     return (
         <form onSubmit={handleSubmit} className="create-product">
+            {showMessage && (
+                <div className="successful-creating-order-message">
+                    Товар успішно створено!
+                </div>
+            )}
             <div className="create-product__image">
                 <div className="upload-images">
                     <input
@@ -290,18 +329,18 @@ const CreateProduct = ({ filters }) => {
                     name="title"
                     required
                     className="create-product__input"
-                    placeholder="Назва товару"
+                    placeholder="*Назва товару"
                 />
                 <textarea
                     name="description"
                     required
                     className="create-product__input create-product__textarea"
-                    placeholder="Опис товару"
+                    placeholder="*Опис товару"
                 />
                 <article>
                     <div>
                         <CustomInput
-                            label="Виберіть матеріал"
+                            label="*Виберіть матеріал"
                             options={materials}
                             value={customValues.material}
                             onChange={(value) => handleCustomValueChange('material', value)}
@@ -315,7 +354,7 @@ const CreateProduct = ({ filters }) => {
                         className='create-product__input'
                     >
                         <option value="" disabled selected>
-                            Виберіть вік
+                            *Виберіть вік
                         </option>
                         {ages.map((age) => (
                             <option key={age.value} value={age.value}>
@@ -332,7 +371,7 @@ const CreateProduct = ({ filters }) => {
                         className='create-product__input'
                     >
                         <option value="" disabled selected>
-                            Виберіть категорію
+                            *Виберіть категорію
                         </option>
                         {categories.map((category) => (
                             <option key={category.value} value={category.value}>
@@ -381,7 +420,7 @@ const CreateProduct = ({ filters }) => {
                         name="price"
                         required
                         className="create-product__input"
-                        placeholder="Ціна без знижки"
+                        placeholder="*Ціна без знижки"
                     />
                     <input
                         type="text"

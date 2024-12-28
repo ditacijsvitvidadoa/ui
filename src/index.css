@@ -69,7 +69,7 @@ a {
 }
 
 input[type="radio"] {
-	appearance: none; /* Убираем стандартный вид радиокнопки */
+	appearance: none;
 	width: 15px;
 	height: 15px;
 	border: 1px solid #373737;

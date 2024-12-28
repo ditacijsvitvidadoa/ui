@@ -4,22 +4,24 @@ import Favourite from "../../assets/images/Product/favorites.jsx";
 import Cart from "../../assets/images/Product/cart.jsx";
 import { addToCart } from "../shared/managementCart/addToCart.jsx";
 import { useAuth } from "../shared/context/AuthContext.jsx";
-import AddToFavourite from "../../services/FavouritesFetch/AddToFavourite.jsx";
-import DeleteFromFavourite from "../../services/FavouritesFetch/DeleteFromFavourite.jsx";
+import AddToFavourite from "../../services/FavouritesFetch/Auth/AddToFavourite.jsx";
+import DeleteFromFavourite from "../../services/FavouritesFetch/Auth/DeleteFromFavourite.jsx";
 import AuthToAccountBlock from "../AuthToAccountBlock/AuthToAccountBlock.jsx";
 import useAuthBlock from "../AuthToAccountBlock/UseAuthBlock.jsx";
 import ProductAnalyticsFetch from "../../services/ProductsFetch/ProductAnalytics.jsx";
 import logIn from "../LogIn/LogIn.jsx";
-import DeleteFromCart from "../../services/CartFetch/DeleteFromCart.jsx";
+import DeleteFromCart from "../../services/CartFetch/Auth/DeleteFromCart.jsx";
+import AddToUnAuthCart from "../../services/CartFetch/UnAuth/AddToUnAuthCart.jsx";
+import DeleteFromUnAuthCart from "../../services/CartFetch/UnAuth/DeleteFromUnAuthCart.jsx";
+import CheckInCart from "../Cart/CheckInCart.jsx";
+import AddToUnAuthFavourite from "../../services/FavouritesFetch/UnAuth/AddToUnAuthFavourite.jsx";
+import DeleteFromUnAuthFavourite from "../../services/FavouritesFetch/UnAuth/DeleteFromUnAuthFavourite.jsx";
+import CheckInFavourites from "../Favourites/CheckInFavourites.jsx";
 
 const ProductsList = ({ products = [], pageCount = 1 }) => {
     const navigate = useNavigate();
     const location = useLocation();
     const { isAuthenticated } = useAuth();
-    const [showAuthBlock, setShowAuthBlock] = useState(false);
-
-    const openAuthBlock = () => setShowAuthBlock(true);
-    const closeAuthBlock = () => setShowAuthBlock(false);
 
     const pageNumbers = Array.from({ length: pageCount }, (_, i) => i + 1);
     const currentPage = parseInt(new URLSearchParams(location.search).get('pageNum')) || 1;
@@ -96,7 +98,11 @@ const ProductsList = ({ products = [], pageCount = 1 }) => {
     };
 
     const handleAddToFavourite = async (productId) => {
-        if (!isAuthenticated) return openAuthBlock();
+        if (!isAuthenticated) {
+            AddToUnAuthFavourite(productId);
+            window.location.reload();
+            return
+        }
         try {
             await AddToFavourite(productId);
             await ProductAnalyticsFetch(productId, "Favourites", 1);
@@ -107,7 +113,11 @@ const ProductsList = ({ products = [], pageCount = 1 }) => {
     };
 
     const handleRemoveFromFavourite = async (productId) => {
-        if (!isAuthenticated) return openAuthBlock();
+        if (!isAuthenticated) {
+            DeleteFromUnAuthFavourite(productId);
+            window.location.reload();
+            return
+        }
         try {
             await DeleteFromFavourite(productId);
             window.location.reload();
@@ -117,7 +127,11 @@ const ProductsList = ({ products = [], pageCount = 1 }) => {
     };
 
     const handleAddToCart = async (productId) => {
-        if (!isAuthenticated) return openAuthBlock();
+        if (!isAuthenticated) {
+            AddToUnAuthCart(productId);
+            window.location.reload();
+            return
+        }
         try {
             await ProductAnalyticsFetch(productId, "AddedToCart", 1);
             await addToCart(productId);
@@ -128,7 +142,11 @@ const ProductsList = ({ products = [], pageCount = 1 }) => {
     };
 
     const handleRemoveFromCart = async (productId) => {
-        if (!isAuthenticated) return openAuthBlock();
+        if (!isAuthenticated) {
+            DeleteFromUnAuthCart(productId)
+            window.location.reload();
+            return
+        }
         try {
             await DeleteFromCart(productId);
             window.location.reload();
@@ -149,26 +167,29 @@ const ProductsList = ({ products = [], pageCount = 1 }) => {
                             <article>
                                 <section className="products-list-slider__actions">
                                     <Favourite
-                                        fill={product.is_favourite ? "#FF5756" : "#29292999"}
+                                        fill={CheckInFavourites(product, isAuthenticated) ? "#FF5756" : "#29292999"}
                                         className="products-list-slider__action"
                                         onClick={(e) => {
                                             e.preventDefault();
-                                            console.log(product.is_favourite)
-                                            {product.is_favourite ? handleRemoveFromFavourite(product.id) : handleAddToFavourite(product.id)}
+                                            {CheckInFavourites(product, isAuthenticated) ? handleRemoveFromFavourite(product.id) : handleAddToFavourite(product.id)}
                                         }}
                                     />
                                     <Cart
-                                        color={product.in_cart ? "#FF5756" : "#29292999"}
+                                        color={CheckInCart(product, isAuthenticated) ? "#FF5756" : "#29292999"}
                                         className="products-list-slider__action"
                                         onClick={(e) => {
                                             e.preventDefault();
-                                            {product.in_cart ? handleRemoveFromCart(product.id) : handleAddToCart(product.id)}
+                                            {CheckInCart(product, isAuthenticated) ? handleRemoveFromCart(product.id) : handleAddToCart(product.id)}
                                         }}
                                     />
                                 </section>
                                 <section>
-                                    <p className="products-list-slider__code">Код: {product.code}</p>
-                                    <p className="products-list-slider__articul">Артикул: {product.articul}</p>
+                                    {product.code === -1 && (
+                                        <p className="products-list-slider__code">Код: {product.code}</p>
+                                    )}
+                                    {product.articul === -1 && (
+                                        <p className="products-list-slider__articul">Артикул: {product.articul}</p>
+                                    )}
                                 </section>
                             </article>
                             <div
@@ -192,8 +213,6 @@ const ProductsList = ({ products = [], pageCount = 1 }) => {
                     {renderPageNumbers()}
                 </div>
             )}
-
-            {showAuthBlock && <AuthToAccountBlock isOpen={showAuthBlock} onClose={closeAuthBlock} />}
         </section>
     );
 };

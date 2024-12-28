@@ -27,7 +27,6 @@ export default function AdminPanelLogin() {
         }
     };
 
-
     const handleInputChange = (e) => {
         const { name, value } = e.target;
         if (name === "phone") {
@@ -71,7 +70,7 @@ export default function AdminPanelLogin() {
                         required
                     />
                 </div>
-                <button style={{ cursor: "pointer" }} type="submit" className="admin-panel-login__submit">Війти</button>
+                <button style={{ cursor: "pointer" }} type="submit" className="admin-panel-login__submit">Увійти</button>
             </form>
         </section>
     );

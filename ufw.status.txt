@@ -1,0 +1,18 @@
+Status: active
+
+To                         Action      From
+--                         ------      ----
+21                         ALLOW       195.43.71.141             
+22                         ALLOW       195.43.71.141             
+80                         ALLOW       Anywhere                  
+8000                       ALLOW       Anywhere                  
+8080                       ALLOW       Anywhere                  
+22                         ALLOW       Anywhere                  
+22/tcp                     ALLOW       Anywhere                  
+22                         ALLOW       176.241.143.3             
+80 (v6)                    ALLOW       Anywhere (v6)             
+8000 (v6)                  ALLOW       Anywhere (v6)             
+8080 (v6)                  ALLOW       Anywhere (v6)             
+22 (v6)                    ALLOW       Anywhere (v6)             
+22/tcp (v6)                ALLOW       Anywhere (v6)             
+

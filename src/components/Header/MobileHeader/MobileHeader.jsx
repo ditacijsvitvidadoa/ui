@@ -1,5 +1,5 @@
 import OpenBurger from "../images/open-burger-btn.svg";
-import Logo from "../../../assets/images/Logo/logo.svg";
+import Logo from "../../../assets/images/Logo/logo.png";
 import Search from "../images/search.svg";
 import Favorites from "../../../assets/images/Product/favorites.jsx";
 import Cart from "../../../assets/images/Product/cart.jsx";
@@ -15,10 +15,10 @@ import Email from "../../../assets/images/SocialNetwork/Email.svg";
 import Facebook from "../../../assets/images/SocialNetwork/Facebook.svg";
 import Home from "../../../assets/images/NavigationSvgs/Home.svg";
 import AboutUs from "../../../assets/images/NavigationSvgs/about-us.svg";
-import Discount from "../../../assets/images/NavigationSvgs/discount.svg";
+import Catalog from "../../../assets/images/NavigationSvgs/Categories.svg";
 import Contacts from "../../../assets/images/NavigationSvgs/contacts.svg";
 import CollapsibleBlock from "../HeaderElements/HeaderElements.jsx";
-import Categories from "../images/Categories.svg";
+import Categories from "../../../assets/images/NavigationSvgs/Categories.svg";
 import Boy from "../../../assets/images/Categories/forBoy.svg";
 import Girl from "../../../assets/images/Categories/forGirl.svg";
 import Infants from "../../../assets/images/Categories/forInfants.svg";
@@ -31,7 +31,6 @@ import Sport from "../../../assets/images/Categories/forSport.svg";
 import Footwear from "../../../assets/images/Categories/footswear.svg";
 import Accessories from "../../../assets/images/Categories/accessories.svg";
 import {useNavigate} from "react-router-dom";
-
 
 export default function MobileHeader() {
     const [showUserBlock, setShowUserBlock] = useState(false);
@@ -112,11 +111,11 @@ export default function MobileHeader() {
                 <article className="header-burder__contact-info">
                     <section className="header-burder__contact-info-item">
                         <img src={Phone} alt={Phone} className=""/>
-                        <p className="header-burder__contact-info-phone">+38(012)-345-67-89</p>
+                        <p className="header-burder__contact-info-phone">+38(050)-196-19-35</p>
                     </section>
                     <section className="header-burder__contact-info-item">
                         <img src={Clock} alt={Clock} className=""/>
-                        <p>Працюємо з 00:00 до 00:00</p>
+                        <p>Працюємо з 9:00 до 20:00</p>
                     </section>
                     <section className="header-burder__contact-info-networks">
                         <a href="https://www.instagram.com/vid_a_do_ya_" className="header-burder__contact-info-instargram-link">
@@ -125,7 +124,7 @@ export default function MobileHeader() {
                         <a href="mailto:dutyachuj@gmail.com">
                             <img src={Email} alt={Email} className="header-burder__contact-info-network"/>
                         </a>
-                        <a href="https://www.facebook.com/profile.php?id=100016646042973">
+                        <a href="https://www.facebook.com/share/1RqDvAz54w/">
                             <img src={Facebook} alt={Facebook} className="header-burder__contact-info-network"/>
                         </a>
                     </section>
@@ -141,11 +140,11 @@ export default function MobileHeader() {
                             <img src={AboutUs} alt={AboutUs} className="header-burder__nav-link-img"/>
                             <p>Про нас</p>
                         </a></li>
-                        <li><a className="header-burder__nav-link" href="/discount-products">
-                            <img src={Discount} alt={Discount} className="header-burder__nav-link-img"/>
-                            <p>Акції</p>
+                        <li><a className="header-burder__nav-link" href="/catalog">
+                            <img src={Catalog} alt={Catalog} className="header-burder__nav-link-img"/>
+                            <p>Каталог</p>
                         </a></li>
-                        <li><a className="header-burder__nav-link" href="/contacts">
+                        <li><a className="header-burder__nav-link" href="/about-us">
                             <img src={Contacts} alt={Contacts} className="header-burder__nav-link-img"/>
                             <p>Контакти</p>
                         </a></li>

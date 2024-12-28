@@ -63,7 +63,7 @@ export default function Orders({ orders }) {
                 );
             case 2:
                 return (
-                    <div className="order-block__btns order-block__section">
+                    <div className="order-block__btns">
                         <p className="order-block__btn order-block__accept"
                            onClick={() => handleOrderButton(orderId, 5)}>Отримано</p>
                         <p className="order-block__btn order-block__return"
@@ -133,7 +133,7 @@ export default function Orders({ orders }) {
                                 </article>
 
                                 <article className="for-dispatch-info">
-                                    <img src={GetPostal(order.PostalType)} alt="postal"/>
+                                    <img src={GetPostal(order.PostalType)} alt="postal" className="for-dispatch-info__img"/>
                                     <p className="for-dispatch-info-p">{order.City}</p>,
                                     {order.ReceivingType === "Branches" ?
                                         <p className="for-dispatch-info-p">{order.PostalInfo}</p>

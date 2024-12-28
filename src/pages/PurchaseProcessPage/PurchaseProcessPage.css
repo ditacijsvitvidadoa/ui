@@ -267,6 +267,18 @@
         background-color: #ffffff;
         overflow-y: auto;
         z-index: 2;
+        margin-top: 10px;
+        border-radius: 10px;
+        box-shadow: 0px 5px 10px #37373740;
+    }
+
+    .purchase-process__suggestions-list::-webkit-scrollbar {
+        width: 8px;
+    }
+
+    .purchase-process__suggestions-list::-webkit-scrollbar-thumb {
+        background-color: #37373750;
+        border-radius: 10px;
     }
 
     .purchase-process__suggestions-list li {
@@ -287,6 +299,12 @@
 
     .purchase-process__suggestion-input.invalid {
         border-bottom: 1px solid #FF5756;
+    }
+
+    .purchase-process__ukr-poshta-p {
+        margin-top: 25px;
+        color: #37373799;
+        font-size: 11px;
     }
 }
 
@@ -405,13 +423,25 @@
 
     .purchase-process__suggestions-list {
         position: absolute;
-        width: 250px;
+        width: 305px;
         color: #373737;
         font-size: 15px;
         max-height: 200px;
         background-color: #ffffff;
         overflow-y: auto;
         z-index: 2;
+        margin-top: 10px;
+        border-radius: 10px;
+        box-shadow: 0px 5px 10px #37373740;
+    }
+
+    .purchase-process__suggestions-list::-webkit-scrollbar {
+        width: 6px;
+    }
+
+    .purchase-process__suggestions-list::-webkit-scrollbar-thumb {
+        background-color: #37373750;
+        border-radius: 10px;
     }
 
     .purchase-process__suggestions-list li {
@@ -421,6 +451,23 @@
         margin-right: 5px;
         border-bottom: 1px solid #37373725;
         cursor: pointer;
+        font-size: 13px;
+    }
+
+    .purchase-process__suggestion-input {
+        background-color: transparent;
+        border-bottom: 1px solid #37373740;
+        width: 300px;
+    }
+
+    .purchase-process__suggestion-input.invalid {
+        border-bottom: 1px solid #FF5756;
+    }
+
+    .purchase-process__ukr-poshta-p {
+        margin-top: 25px;
+        color: #37373799;
+        font-size: 11px;
     }
 
     .purchase-process__city-block {
@@ -689,22 +736,52 @@
 
     .purchase-process__suggestions-list {
         position: absolute;
-        width: 250px;
+        width: 205px;
         color: #373737;
-        font-size: 15px;
+        font-size: 13px;
         max-height: 200px;
         background-color: #ffffff;
         overflow-y: auto;
         z-index: 2;
+        margin-top: 10px;
+        border-radius: 10px;
+        box-shadow: 0px 5px 10px #37373740;
+    }
+
+    .purchase-process__suggestions-list::-webkit-scrollbar {
+        width: 4px;
+    }
+
+    .purchase-process__suggestions-list::-webkit-scrollbar-thumb {
+        background-color: #37373750;
+        border-radius: 10px;
     }
 
     .purchase-process__suggestions-list li {
         padding-top: 10px;
-        padding-left: 10px;
+        padding-left: 5px;
         margin-left: 5px;
         margin-right: 5px;
         border-bottom: 1px solid #37373725;
         cursor: pointer;
+        font-size: 13px;
+    }
+
+    .purchase-process__suggestion-input {
+        background-color: transparent;
+        border-bottom: 1px solid #37373740;
+        width: 200px;
+        font-size: 12px;
+    }
+
+    .purchase-process__suggestion-input.invalid {
+        border-bottom: 1px solid #FF5756;
+    }
+
+    .purchase-process__ukr-poshta-p {
+        margin-top: 25px;
+        color: #37373799;
+        font-size: 10px;
     }
 
     .purchase-process__city-block {
@@ -973,22 +1050,52 @@
 
     .purchase-process__suggestions-list {
         position: absolute;
-        width: 250px;
+        width: 205px;
         color: #373737;
-        font-size: 15px;
+        font-size: 13px;
         max-height: 200px;
         background-color: #ffffff;
         overflow-y: auto;
         z-index: 2;
+        margin-top: 10px;
+        border-radius: 10px;
+        box-shadow: 0px 5px 10px #37373740;
+    }
+
+    .purchase-process__suggestions-list::-webkit-scrollbar {
+        width: 4px;
+    }
+
+    .purchase-process__suggestions-list::-webkit-scrollbar-thumb {
+        background-color: #37373750;
+        border-radius: 10px;
     }
 
     .purchase-process__suggestions-list li {
         padding-top: 10px;
-        padding-left: 10px;
+        padding-left: 5px;
         margin-left: 5px;
         margin-right: 5px;
         border-bottom: 1px solid #37373725;
         cursor: pointer;
+        font-size: 13px;
+    }
+
+    .purchase-process__suggestion-input {
+        background-color: transparent;
+        border-bottom: 1px solid #37373740;
+        width: 200px;
+        font-size: 12px;
+    }
+
+    .purchase-process__suggestion-input.invalid {
+        border-bottom: 1px solid #FF5756;
+    }
+
+    .purchase-process__ukr-poshta-p {
+        margin-top: 25px;
+        color: #37373799;
+        font-size: 10px;
     }
 
     .purchase-process__city-block {
@@ -1256,22 +1363,52 @@
 
     .purchase-process__suggestions-list {
         position: absolute;
-        width: 250px;
+        width: 255px;
         color: #373737;
-        font-size: 15px;
+        font-size: 13px;
         max-height: 200px;
         background-color: #ffffff;
         overflow-y: auto;
         z-index: 2;
+        margin-top: 10px;
+        border-radius: 10px;
+        box-shadow: 0px 5px 10px #37373740;
+    }
+
+    .purchase-process__suggestions-list::-webkit-scrollbar {
+        width: 4px;
+    }
+
+    .purchase-process__suggestions-list::-webkit-scrollbar-thumb {
+        background-color: #37373750;
+        border-radius: 10px;
     }
 
     .purchase-process__suggestions-list li {
         padding-top: 10px;
-        padding-left: 10px;
+        padding-left: 5px;
         margin-left: 5px;
         margin-right: 5px;
         border-bottom: 1px solid #37373725;
         cursor: pointer;
+        font-size: 14px;
+    }
+
+    .purchase-process__suggestion-input {
+        background-color: transparent;
+        border-bottom: 1px solid #37373740;
+        width: 250px;
+        font-size: 14px;
+    }
+
+    .purchase-process__suggestion-input.invalid {
+        border-bottom: 1px solid #FF5756;
+    }
+
+    .purchase-process__ukr-poshta-p {
+        margin-top: 25px;
+        color: #37373799;
+        font-size: 11px;
     }
 
     .purchase-process__city-block {
@@ -1534,22 +1671,52 @@
 
     .purchase-process__suggestions-list {
         position: absolute;
-        width: 250px;
+        width: 255px;
         color: #373737;
-        font-size: 15px;
+        font-size: 13px;
         max-height: 200px;
         background-color: #ffffff;
         overflow-y: auto;
         z-index: 2;
+        margin-top: 10px;
+        border-radius: 10px;
+        box-shadow: 0px 5px 10px #37373740;
+    }
+
+    .purchase-process__suggestions-list::-webkit-scrollbar {
+        width: 4px;
+    }
+
+    .purchase-process__suggestions-list::-webkit-scrollbar-thumb {
+        background-color: #37373750;
+        border-radius: 10px;
     }
 
     .purchase-process__suggestions-list li {
         padding-top: 10px;
-        padding-left: 10px;
+        padding-left: 5px;
         margin-left: 5px;
         margin-right: 5px;
         border-bottom: 1px solid #37373725;
         cursor: pointer;
+        font-size: 14px;
+    }
+
+    .purchase-process__suggestion-input {
+        background-color: transparent;
+        border-bottom: 1px solid #37373740;
+        width: 250px;
+        font-size: 14px;
+    }
+
+    .purchase-process__suggestion-input.invalid {
+        border-bottom: 1px solid #FF5756;
+    }
+
+    .purchase-process__ukr-poshta-p {
+        margin-top: 25px;
+        color: #37373799;
+        font-size: 11px;
     }
 
     .purchase-process__city-block {
@@ -1812,22 +1979,51 @@
 
     .purchase-process__suggestions-list {
         position: absolute;
-        width: 250px;
+        width: 205px;
         color: #373737;
-        font-size: 15px;
         max-height: 200px;
         background-color: #ffffff;
         overflow-y: auto;
         z-index: 2;
+        margin-top: 10px;
+        border-radius: 10px;
+        box-shadow: 0px 5px 10px #37373740;
+    }
+
+    .purchase-process__suggestions-list::-webkit-scrollbar {
+        width: 4px;
+    }
+
+    .purchase-process__suggestions-list::-webkit-scrollbar-thumb {
+        background-color: #37373750;
+        border-radius: 10px;
     }
 
     .purchase-process__suggestions-list li {
         padding-top: 10px;
-        padding-left: 10px;
+        padding-left: 5px;
         margin-left: 5px;
         margin-right: 5px;
         border-bottom: 1px solid #37373725;
         cursor: pointer;
+        font-size: 12px;
+    }
+
+    .purchase-process__suggestion-input {
+        background-color: transparent;
+        border-bottom: 1px solid #37373740;
+        width: 200px;
+        font-size: 12px;
+    }
+
+    .purchase-process__suggestion-input.invalid {
+        border-bottom: 1px solid #FF5756;
+    }
+
+    .purchase-process__ukr-poshta-p {
+        margin-top: 25px;
+        color: #37373799;
+        font-size: 11px;
     }
 
     .purchase-process__city-block {
@@ -2091,22 +2287,51 @@
 
     .purchase-process__suggestions-list {
         position: absolute;
-        width: 250px;
+        width: 205px;
         color: #373737;
-        font-size: 15px;
         max-height: 200px;
         background-color: #ffffff;
         overflow-y: auto;
         z-index: 2;
+        margin-top: 10px;
+        border-radius: 10px;
+        box-shadow: 0px 5px 10px #37373740;
+    }
+
+    .purchase-process__suggestions-list::-webkit-scrollbar {
+        width: 4px;
+    }
+
+    .purchase-process__suggestions-list::-webkit-scrollbar-thumb {
+        background-color: #37373750;
+        border-radius: 10px;
     }
 
     .purchase-process__suggestions-list li {
         padding-top: 10px;
-        padding-left: 10px;
+        padding-left: 5px;
         margin-left: 5px;
         margin-right: 5px;
         border-bottom: 1px solid #37373725;
         cursor: pointer;
+        font-size: 12px;
+    }
+
+    .purchase-process__suggestion-input {
+        background-color: transparent;
+        border-bottom: 1px solid #37373740;
+        width: 200px;
+        font-size: 12px;
+    }
+
+    .purchase-process__suggestion-input.invalid {
+        border-bottom: 1px solid #FF5756;
+    }
+
+    .purchase-process__ukr-poshta-p {
+        margin-top: 25px;
+        color: #37373799;
+        font-size: 10px;
     }
 
     .purchase-process__city-block {
@@ -2370,22 +2595,51 @@
 
     .purchase-process__suggestions-list {
         position: absolute;
-        width: 250px;
+        width: 205px;
         color: #373737;
-        font-size: 15px;
         max-height: 200px;
         background-color: #ffffff;
         overflow-y: auto;
         z-index: 2;
+        margin-top: 10px;
+        border-radius: 10px;
+        box-shadow: 0px 5px 10px #37373740;
+    }
+
+    .purchase-process__suggestions-list::-webkit-scrollbar {
+        width: 4px;
+    }
+
+    .purchase-process__suggestions-list::-webkit-scrollbar-thumb {
+        background-color: #37373750;
+        border-radius: 10px;
     }
 
     .purchase-process__suggestions-list li {
         padding-top: 10px;
-        padding-left: 10px;
+        padding-left: 5px;
         margin-left: 5px;
         margin-right: 5px;
         border-bottom: 1px solid #37373725;
         cursor: pointer;
+        font-size: 12px;
+    }
+
+    .purchase-process__suggestion-input {
+        background-color: transparent;
+        border-bottom: 1px solid #37373740;
+        width: 200px;
+        font-size: 12px;
+    }
+
+    .purchase-process__suggestion-input.invalid {
+        border-bottom: 1px solid #FF5756;
+    }
+
+    .purchase-process__ukr-poshta-p {
+        margin-top: 25px;
+        color: #37373799;
+        font-size: 11px;
     }
 
     .purchase-process__city-block {

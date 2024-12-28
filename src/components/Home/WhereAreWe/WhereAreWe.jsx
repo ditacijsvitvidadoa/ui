@@ -24,7 +24,7 @@ function WhereAreWe() {
             <div className="WhereAreWe-map">
                 <GoogleMap
                     mapContainerClassName="google-map-container"
-                    zoom={12}
+                    zoom={10}
                     center={center}
                 >
                     {locations.map((location, index) => (
